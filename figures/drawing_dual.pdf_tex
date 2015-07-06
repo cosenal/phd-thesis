@@ -49,7 +49,7 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,1.11050938)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{drawin_dualg.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{drawing_dual.pdf}}%
     \put(0.4854189,1.07207223){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20365376\unitlength}\raggedright ?\\ \end{minipage}}}%
     \put(0.43374087,0.8560354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Sep*}}}%
     \put(0.43467636,0.68178262){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{PPT*}}}%
