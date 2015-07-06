@@ -1,0 +1,527 @@
+%!TEX root = thesis.tex
+%-------------------------------------------------------------------------------
+\chapter{Distinguishability of unextendable product sets}
+\label{chap:ups}
+%-------------------------------------------------------------------------------
+
+In this chapter, we study the state discrimination problem for collections of
+states formed by unextendable product sets.
+An orthonormal collection of product vectors
+\begin{equation}
+  \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X \otimes \Y,
+\end{equation}
+for complex Euclidean spaces $\X=\complex^n$ and $\Y=\complex^m$, is said to be
+an \emph{unextendable product set} if it is impossible to find a nonzero
+product vector $u \otimes v \in \X \otimes \Y$ that is orthogonal to every
+element of $\A$ \cite{Bennett99}.
+That is, $\A$ is an unextendable product set if, for every choice of vectors
+$u\in\X$ and $v\in\Y$ satisfying either $\ip{u}{u_{k}} = 0$ or 
+$\ip{v}{v_{k}} = 0$ for each $k\in\{1,\ldots,N\}$, one has that either $u = 0$
+or $v = 0$ (or both).
+
+The first section establishes a simple criterion for the states formed by
+any unextendable product set to be perfectly discriminated by separable
+measurements, and the second subsection proves that any set of states formed
+by taking the union of an unextendable product set $\A \subset \X \otimes \Y$ 
+together with any pure state $z \in \X\otimes\Y$ orthogonal to every element of
+$\A$ cannot be perfectly discriminated by a separable measurement.
+(It is evident that PPT measurements allow a perfect discrimination in both
+cases.)
+
+\minitoc
+
+%------------------------------------------------------------------------------%
+\section{A criterion for perfect separable discrimination of
+unextendable product sets}
+%------------------------------------------------------------------------------%
+
+Here we provide a simple criterion for when an unextendable product set can be
+perfectly discriminated by separable measurements, and we use this criterion to
+show that there is an unextendable product set $\A \subset \X\otimes\Y$ that is
+not perfectly discriminated by any separable measurement when
+$\X = \Y = \complex^4$.
+It is known that no unextendable product set $\A \subset \X\otimes\Y$
+spanning a proper subspace of $\X\otimes\Y$ can be perfectly discriminated by
+an LOCC measurement \cite{Bennett99}, while every unextendable product
+set can be discriminated perfectly by a PPT measurement.
+It is also known that every unextendable product set $\A\subset\X\otimes\Y$ can
+be perfectly discriminated by separable measurements in the case 
+$\X = \Y = \complex^3$ \cite{DiVincenzo03}.
+
+The following notation will be used throughout this section.
+For $\X=\complex^n$, $\Y=\complex^m$, and
+$\A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X\otimes\Y$
+being an unextendable product set, we will write
+\begin{equation}
+  \A_k = \A \backslash \{u_k \otimes v_k\},
+\end{equation}
+and define a set of rank-one
+product projections
+\begin{equation}
+\label{eq:P_k-sets}
+\P_k = \bigl\{ x x^{\ast} \otimes y y^{\ast}\,:\,
+x\in\X,\,y\in\Y,\,\norm{x} = \norm{y} =1,\;\text{and}\;
+x\otimes y\perp \A_k\bigr\}
+\end{equation}
+for each $k = 1,\ldots,N$.
+One may interpret each element $x x^{\ast} \otimes y y^{\ast}$ of 
+$\P_k$ as corresponding to a product vector $x \otimes y$ that could replace
+$u_k \otimes v_k$ in $\A$, yielding a (not necessarily unextendable)
+orthonormal product set.
+
+The following theorem states that the sets $\P_1,\ldots,\P_N$ defined above
+determine whether or not an unextendable product set can be perfectly
+discriminated by separable measurements.
+
+\begin{theorem}\label{thm:upb_sep_characterize}
+  Let $\X=\complex^n$ and $\Y=\complex^m$ be complex Euclidean spaces and let
+  \begin{equation}
+    \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X\otimes\Y
+  \end{equation}
+  be an unextendable product set.
+  The following two statements are equivalent:
+  \begin{enumerate}
+  \item
+    There exists a separable measurement $\mu \in \Meas_{\Sep}(N, \X:\Y)$
+    that perfectly discriminates the
+    states represented by $\A$ (for any choice of nonzero probabilities
+    $p_1,\ldots,p_N$).
+  \item
+    For $\P_1,\ldots,\P_N$ as defined in \eqref{eq:P_k-sets}, one has that the
+    identity operator $\I_{\X}\otimes\I_{\Y}$ can be written as a nonnegative
+    linear combination of projections in the set $\P_1\cup\cdots\cup \P_N$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Assume first that statement 2 holds, so that one may write
+  \begin{equation}
+    \I_{\X}\otimes\I_{\Y} =
+    \sum_{k = 1}^N \sum_{j = 1}^{M_k} \lambda_{k,j}\,
+    x_{k,j} x_{k,j}^{\ast}\otimes y_{k,j} y_{k,j}^{\ast}
+  \end{equation}
+  for some choice of positive integers $M_1,\ldots,M_N$, nonnegative real
+  numbers $\{\lambda_{k,j}\}$, and product vectors
+  $\{x_{k,j} \otimes y_{k,j}\}$ satisfying
+  \begin{equation}
+    x_{k,j} x_{k,j}^{\ast}\otimes y_{k,j} y_{k,j}^{\ast} \in \P_k
+  \end{equation}
+  for each $k\in\{1,\ldots,N\}$ and $j \in \{1,\ldots,M_k\}$.
+  Define
+  \begin{equation} \label{eq:P_k-enumeration}
+    \mu(k) = \sum_{j = 1}^{M_k} \lambda_{k,j}\,
+    x_{k,j} x_{k,j}^{\ast}\otimes y_{k,j} y_{k,j}^{\ast}
+  \end{equation}
+  for each $k\in\{1,\ldots,N\}$.
+  It is clear that $\mu$ is a separable measurement, and by the
+  definition of the sets $\P_1,\ldots,\P_N$ it necessarily holds that
+  \begin{equation}
+    \ip{\mu(k)}{u_\ell u_\ell^* \otimes v_\ell v_\ell^*} = 0,
+  \end{equation}
+  when $k\not=\ell$.
+  This implies that $\mu$ perfectly discriminates the states
+  represented by $\A$, and therefore implies that statement 1 holds.
+  
+  Now assume that statement 1 holds: there exists a separable measurement
+  \[\mu \in \Meas_{\Sep}(N, \X:\Y)\] 
+  that perfectly discriminates the states represented by $\A$.
+  As each measurement operator $\mu(k)$ is separable, it is possible to write
+  \begin{equation}
+    \mu(k) = \sum_{j = 1}^{M_k} \lambda_{k,j}\,
+    x_{k,j} x_{k,j}^{\ast}\otimes y_{k,j} y_{k,j}^{\ast}
+  \end{equation}
+  for some choice of nonnegative integers $\{M_k\}$, positive real numbers
+  $\{\lambda_{k,j}\}$, and unit vectors
+  $\{x_{k,j}\,:\,j=1,\ldots,M_k\}\subset\X$ and 
+  $\{y_{k,j}\,:\,j=1,\ldots,M_k\}\subset\Y$.
+  The assumption that this measurement perfectly discriminates $\A$ implies that
+  $x_{k,j}\otimes y_{k,j} \perp \A_k$, and therefore
+  $x_{k,j} x_{k,j}^{\ast} \otimes y_{k,j} y_{k,j}^{\ast} \in \P_k$, for each
+  $k = 1,\ldots,N$ and $j = 1,\ldots,M_k$.
+  As we have that $\mu(1)+\cdots+\mu(N) = \I_{\X} \otimes \I_{\Y}$, it follows that statement 2
+  holds.
+\end{proof}
+
+It is not immediately clear that Theorem~\ref{thm:upb_sep_characterize} is
+useful for determining whether or not any particular unextendable product set
+can be discriminated by separable measurements, but indeed it is.
+What makes this so is the fact that each set $\P_k$ is necessarily finite, as
+the following proposition establishes.
+
+\begin{prop}\label{lem:upb_finite}
+  Let $\X$ and $\Y$ be complex Euclidean spaces, let
+  \[
+    \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X\otimes\Y
+  \]
+  be an unextendable product set, and let $\P_1,\ldots,\P_N$ be as defined in
+  \eqref{eq:P_k-sets}.
+  The sets $\P_1,\ldots,\P_N$ are finite.
+\end{prop}
+
+\begin{proof}
+  Assume toward contradiction that $\P_k$ is infinite for some choice of
+  $k\in\{1,\ldots,N\}$.
+  There are finitely many subsets $S\subseteq \{1,\ldots,k-1,k+1,\ldots,N\}$,
+  so  there must exist at least one such subset $S$ with the property that
+  there are infinitely many pairwise nonparallel product vectors of the form
+  $x\otimes y$ such that $x \perp u_j$ for every $j\in S$ and $y\perp v_j$ for
+  every $j\not\in\S$.
+  This implies that both the subspace of $\X$ orthogonal to
+  $\{u_j\,:\,j\in S\}$ and the subspace of $\Y$ orthogonal to
+  $\{v_j\,:\,j\not\in S\}$ have dimension at least 1, and
+  at least one of them has dimension at least~2.
+  It follows that there must exist a unit product vector $x \otimes y$ with
+  three properties:
+  (i) $x \perp u_j$ for every $j\in S$,
+  (ii) $y \perp v_j$ for every $j\not\in\S$, and
+  (iii) $x\otimes y\perp u_k \otimes v_k$.
+  This contradicts the fact that $\A$ is unextendable, and therefore completes
+  the proof.
+\end{proof}
+
+Given Proposition~\ref{lem:upb_finite}, it becomes straightforward to make use
+of Theorem~\ref{thm:upb_sep_characterize} computationally.
+The sets $\P_1,\ldots,\P_N$ can be computed by iterating over all 
+$S \subseteq \{1,\ldots,k-1,k+1,\ldots,N\}$ and
+finding the (at most one) product state orthogonal to $\{ u_j : j \in S \}$ on
+$\X$ and $\{ v_j : j \notin S \}$ on $\Y$. 
+Then, the second statement in Theorem~\ref{thm:upb_sep_characterize} can be
+checked through the use of linear programming (and even by hand in some cases).
+
+\begin{example}[Feng's unextendable product set]
+We now present an example of an unextendable product set in $\X\otimes\Y$,
+for $\X = \Y = \complex^4$, that cannot be perfectly discriminated by separable
+measurements. 
+In particular, let $\A$ be the unextendable product set consisting of $8$
+states that were found in \cite{Feng06}:
+\begin{equation}
+  \begin{array}{l}
+    \ket{\phi_1} = \ket{0}\ket{0}, \\
+    \ket{\phi_2} = \ket{1}\left(\ket{0} - \ket{2} + \ket{3}\right)/\sqrt{3},\\
+    \ket{\phi_3} = \ket{2}\left(\ket{0} + \ket{1} - \ket{3}\right)/\sqrt{3}, \\
+    \ket{\phi_4} = \ket{3}\ket{3}, \\
+    \ket{\phi_5} = \left(\ket{1} + \ket{2} + \ket{3}\right)\left(\ket{0}
+    - \ket{1} + \ket{2}\right)/3, \\
+    \ket{\phi_6} = \left(\ket{0} - \ket{2} + \ket{3}\right)\ket{2}/\sqrt{3}, \\
+    \ket{\phi_7} = \left(\ket{0} + \ket{1} - \ket{3}\right)\ket{1}/\sqrt{3}, \\
+    \ket{\phi_8} = \left(\ket{0} - \ket{1} + \ket{2}\right)\left(\ket{0}
+    + \ket{1} + \ket{2}\right)/3.
+  \end{array}
+\end{equation}
+
+For each $k = 1, \ldots, 8$, there are exactly $6$ product states contained in
+$\P_k$ for each choice of $k$, which we represent by product vectors
+$\ket{\phi_{k,j}}$ for $j = 1, \ldots, 6$.
+To be explicit, these states are as follows (where we have omitted
+normalization factors for brevity):\vspace{3mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{1,1}} = \ket{0}\ket{0}$,\\
+  $\ket{\phi_{1,2}} = \left(\ket{0} + \ket{1} - \ket{3}\right)
+  \left(\ket{0} + \ket{2}\right)$,\\
+  $\ket{\phi_{1,3}} = \left(\ket{0} - \ket{1}\right)
+  \left(\ket{0} + \ket{1} - \ket{3}\right)$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{1,4}} = \left(\ket{0} - \ket{1} + 
+  \ket{2}\right)\left(\ket{0} - \ket{1} + \ket{2}\right)$, \\
+  $\ket{\phi_{1,5}} = \left(\ket{0} + \ket{2}\right)
+  \left(\ket{0} - \ket{2} + \ket{3}\right)$,\\
+  $\ket{\phi_{1,6}} = \left(\ket{0} - \ket{2} + \ket{3}\right)
+  \left(\ket{0} - \ket{1}\right)$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{2,1}} = \ket{1}\left(\ket{0} - \ket{2} + \ket{3}\right)$,\\
+  $\ket{\phi_{2,2}} = \left(\ket{0} + \ket{1} - \ket{3}\right)\ket{2}$,\\
+  $\ket{\phi_{2,3}} =  \left(\ket{0} + \ket{1}\right)\ket{3}$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{2,4}} = \left(\ket{0} - \ket{1} + \ket{2}\right)
+  \left(\ket{1} - 2\ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{2,5}} = \left(\ket{1} + \ket{2} + \ket{3}\right)
+  \left(\ket{0} - \ket{1} - 2\ket{2}\right)$, \\
+  $\ket{\phi_{2,6}} = \left(\ket{1} - \ket{3}\right)\ket{0}$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}   
+  $\ket{\phi_{3,1}} = \ket{2}\left(\ket{0} + \ket{1} - \ket{3}\right)$,\\
+  $\ket{\phi_{3,2}} = \left(\ket{0} - \ket{2} + \ket{3}\right)\ket{1}$,\\
+  $\ket{\phi_{3,3}} =  \left(\ket{2} - \ket{3}\right)\ket{0}$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{3,4}} = \left(\ket{1} + \ket{2} + \ket{3}\right)
+  \left(\ket{0} + 2\ket{1} + \ket{2}\right)$, \\
+  $\ket{\phi_{3,5}} = \left(\ket{0} - \ket{1} + \ket{2}\right)
+  \left(2\ket{1} - \ket{2} - \ket{3}\right)$, \\
+  $\ket{\phi_{3,6}} = \left(\ket{0} - \ket{2}\right)\ket{3}$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{4,1}} = \ket{3}\ket{3}$,\\
+  $\ket{\phi_{4,2}} = \left(\ket{0} + \ket{1} - \ket{2}\right)
+  \left(\ket{2} + \ket{3}\right)$,\\
+  $\ket{\phi_{4,3}} =  \left(\ket{1} + \ket{3}\right)
+  \left(\ket{0} + \ket{1} - \ket{3}\right)$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{4,4}} = \left(\ket{2} + \ket{3}\right)
+  \left(\ket{0} - \ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{4,5}} = \left(\ket{1} + \ket{2} + \ket{3}\right)
+  \left(\ket{1} + \ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{4,6}} = \left(\ket{0} - \ket{2} + \ket{3}\right)
+  \left(\ket{1} + \ket{3}\right)$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{5,1}} = \left(\ket{1} + \ket{2} + \ket{3}\right)
+  \left(\ket{0} - \ket{1} + \ket{2}\right)$,\\
+  $\ket{\phi_{5,2}} = \ket{1}\left(2\ket{0} + \ket{2} - \ket{3}\right)$,\\
+  $\ket{\phi_{5,3}} = \ket{3}\ket{0}$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{5,4}} = \left(\ket{0} - \ket{2} - 2\ket{3}\right)\ket{2}$, \\
+  $\ket{\phi_{5,5}} = \ket{2}\left(2\ket{0} - \ket{1} + \ket{3}\right)$, \\
+  $\ket{\phi_{5,6}} = \left(\ket{0} + \ket{1} + 2\ket{3}\right)\ket{1}$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{6,1}} = \left(\ket{0} - \ket{2} + \ket{3}\right)\ket{2}$,\\
+  $\ket{\phi_{6,2}} = \ket{3}\left(\ket{0} - \ket{2}\right)$,\\
+  $\ket{\phi_{6,3}} =  \ket{0}\left(\ket{2} - \ket{3}\right)$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{6,4}} = \left(\ket{0} - \ket{1} - 2\ket{2}\right)
+  \left(\ket{1} + \ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{6,5}} = \ket{2}\left(\ket{0} - \ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{6,6}} = \left(\ket{1} - 2\ket{2} + \ket{3}\right)
+  \left(\ket{0} - \ket{1} + \ket{2}\right)$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{7,1}} = \left(\ket{0} + \ket{1} - \ket{3}\right)\ket{1}$,\\
+  $\ket{\phi_{7,2}} = \ket{0}\left(\ket{1} - \ket{3}\right)$,\\
+  $\ket{\phi_{7,3}} =  \ket{1}\left(\ket{0} + \ket{1} - \ket{3}\right)$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{7,4}} = \left(\ket{0} + 2\ket{1} + \ket{2}\right)
+  \left(\ket{1} + \ket{2} + \ket{3}\right)$, \\
+  $\ket{\phi_{7,5}} = \left(2\ket{1} - \ket{2} - \ket{3}\right)
+  \left(\ket{0} - \ket{1} + \ket{2}\right)$, \\
+  $\ket{\phi_{7,6}} = \ket{3}\left(\ket{0} + \ket{1}\right)$,
+\end{minipage}
+
+\vspace{2mm}
+
+\noindent\hspace{8pt}
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{8,1}} = \left(\ket{0} - \ket{1} + \ket{2}\right)
+  \left(\ket{0} + \ket{1} + \ket{2}\right)$,\\
+  $\ket{\phi_{8,2}} = \ket{1}\left(\ket{0} - \ket{2} - 2\ket{3}\right)$,\\
+  $\ket{\phi_{8,3}} =  \left(2\ket{0} - \ket{1} + \ket{3}\right)\ket{1}$,
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  $\ket{\phi_{8,4}} = \ket{0}\ket{3}$, \\
+  $\ket{\phi_{8,5}} = \left(2\ket{0} + \ket{2} - \ket{3}\right)\ket{2}$, \\
+  $\ket{\phi_{8,6}} = \ket{2}\left(\ket{0} + \ket{1} + 2\ket{3}\right)$.
+\end{minipage}
+
+\vspace{3mm}
+
+\noindent 
+One may verify by a computer that $\I\otimes\I$ is not contained in the convex
+cone generated by 
+\begin{equation}
+  \label{eq:Feng-replacement-set}
+  \bigl\{ \ket{\phi_{k,j}}\bra{\phi_{k,j}}\,:\,k = 1,\ldots,8,\;j=1,\ldots,6
+  \bigr\}.
+\end{equation}
+(In fact, $\I\otimes\I$ is not in the linear span of the set
+\eqref{eq:Feng-replacement-set}.)
+Theorem~\ref{thm:upb_sep_characterize} therefore implies that this unextendable
+product set is not perfectly discriminated by separable measurements.
+\end{example}
+
+The computational procedure described above was implemented in MATLAB as part 
+of the QETLAB Toolbox (\cite{Johnston2015}, \texttt{UPBSepDistinguishable} function).
+
+
+%------------------------------------------------------------------------------%
+\section[Impossibility to distinguish an unextendable product set plus one more 
+pure state]{Impossibility to distinguish an unextendable\newline
+product set plus one more pure state}
+%------------------------------------------------------------------------------%
+
+Next, we prove an upper bound on the probability to correctly discriminate
+any unextendable product set, together with one extra pure state orthogonal
+to the members of the unextendable product set, by a separable measurement.
+Central to the proof of this statement is a family of positive linear maps
+previously studied in the literature \cite{Terhal01,Bandyopadhyay05}.
+
+Before proving this fact, we note that it is fairly straightforward to obtain
+a qualitative result along similar lines:
+if a separable measurement were able to perfectly discriminate a particular
+product set from any state orthogonal to this product set, there would
+necessarily be a separable measurement operator orthogonal to the space spanned
+by the product set, implying that some nonzero product state must be orthogonal
+to the product set (and therefore the product set must be extendable).
+Related results based on this sort of argument may be found in \cite{Bandyopadhyay11}.
+An advantage of the method described here is that one obtains
+precise bounds on the optimal discrimination probability, as opposed to a
+statement that a perfect discrimination is not possible.
+
+The following lemma is required for the proof of the theorem below.
+
+\begin{lemma}[Terhal]
+  \label{lemma:lambda}
+  For given complex Euclidean spaces $\X=\complex^n$ and $\Y=\complex^m$, and
+  any unextendable product set
+  \begin{equation}
+    \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X\otimes\Y,
+  \end{equation}
+  there exists a positive real number $\lambda_{\A} > 0$ such that
+  \begin{equation}
+    \left(\I_{\X} \otimes y^{\ast}\right)
+    \left( \sum_{k = 1}^{N}u_{k}u_{k}^{\ast}\otimes v_{k}v_{k}^{\ast} \right)
+    \left(\I_{\X} \otimes y\right)
+    - \lambda_{\A}\norm{y}^{2}\I_{\X} \in \Pos(\X),
+  \end{equation}
+  for every $y \in \Y$.
+\end{lemma}
+
+\noindent
+A proof of the lemma, as well as a constructive procedure
+to calculate a bound on $\lambda_{\A}$, can be found in \cite{Terhal01}.
+
+\begin{theorem}
+  \label{thm:upb}
+  Let $\X = \complex^n$ and $\Y=\complex^m$ be complex Euclidean spaces, let
+  \begin{equation}
+    \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X\otimes\Y
+  \end{equation}
+  be an unextendable product set, and let 
+  \begin{equation}
+    z \in \X\otimes\Y
+  \end{equation}
+  be a unit vector orthogonal to $\A$.
+  We have that
+  \begin{equation}
+    \opt_{\Sep}(\A \cup \{ z \}) \leq  1 - \frac{\lambda_{\A}}{(N + 1)\delta},
+  \end{equation}
+  where $\lambda_{\A}$ is a positive real number satisfying the requirements 
+  of Lemma~\ref{lemma:lambda} and 
+  \[
+    \delta = \norm{\tr_{\X}(z z^{\ast})}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  Consider the following Hermitian operator:
+  \begin{equation}
+    H = \frac{1}{N+1} \left( \sum_{k = 1}^{N}u_{k}u_{k}^{\ast}\otimes 
+    v_{k}v_{k}^{\ast} + \left( 1- \frac{\lambda_{\A}}{\delta} \right) 
+    zz^{\ast} \right).
+  \end{equation}
+  We want to show that $H$ is a feasible solution of the dual problem
+  \eqref{eq:sep-dual-problem} for the state discrimination problem under
+  consideration.
+  It is clear that
+  \begin{equation}
+    H - \frac{1}{N+1}u_{k}u_{k}^{\ast}\otimes v_{k}v_{k}^{\ast} \in 
+    \Pos(\X\otimes\Y) \subset \BPos(\X:\Y)
+  \end{equation}
+  for $k = 1, \ldots, N$. 
+  The remaining constraint left to be checked is the following:
+  \begin{equation}
+    \label{eq:upb_constraint} 
+    H - \frac{1}{N+1}zz^{\ast} = 
+    \frac{1}{N+1}\left(
+    \sum_{k = 1}^{N}u_{k}u_{k}^{\ast}\otimes v_{k}v_{k}^{\ast} -
+    \frac{\lambda_{\A}}{\delta} zz^{\ast} \right) \in \BPos(\X:\Y).
+  \end{equation}
+  Using the fact that
+  \begin{equation}
+    \delta\norm{y}^{2}\I_{\X} - 
+    \left(\I_{\X} \otimes y^{\ast}\right)zz^{\ast}\left(\I_{\X} \otimes y\right)
+    \in \Pos(\X),
+  \end{equation} 
+  for any $y \in \Y$, together with Lemma \ref{lemma:lambda}, one has that
+  \begin{equation}
+    \left( \I \otimes y \right)^{\ast}
+    \left(\sum_{k = 1}^{N}u_{k}u_{k}^{\ast}\otimes v_{k}v_{k}^{\ast} -
+    \frac{\lambda_{\A}}{\delta} zz^{\ast}\right)
+    \left( \I \otimes y \right) \in \Pos(\X)
+  \end{equation}
+  and therefore the constraint \eqref{eq:upb_constraint} is satisfied.
+  Finally, it holds that
+  \begin{equation}
+    \tr(H) = 1 - \frac{\lambda_{\A}}{(N + 1)\delta},
+  \end{equation}
+  which completes the proof.
+\end{proof}
+
+%------------------------------------------------------------------------------%
+\begin{example}[Tiles set]
+\label{ex:tiles-set}
+%------------------------------------------------------------------------------%
+
+Theorem \ref{thm:upb} allow us to find specific bounds for the probability 
+of correctly discriminating certain sets of states.
+For instance, here we consider the following unextendable product set  
+$\A \subset \X\otimes\Y$ for $\X = \Y = \complex^3$, commonly known as the 
+\emph{tiles set}:
+\begin{equation}
+  \begin{array}{llll}
+    \ket{\phi_1} = \ket{0}\left(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\right),
+    &\ket{\phi_2} = \ket{2}\left(\frac{\ket{1}-\ket{2}}{\sqrt{2}}\right),
+    &\ket{\phi_3} = \left(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\right)\ket{2},
+    &\ket{\phi_4} = \left(\frac{\ket{1}-\ket{2}}{\sqrt{2}}\right)\ket{0},\\[4mm]
+    \multicolumn{4}{c}{\ket{\phi_5} = 
+      \frac{1}{3}\left(\ket{0}+\ket{1}+\ket{2}\right)
+      \left(\ket{0}+\ket{1}+\ket{2}\right).}
+  \end{array}
+\end{equation}
+For a pure state orthogonal to this set, one may take
+\begin{equation}
+  \ket{\psi} = \frac{1}{2}\left(\ket{0}\ket{0} + \ket{0}\ket{1} -
+  \ket{0}\ket{2} -  \ket{1}\ket{2}\right).
+\end{equation}
+Using the procedure described in \cite{Terhal01}, one obtains
+\begin{equation}
+  \lambda_{\A} \geq \frac{1}{9}\left( 1 - \sqrt{\frac{5}{6}} \right)^{2}.
+\end{equation}
+Therefore, if we assume that each state is selected with probability $1/6$, 
+the maximum probability of correctly discriminating the set 
+$\left\{ \ket{\phi_1}, \ldots, \ket{\phi_5}, \ket{\psi} \right\}$ by a
+separable measurement is at most
+\begin{equation}
+  \opt_{\Sep}(\A) \leq 1 - \frac{1}{54}\frac{\left( 1 - \sqrt{\frac{5}{6}} \right)^{2}}
+  {\cos\left(\frac{\pi}{8}\right)^{2}} <  1 - 1.647 \times 10^{-4}.
+\end{equation}
+This bound is not tight, as numerical optimization (see Appendix \ref{chap:AppendixA})
+shows that
+\begin{equation}
+  \opt_{\Sep}(\A) < 0.9861 .
+\end{equation} 
+
+\end{example}
+

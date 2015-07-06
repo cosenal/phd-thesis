@@ -1,0 +1,1103 @@
+%!TEX root = thesis.tex
+%-------------------------------------------------------------------------------
+\chapter{Distinguishability of maximally entangled states}
+\label{chap:mes}
+%-------------------------------------------------------------------------------
+
+In this chapter we finally bring the cone programming framework into action, 
+in order to answer some questions about the distinguishability of maximally entangled states.
+As it was discussed in Section \ref{sec:mes-intro}, sets of maximally entangled states
+constitute an important testbed for gaging the power of different classes of measurements.
+
+As a warm-up, we first reprove a bound by \cite{Yu12} on the distinguishability
+of any set of maximally entangled states.
+Next, we answer an open question regarding the entanglement
+cost of Bell states that was raised in \cite{Yu14}.
+In the second part we study the set of states \eqref{eq:ydy_states} introduced in \cite{Yu12}. 
+
+\minitoc
+
+%------------------------------------------------------------------------------%
+\section{General bound for maximally entangled states}
+\label{sec:nathansons-bound}
+%------------------------------------------------------------------------------%
+
+We show that no PPT measurement can perfectly distinguish more than $n$ 
+maximally entangled states in $\X\otimes\Y$, where $\X = \Y = \complex^{n}$. 
+This result appears in \cite{Yu12} and it generalizes 
+a bound by Nathanson, which is valid against LOCC and separable measurements 
+\cite{Nathanson05}. The following lemma is central to the proof.
+\begin{lemma}
+  \label{lemma:isometry-ppt-star}
+  Let $A\in\Unitary(\Y,\X)$ be a unitary operator.
+  It holds that
+  \begin{equation}
+  \label{eq:reduction-operator}
+    \I_{\X}\otimes\I_{\Y} - \vec(A) \vec(A)^{\ast} \in \PPTStar(\X:\Y).
+  \end{equation}
+\end{lemma}
+\begin{proof}
+Let $W_{n}\in\Unitary(\X,\Y)$ be the swap operator from Eq.~\eqref{eq:swap-operator}.
+Consider the operator 
+\begin{equation}
+  U = (\overline{A}\otimes\I_{\Y})W_{n}(A^{\t}\otimes\I_{\Y}).
+\end{equation}
+Since $A$ and $W_{n}$ are unitary operators, so is $U$. Notice that $U$ is also Hermitian, 
+and therefore its eigenvalues are either $1$ or $-1$. This implies that
+\begin{equation}
+  \I_{\X}\otimes\I_{\Y} -  U \in \Pos(\X\otimes\Y)
+\end{equation}
+is positive semidefinite. Moreover we have that
+\begin{equation}
+  \begin{aligned}
+    \pt_{\X}(\I_{\X}\otimes\I_{\Y} -  U) &= \I_{\X}\otimes\I_{\Y} - 
+      (A\otimes\I_{\Y})\vec(\I)\vec(\I)^{\ast}(A^{\ast}\otimes\I_{\Y}) \\ 
+      &= \I_{\X}\otimes\I_{\Y} - \vec(A) \vec(A)^{\ast},
+  \end{aligned} 
+\end{equation}
+and therefore 
+  \begin{equation}
+    \I_{\X}\otimes\I_{\Y} - \vec(A) \vec(A)^{\ast} \in \PPTStar(\X:\Y).
+  \end{equation}
+\end{proof}
+
+Now, suppose that $u_1,\ldots,u_N\in\X\otimes\Y$ are vectors representing
+maximally entangled pure states.
+An upper-bound on the probability to distinguish these $N$ states, assuming
+a uniform selection, is obtained from the dual problem \eqref{eq:ppt-dual-problem}
+by considering
+\begin{equation}
+  H = \frac{\I_{\X}\otimes\I_{\Y}}{nN}.
+\end{equation}
+It holds that $H$ is a feasible solution to the dual problem:
+since the states are maximally entangled, for each $k\in\{1,\ldots,N\}$ one may write
+\begin{equation}
+  u_k = \frac{1}{\sqrt{n}}\vec(A_k),
+\end{equation}
+for some choice of an isometry $A_k\in\Unitary(\Y,\X)$, and therefore
+\begin{equation}
+  H - \frac{1}{N}u_k u_k^{\ast} = \frac{1}{nN}\left(
+  \I_{\X}\otimes\I_{\Y} - \vec(A_k) \vec(A_k)^{\ast}\right) \in \PPTStar(\X:\Y)
+\end{equation}
+by Lemma~\ref{lemma:isometry-ppt-star}.
+Finally, the value
+\begin{equation}
+\tr(H) = \frac{n}{N}
+\end{equation}
+is an upper bound on the probability of distinguishing the states and it is smaller 
+than $1$ whenever the number of states $N$ is bigger than the dimension $n$ of
+each subspace.
+\begin{remark}
+The statement of Lemma \ref{lemma:isometry-ppt-star} may become very familiar to the reader, 
+once it is translated in the language of linear mappings via the Choi isomorphism.
+It is straightforward to see that the operator in Eq.~\ref{eq:reduction-operator}
+is the Choi operator of a mapping $\Phi_{A}:\Lin(\Y)\to\Lin(\X)$ defined as
+\begin{equation}
+  \Phi_{A}(X) = \tr(X)\I - AXA^{\ast},
+\end{equation}
+for any $X\in\Lin(\Y)$, which in turn is the composition of a unitary mapping
+\begin{equation}
+  X \to AXA^{\ast}
+\end{equation}
+and the mapping
+\begin{equation}
+  \Phi(X) = \tr(X)\I - X,
+\end{equation}
+which is the well-known \emph{reduction map} introduced in \cite{Horodecki99} 
+(it is the mapping at the basis of the reduction criterion for entanglement detection).
+In brief, we related the fact that PPT measurements can distinguish no more than 
+$n$ maximally entangled states in $\complex^{n}\otimes\complex^{n}$ with the fact
+that the reduction map from $\Lin(\complex^{n})\to\Lin(\complex^{n})$ is a decomposable map.
+\end{remark}
+
+%-------------------------------------------------------------------------------
+\section{Entanglement cost of distinguishing Bell states}
+%-------------------------------------------------------------------------------
+
+In this section, we study state discrimination problems for sets of three or
+four Bell states, by LOCC, separable, and PPT measurements, with the assistance
+of an entangled pair of qubits.
+In particular, we will assume that Alice and Bob aim to discriminate a set of
+Bell states given that they share the additional resource state
+\begin{equation}
+  \label{eq:tau_eps}
+  \ket{\tau_{\eps}} = \sqrt{\frac{1 + \eps}{2}}\,\ket{0}\ket{0} + 
+  \sqrt{\frac{1 - \eps}{2}}\,\ket{1}\ket{1},
+\end{equation}
+for some choice of $\eps \in [0,1]$.
+The parameter $\eps$ quantifies the amount of entanglement in the state
+$\ket{\tau_{\eps}}$.
+Up to local unitaries, this family of states represents every pure state of two
+qubits.
+
+Using the cone programming method discussed in the previous chapter, we obtain
+exact expressions for the optimal probability with which any set of three or
+four Bell states can be discriminated with the assistance of the state
+\eqref{eq:tau_eps} by separable measurements (which match the probabilities
+obtained by LOCC measurements in all cases).
+
+%------------------------------------------------------------------------------%
+\subsection{Discriminating three Bell states}
+%------------------------------------------------------------------------------%
+
+Notice that the state $\ket{\tau_{1}} = \ket{0}\ket{0}$ is a product state and
+it does not aid the two parties in discriminating any set of Bell states,
+so the probability of success for $\eps = 1$ is still at most $2/3$ for a set
+of three Bell states.
+If $\varepsilon = 0$, then Alice and Bob can use teleportation to perfectly
+discriminate all four Bell states perfectly by LOCC measurements, and therefore
+the same is true for any three Bell states.
+It was proved in \cite{Yu14} that PPT measurements can perfectly
+discriminate any set of three Bell states using the resource state
+\eqref{eq:tau_eps} if and only if $\eps \leq 1/3$.
+
+Here we show that a maximally entangled state ($\eps = 0$) is required to 
+perfectly discriminate any set of three Bell states using separable
+measurements, and more generally we obtain an expression for the optimal
+probability of a correct discrimination for all values of $\varepsilon$.
+Because the permutations of Bell states induced by local unitaries is
+transitive, there is no loss of generality in fixing the three Bell states to
+be discriminated to be $\ket{\phi_1}$, $\ket{\phi_2}$, and $\ket{\phi_3}$
+(as defined in \eqref{eq:Bell-states}).
+
+\begin{theorem}
+  \label{thm:three-bell}
+  Let $\X_1 = \X_2 = \Y_1 = \Y_2 = \complex^2$, define 
+  $\X = \X_1 \otimes \X_2$ and $\Y = \Y_1 \otimes \Y_2$, and let 
+  $\eps \in [0,1]$ be chosen arbitrarily. 
+  For any separable measurement $\mu\in\Meas_{\Sep}(3,\X:\Y)$, the
+  success probability of correctly discriminating the states corresponding to
+  the set
+  \begin{equation}
+    \label{eq:set-three-bells}
+    \bigl\{ \ket{\phi_{1}} \otimes \ket{\tau_{\eps}},\; 
+    \ket{\phi_{2}} \otimes \ket{\tau_{\eps}},\;
+    \ket{\phi_{3}} \otimes \ket{\tau_{\eps}} \bigr\}
+    \subset (\X_1\otimes\Y_1)\otimes(\X_2\otimes\Y_2),
+  \end{equation}
+  assuming a uniform distribution $p_1 = p_2 = p_3 = 1/3$, is at most
+  \begin{equation}
+  \label{eq:probability-three-bell}
+    \frac{1}{3}\left(2 + \sqrt{1 - \eps^{2}}\right).
+  \end{equation}
+\end{theorem}
+
+To prove this theorem, we require the following lemma.
+The lemma introduces a family of positive maps that, to our knowledge, has not
+previously appeared in the literature.
+
+\begin{lemma}
+  \label{lemma:3Bell}
+  Define a linear mapping
+  $\Xi_{t}: \Lin(\complex^2 \oplus \complex^2)\rightarrow
+  \Lin(\complex^2 \oplus \complex^2)$ as
+  \begin{equation}
+    \Xi_t\begin{pmatrix}
+    A & B\\
+    C & D
+    \end{pmatrix}
+    = \begin{pmatrix}
+      \Psi_t(D) + \Phi(D) &
+      \Psi_t(B) + \Phi(C)\\[2mm]
+      \Psi_t(C) + \Phi(B) &
+      \Psi_t(A) + \Phi(A)
+    \end{pmatrix}
+  \end{equation}
+  for every $t\in(0,\infty)$ and $A,B,C,D\in\Lin(\complex^2)$, where
+  $\Psi_t:\Lin(\complex^2)\rightarrow\Lin(\complex^2)$
+  is defined as
+  \begin{equation}
+    \Psi_t
+    \begin{pmatrix}
+      \alpha & \beta \\
+      \gamma & \delta
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+      t \alpha & \beta \\
+      \gamma & t^{-1} \delta
+    \end{pmatrix}
+  \end{equation}
+  and $\Phi:\Lin(\complex^2)\rightarrow\Lin(\complex^2)$ is defined as
+  \begin{equation}
+    \Phi\begin{pmatrix}
+    \alpha & \beta \\
+    \gamma & \delta
+    \end{pmatrix}
+    = \begin{pmatrix}
+      \delta & -\beta\\
+      -\gamma & \alpha
+    \end{pmatrix},
+  \end{equation}
+  for every $\alpha,\beta,\gamma,\delta\in\complex$.
+  It holds that $\Xi_t$ is a positive map for all $t\in (0,\infty)$.
+\end{lemma}
+
+\begin{proof}
+  It will first be proved that $\Xi_1$ is positive.
+  For every vector
+  \begin{equation}
+    u = \begin{pmatrix}
+      \alpha\\ \beta
+    \end{pmatrix}
+  \end{equation}
+  in $\complex^2$, define a matrix
+  \begin{equation}
+    M_u = \begin{pmatrix}
+      \overline\alpha & \overline\beta\\[1mm]
+      -\beta & \alpha
+    \end{pmatrix}.
+  \end{equation}
+  Straightforward computations reveal that
+  \begin{equation}
+    M_u^{\ast} M_v = u v^{\ast} + \Phi(v u^{\ast})
+    \qquad\text{and}\qquad
+    M_u^{\ast} M_u = \norm{u}^2\tinyspace \I
+  \end{equation}
+  for all $u,v\in\complex^2$.
+  It follows that
+  \begin{equation}
+    \Xi_1 \begin{pmatrix}
+      u u^{\ast} & u v^{\ast}\\
+      v u^{\ast} & v v^{\ast}
+    \end{pmatrix}
+    = \begin{pmatrix}
+      v v^{\ast} + \Phi(v v^{\ast}) & 
+      u v^{\ast} + \Phi(v u^{\ast}) \\
+      v u^{\ast} + \Phi(u v^{\ast}) &
+      u u^{\ast} + \Phi(u u^{\ast}) 
+    \end{pmatrix}
+    = \begin{pmatrix}
+      \norm{v}^2 \I & M_u^{\ast} M_v\\[1mm]
+      M_v^{\ast} M_u & \norm{u}^2 \I
+    \end{pmatrix},
+  \end{equation}
+  which is positive semidefinite by virtue of the fact that
+  $\norm{M_u^{\ast} M_v}\leq\norm{M_u}\norm{M_v} = \norm{u} \norm{v}$.
+  As every element of $\Pos(\complex^2\oplus\complex^2)$ can be written as a
+  positive linear combination of matrices of the form
+  \begin{equation}
+    \begin{pmatrix}
+      u u^{\ast} & u v^{\ast}\\
+      v u^{\ast} & v v^{\ast}
+    \end{pmatrix},
+  \end{equation}
+  ranging over all vectors $u, v \in \complex^2$, it follows that $\Xi_1$ is a
+  positive map.
+
+  For the general case, observe first that the mapping $\Psi_s$ may be
+  expressed using the Hadamard (or entry-wise) product as
+  \begin{equation}
+    \Psi_s
+    \begin{pmatrix}
+      \alpha & \beta \\
+      \gamma & \delta
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+      s \alpha & \beta \\
+      \gamma & s^{-1} \delta
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      s & 1\\
+      1 & s^{-1}
+    \end{pmatrix} \circ
+    \begin{pmatrix}
+      \alpha & \beta \\
+      \gamma & \delta
+    \end{pmatrix}
+  \end{equation}
+  for every positive real number $s\in(0,\infty)$.
+  The matrix
+  \begin{equation}
+    \begin{pmatrix}
+      s & 1\\
+      1 & s^{-1}
+    \end{pmatrix}
+  \end{equation}
+  is positive semidefinite, from which it follows (by the Schur product
+  theorem) that $\Psi_s$ is a completely positive map.
+  (See, for instance, Theorem 3.7 of \cite{Paulsen02}.)
+  Also note that $\Phi = \Psi_s \Phi \Psi_s$ for every $s\in (0,\infty)$, which
+  implies that
+  \begin{equation}
+    \Xi_t = \bigl(\I_{\Lin(\complex^2)} \otimes \Psi_s\bigr) \Xi_1
+    \bigl(\I_{\Lin(\complex^2)} \otimes \Psi_s\bigr)
+  \end{equation}
+  for $s = \sqrt{t}$.
+  This shows that $\Xi_t$ is a composition of positive maps for every positive
+  real number~$t$, and is therefore positive.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:three-bell}]
+  For the cases that $\eps = 0$ and $\varepsilon = 1$, the theorem is known,
+  as was discussed previously, so it will be assumed that $\eps \in (0,1)$.
+  Define a Hermitian operator
+  \begin{equation}
+    H_{\eps} = \frac{1}{3}\left[\frac{\I_{\X_1\otimes\Y_1}\otimes
+        \tau_{\eps}}{2} + \sqrt{1 - \eps^{2}} \, \phi_{4} \otimes
+      \pt_{\negsmallspace\X_2}(\phi_{4}) \right],
+  \end{equation}
+  where $\tau_{\eps} = \ket{\tau_{\eps}}\bra{\tau_{\eps}}$,
+  $\phi_{4} = \ket{\phi_{4}}\bra{\phi_{4}}$,
+  and $\pt_{\negsmallspace\X_2}$ denotes partial transposition with respect to
+  the standard basis of $\X_2$.
+  It holds that
+  \begin{equation}
+    \tr(H_{\eps}) = \frac{1}{3}\left(2 + \sqrt{1 - \eps^{2}}\right),
+  \end{equation}
+  so to complete the proof it suffices to prove that $H_{\varepsilon}$ is a
+  feasible solution to the dual problem \eqref{eq:sep-dual-problem}
+  for the cone program corresponding to the state discrimination problem being considered.
+
+  In order to be more precise about the task at hand, it is helpful to define a
+  unitary operator $W$, mapping $\X_1\otimes\X_2\otimes\Y_1\otimes\Y_2$ to
+  $\X_1\otimes\Y_1\otimes\X_2\otimes\Y_2$, that corresponds to swapping the
+  second and third subsystems:
+  \begin{equation}
+    \label{eq:swap}
+    W(x_{1}\otimes x_{2}\otimes y_{1}\otimes y_{2}) =
+    x_{1}\otimes y_{1}\otimes x_{2}\otimes y_{2},
+  \end{equation}
+  for all vectors 
+  $x_{1}\in\X_{1}$, $x_{2}\in\X_{2}$, $y_{1}\in\Y_{1}$, $y_{2}\in\Y_{2}$.
+  We are concerned with the separability of measurement operators with respect
+  to the bipartition between $\X_1\otimes\X_2$ and $\Y_1\otimes\Y_2$, so the
+  dual feasibility of $H_{\varepsilon}$ requires that the operators defined as
+  \begin{equation}
+    Q_{k, \eps} = W^{\ast} \left( H_{\eps} - \frac{1}{3}\phi_{k} \otimes 
+    \tau_{\eps} \right) W \in \Herm(\X\otimes\Y)
+  \end{equation}
+  be contained in $\BPos(\X:\Y)$ for $k = 1,2,3$.
+
+  Let $\Lambda_{k, \eps}: \Lin(\Y) \rightarrow \Lin(\X)$ be the unique linear
+  map whose Choi representation satisfies 
+  $J(\Lambda_{k,\varepsilon}) = Q_{k, \eps}$ for each $k = 1,2,3$.
+  As discussed in Section~\ref{sec:block-positive-operators}, 
+  the block positivity of $Q_{k, \eps}$
+  is equivalent to the positivity of $\Lambda_{k, \eps}$.
+  Consider first the case $k = 1$ and let
+  \begin{equation}
+    t = \sqrt{\frac{1+\eps}{1-\eps}}.
+  \end{equation}
+  A calculation reveals that
+  \begin{equation}
+    \Lambda_{1, \eps}(Y) = \frac{\sqrt{1 - \eps^{2}}}{3}
+    \left(\sigma_{3} \otimes \I_{\X_2}\right)
+    \Xi_{t}(Y)
+    \left(\sigma_{3} \otimes \I_{\X_2}\right),
+  \end{equation}
+  where $\Xi_{t}:\Lin(\Y)\rightarrow\Lin(\X)$ is the map defined in
+  Lemma~\ref{lemma:3Bell} and $\sigma_{3}$ denotes one of the Pauli operators
+  (see Eq.~\eqref{eq:Pauli-operators} for an explicit definition).   
+  % (in general)
+  % \begin{equation} \label{eq:Pauli-operators}
+  % \begin{array}{llll}
+  %   \sigma_{0} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, & 
+  %   \sigma_{1} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, & 
+  %   \sigma_{2} = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, & 
+  %   \sigma_{3} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+  % \end{array}
+  % \end{equation}
+  % denote the Pauli operators.
+  As $\eps \in (0,1)$, it holds that $t\in (0,\infty)$, and therefore
+  Lemma~\ref{lemma:3Bell} implies that $\Xi_{t}(Y) \in \Pos(\X)$ for every
+  $Y \in \Pos(Y)$. 
+  As we are simply conjugating $\Xi_{t}(Y)$ by a unitary and scaling it 
+  by a positive real factor, we also have that 
+  $\Lambda_{1, \eps}(Y) \in \Pos(\X)$, for any $Y \in \Pos(Y)$, which in turn
+  implies that $Q_{1, \eps} \in \BPos(\X:\Y)$.
+
+  For the case of $k=2$ and $k = 3$, first define 
+  $U, V \in \Unitary(\complex^{2})$ as follows:
+  \begin{equation}
+    U = \begin{pmatrix}
+      1 & 0\\
+      0 & i
+    \end{pmatrix}
+    \quad \mbox{and} \quad
+    V = \frac{1}{\sqrt{2}}\begin{pmatrix}
+      1 & i\\
+      i & 1
+    \end{pmatrix}.
+  \end{equation}
+  These operators transform $\phi_{1} = \ket{\phi_1}\bra{\phi_1}$ into 
+  $\phi_{2} = \ket{\phi_2}\bra{\phi_2}$ and $\phi_{3} =
+  \ket{\phi_3}\bra{\phi_3}$, respectively, and leave $\phi_{4}$ unchanged, in
+  the following sense:
+  \begin{equation}
+    \begin{aligned}
+      (U^{\ast}\otimes U^{\ast}) \phi_{1} (U\otimes U) = \phi_{2},\\
+      (V^{\ast}\otimes V^{\ast}) \phi_{1} (V\otimes V) = \phi_{3},\\
+      (U^{\ast}\otimes U^{\ast}) \phi_{4} (U\otimes U) = \phi_{4},\\
+      (V^{\ast}\otimes V^{\ast}) \phi_{4} (V\otimes V) = \phi_{4}.
+    \end{aligned}
+  \end{equation}
+  Therefore the following equations hold:
+  \begin{equation}
+    \begin{aligned}
+      Q_{2,\eps} &= \left(U^{\ast}\otimes\I \otimes U^{\ast}\otimes\I\right) 
+      Q_{1,\eps} \left(U\otimes\I \otimes U\otimes\I\right),  \\
+      Q_{3,\eps} &= \left(V^{\ast}\otimes\I \otimes V^{\ast}\otimes\I\right) 
+      Q_{1,\eps} \left(V\otimes\I \otimes V\otimes\I\right).
+    \end{aligned}
+  \end{equation}
+  It follows that $Q_{2,\eps}\in\BPos(\X:\Y)$ and $Q_{3,\eps}\in\BPos(\X:\Y)$,
+  which completes the proof.
+\end{proof}
+
+\begin{remark}
+  The upper bound obtained in Theorem \ref{thm:three-bell} is achievable by an
+  LOCC measurement, as it is the probability obtained by using the resource
+  state $\ket{\tau_\varepsilon}$ to teleport the given Bell state from one
+  player to the other, followed by an optimal local measurement to discriminate
+  the resulting states.
+\end{remark}
+
+%------------------------------------------------------------------------------%
+\subsection{Discriminating four Bell states}
+%------------------------------------------------------------------------------%
+
+It is known that, for the perfect LOCC discrimination of all four Bell states
+using an auxiliary entangled state $\ket{\tau_{\varepsilon}}$ as above,
+one requires that $\varepsilon = 0$ (i.e., a maximally entangled pair of qubits
+is required).
+This fact follows from the method of \cite{Horodecki03}, for instance.
+Here we prove a more precise bound on the optimal probability of a correct
+discrimination, for every choice of $\varepsilon\in[0,1]$, along similar lines
+to the bound on three Bell states provided by Theorem~\ref{thm:three-bell}.
+In the present case, in which all four Bell states are considered, the result
+is somewhat easier: one obtains an upper bound for PPT measurements that
+matches a bound that can be obtained by an LOCC measurement,
+implying that LOCC, separable, and PPT measurements are equivalent for this
+discrimination problem.
+
+\begin{theorem}
+  \label{thm:four-bell}
+  Let $\X_1 = \X_2 = \Y_1 = \Y_2 = \complex^2$, define
+  $\X = \X_1 \otimes \X_2$ and $\Y = \Y_1 \otimes \Y_2$, and let
+  $\varepsilon\in [0,1]$.
+  For any PPT measurement $\{P_1,P_2,P_3,P_4\}\subset\PPT(\X:\Y)$, the success
+  probability of discriminating the states corresponding to the set
+  \begin{equation}
+    \label{eq:set-four-bells}
+    \left\{ \ket{\phi_{1}} \otimes \ket{\tau_{\eps}},\; 
+    \ket{\phi_{2}} \otimes \ket{\tau_{\eps}},\;
+    \ket{\phi_{3}} \otimes \ket{\tau_{\eps}},\; 
+    \ket{\phi_{4}} \otimes \ket{\tau_{\eps}}\right\} 
+    \subset (\X_1\otimes\Y_1)\otimes(\X_2\otimes\Y_2),
+  \end{equation}
+  assuming a uniform distribution $p_1 = p_2 = p_3 = p_4 = 1/4$, is at most
+  \begin{equation}
+    \label{eq:probability-four-bell}
+    \frac{1}{2}\left(1 + \sqrt{1 - \eps^2}\right).
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  One may formulate a cone program corresponding to state discrimination by 
+  PPT measurements along similar lines to the cone program for separable
+  measurements, simply by replacing the cone $\Sep(\X:\Y)$ by the cone
+  $\PPT(\X:\Y)$ of positive semidefinite operators whose partial transpose is
+  positive semidefinite.
+  This cone program is a semidefinite program, as discussed in
+  \cite{Cosentino13}, by virtue of the fact that partial transpose mapping is
+  linear.
+  
+  Consider the following operator:
+  \begin{equation}
+    H_{\varepsilon} = \frac{1}{8}
+    \Bigl[
+      \I_{\X_1 \otimes \Y_1} \otimes \tau_{\varepsilon}
+      + \sqrt{1 - \varepsilon^2}\,
+      \I_{\X_1 \otimes \Y_1} \otimes \pt_{\negsmallspace\X_2}(\phi_4)
+      \Bigr] \in \Herm(\X_1\otimes\Y_1\otimes\X_2\otimes\Y_2).
+  \end{equation}
+  It holds that
+  \begin{equation}
+    \tr(H_{\eps}) = \frac{1}{2}\left( 1 + \sqrt{1-\eps^2} \right),
+  \end{equation}
+  so to complete the proof it suffices to prove that $H_{\varepsilon}$ is
+  dual feasible for the (semidefinite) cone program representing the 
+  PPT state discrimination problem under consideration.
+  Dual feasibility will follow from the condition
+  \begin{equation}
+    (\pt_{\negsmallspace\X_1} \otimes \pt_{\negsmallspace\X_2})
+    \Bigl(
+    H_{\varepsilon} - \frac{1}{4}\,\phi_k\otimes\tau_{\varepsilon}\Bigr)
+    \in\Pos(\X_1\otimes\Y_1\otimes\X_2\otimes\Y_2)
+  \end{equation}
+  (which is sufficient but not necessary for feasibility) for $k = 1,2,3,4$.
+  One may observe that
+  \begin{equation}
+    \pt_{\negsmallspace\X_2}(\tau_{\varepsilon}) 
+    + \frac{\sqrt{1-\varepsilon^2}}{2}\phi_4
+    = \frac{1}{2}
+    \begin{pmatrix}
+      1 + \varepsilon & 0 & 0 & 0\\[1mm]
+      0 & \frac{\sqrt{1 - \varepsilon^2}}{2} 
+      & \frac{\sqrt{1 - \varepsilon^2}}{2} & 0\\[2mm]
+      0 & \frac{\sqrt{1 - \varepsilon^2}}{2} 
+      & \frac{\sqrt{1 - \varepsilon^2}}{2} & 0\\[2mm]
+      0 & 0 & 0 & 1 - \varepsilon
+    \end{pmatrix}
+  \end{equation}
+  is positive semidefinite, from which it follows that
+  \begin{equation}
+    (\pt_{\negsmallspace\X_1} \otimes \pt_{\negsmallspace\X_2})
+    \Bigl(
+    H_{\varepsilon} - \frac{1}{4}\,\phi_1\otimes\tau_{\varepsilon}\Bigr)
+    = \frac{1}{4} \phi_4 \otimes \pt_{\negsmallspace\X_2}(\tau_{\varepsilon})
+    + \frac{\sqrt{1 - \varepsilon^2}}{8} \I_{\X_1\otimes\Y_1} \otimes \phi_4
+  \end{equation}
+  is also positive semidefinite.
+  A similar calculation holds for $k=2,3,4$, which completes the proof.
+\end{proof}
+
+\begin{remark}
+  Similar to Theorem \ref{thm:three-bell}, one has that the upper bound
+  obtained by Theorem \ref{thm:four-bell} is optimal for LOCC measurements,
+  as it is the probability obtained using teleportation.
+\end{remark}
+
+
+
+%-------------------------------------------------------------------------------
+\section{Yu-Duan-Ying states}
+%-------------------------------------------------------------------------------
+
+In this section we prove a tight bound of $3/4$ on the maximum success
+probability for any LOCC measurement to discriminate the set of states 
+\eqref{eq:ydy_states} exhibited by Yu, Duan, and Ying \cite{Yu12},
+assuming a uniform selection of states.
+The fact that this bound can be achieved by an LOCC measurement is trivial:
+if Alice and Bob measure their parts of the states with respect to the standard
+basis, they can easily discriminate $\ket{\phi_1}$, $\ket{\phi_2}$, and 
+$\ket{\phi_4}$, erring only in the case that they receive $\ket{\phi_3}$.
+The fact that this bound is optimal will be proved by exhibiting a 
+feasible solution $H$ to the dual problem \eqref{eq:sep-dual-problem}
+instantiated with the state discrimination problem at hand, such that
+\begin{equation}
+\tr(H) = \frac{3}{4}.
+\end{equation}
+
+With respect to the vector-operator correspondence, the states \eqref{eq:ydy_states} are given
+by tensor products of the Pauli operators \eqref{eq:Pauli-operators} as follows:
+\begin{align}
+\begin{split}
+  \ket{\phi_1} = \frac{1}{2}\op{vec}(U_1),\quad
+   \ket{\phi_2} = \frac{1}{2}\op{vec}(U_2),\\
+  \ket{\phi_3} = \frac{1}{2}\op{vec}(U_3),\quad
+   \ket{\phi_4} = \frac{1}{2}\op{vec}(U_4),
+\end{split}
+\end{align}
+for
+\begin{equation}
+\label{eq:ydy-operators}
+\begin{aligned}
+  U_1 & = 
+  \sigma_0\otimes\sigma_0 = 
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}, & 
+  U_2 & = 
+  \sigma_1\otimes\sigma_1 =
+  \begin{pmatrix}
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0
+  \end{pmatrix},\\[3mm]
+  U_3 & = 
+  i \sigma_2 \otimes \sigma_1 =
+  \begin{pmatrix}
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+    0 & -1 & 0 & 0 \\
+    -1 & 0 & 0 & 0
+  \end{pmatrix}, \qquad & 
+  U_4 & = 
+  \sigma_3 \otimes \sigma_1 =
+  \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & -1 \\
+    0 & 0 & -1 & 0
+  \end{pmatrix}.
+\end{aligned}
+\end{equation}
+
+\subsubsection*{Bound for separable measurements}
+A feasible solution of the dual problem \eqref{eq:sep-dual-problem} is based on
+a construction of block positive operators that correspond, via the Choi
+isomorphism, to the family of positive maps introduced by Breuer and Hall
+\cite{Breuer06,Hall06}.
+
+\begin{prop}[Breuer--Hall]
+  \label{prop:breuer-hall}
+  Let $\X = \Y = \complex^n$ and let $U,V\in\Unitary(\Y,\X)$ be unitary
+  operators such that $U^{\t}V \in \Unitary(\Y)$ is skew-symmetric:
+  $(V^{\t}U)^{\t} = -V^{\t}U$.
+  It holds that
+  \begin{equation}
+    \I_{\X}\otimes\I_{\Y} - \vec(U) \vec(U)^{\ast} - 
+        \pt_{\negsmallspace\X}(\vec(V)\vec(V)^{\ast})
+    \in \BPos(\X:\Y).
+  \end{equation}
+\end{prop}
+
+\begin{proof}
+  For every unit vector $y\in\Y$, one has
+  \begin{multline} \label{eq:BH}
+    \qquad
+    (\I_{\X} \otimes y^{\ast})
+    (\I_{\X}\otimes\I_{\Y} - \vec(U) 
+    \vec(U)^{\ast} - \pt_{\negsmallspace\X}(\vec(V)\vec(V)^{\ast}))
+    (\I_{\X} \otimes y) \\
+    = \I_{\X} - U \overline{y} y^{\t} U^{\ast} - \overline{V}y
+    y^{\ast}V^{\t}.
+    \qquad
+  \end{multline}
+  As it holds that $V^{\t}U$ is skew-symmetric, we have
+  \begin{equation}
+    \bigip{\overline{V}y}{U\overline{y}}
+    = y^{\ast} V^{\t}U \overline{y} 
+    = \bigip{y y^{\t}}{V^{\t}U}
+    = 0,
+  \end{equation}
+  as the last inner product is between a symmetric and a skew-symmetric
+  operator.
+  Because $U$ and $V$ are unitary, it follows that
+  $U\overline{y}y^{\t}U^{\ast} + \overline{V}yy^{\ast}V^{\t}$ is a rank two
+  orthogonal projection, so the operator represented by \eqref{eq:BH} is also a
+  projection and is therefore positive semidefinite.
+\end{proof}
+
+\begin{remark}
+  The assumption of Proposition \ref{prop:breuer-hall} requires $n$ to be even,
+  as skew-symmetric unitary operators exist only in even dimensions.
+\end{remark}
+
+Now, for the ensemble
+\begin{equation}
+\label{eq:ydy-ensemble}
+  \E = \{ \ket{\phi_1}, \ket{\phi_2}, \ket{\phi_3}, \ket{\phi_4} \},
+\end{equation}
+one has that the following operator is a feasible solution to the dual problem
+\eqref{eq:sep-dual-problem}:
+\begin{equation}
+  \label{eq:H_2}
+  H = \frac{1}{16}(\I_{\X}\otimes\I_{\Y} - 
+  \pt_{\negsmallspace\X}(\vec(V)\vec(V)^{\ast}))
+\end{equation}
+for
+\begin{equation}
+  V = i \sigma_2 \otimes \sigma_3
+  = \begin{pmatrix}
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & -1\\
+    -1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0
+  \end{pmatrix}.
+\end{equation}
+Due to Proposition~\ref{prop:breuer-hall}, the feasibility of $H$ follows from
+the condition
+\begin{equation}
+  (V^{\t} U_k)^{\t} = - V^{\t} U_k,
+\end{equation}
+which can be checked by inspecting each of the four cases.
+It is easy to calculate that $\tr(H) = 3/4$, and so the required bound has been
+obtained.
+
+\subsubsection*{Bound for PPT measurements}
+Interestingly, when it comes to distinguishing the Yu--Duan--Ying states, 
+PPT measurements can do better than separable (and LOCC) measurement, 
+yet without achieving perfect distinguishability. As far as we know, this is the
+first example of a set consisting only of maximally entangled states for which 
+such a gap holds.
+In this section we exhibit a tight bound of $7/8$ on the probability of distinguishing
+the Yu--Duan--Ying ensemble by PPT measurements.
+
+\begin{theorem}
+\label{thm:dual-ppt-ydy}
+For $\E$ being the ensemble in Eq.~\eqref{eq:ydy-ensemble}, it holds that $\opt_{\PPT}(\E)\leq 7/8$.
+\end{theorem}
+\begin{proof}
+We show that there exists a solution of the dual program $(\DP_{\PPT})$ which achieves the bound.
+It is easy to check that the following operator satisfies the constraints in of the program 
+and its trace is equal to $7/8$:
+\[
+Y = \frac{1}{16}\I\otimes\I - \frac{1}{8}\left(\psi_{2}\otimes\psi_{1}\right).
+\]
+We will check the constraint $Y \geq \pt_{\A}(\rho_1)$ and the reader can check the remaining constraints with
+a similar calculation. By the equations in \eqref{eq:ppt-bell-states}, we have
+\begin{align*}
+ \pt_{\A}(\rho_{1}) &= \pt_{\A}(\psi_{0}\otimes\psi_{0}) = \left(\frac{1}{2}\I - \psi_{2}\right)\otimes\left(\frac{1}{2}\I - \psi_{2}\right) \\
+&= \frac{1}{4}\I\otimes\I - \frac{1}{2}\sum_{i\in\{0,1,3\}}(\psi_{i}\otimes\psi_{2}+\psi_{2}\otimes\psi_{i}),
+\end{align*}
+and
+\begin{align*}
+ Y - \frac{1}{4}\pt_{\A}(\rho_{1}) &= \frac{1}{8}(\psi_{0}\otimes\psi_{2}+\psi_{1}\otimes\psi_{2}+\psi_{3}\otimes\psi_{2}
++\psi_{2}\otimes\psi_{0}+\psi_{2}\otimes\psi_{3}) \geq 0.
+\end{align*}
+\end{proof}
+
+\begin{theorem}
+\label{thm:primal-ppt-ydy}
+For $\E$ being the ensemble in Eq.~\eqref{eq:ydy-ensemble}, it holds that $\opt_{\PPT}(\E)\geq 7/8$.
+\end{theorem}
+\begin{proof}
+It is enough to show a feasible solution of the primal program ($\PP_{\PPT}$) 
+that achieves the bound. 
+Let $Q \in \Pos(\complex^{4}\otimes\complex^{4})$ and $R,S\in\Pos(\complex^{2}\otimes\complex^{2})$ 
+be the following operators:
+\[
+  Q = \frac{1}{4}\I\otimes(\psi_{1}+\psi_{2}), \qquad
+  R = \frac{7}{8}\psi_{0}+\frac{1}{8}\psi_{3}, \qquad 
+  S = \frac{1}{8}\psi_{0}+\frac{7}{8}\psi_{3}.
+\]
+Then the following operators define a PPT measurement that achieves a success probability of $7/8$:
+\begin{align*}
+  \mu(1) &= Q + (\frac{2}{3}\psi_{0}+\frac{1}{3}\I)\otimes R ,\\
+  \mu(2) &= Q + (\frac{1}{3}\psi_{0}+\psi_{1})\otimes S + \frac{1}{3}(\psi_{2}+\psi_{3})\otimes R ,\\
+  \mu(3) &= Q + (\frac{1}{3}\psi_{0}+\psi_{2})\otimes S + \frac{1}{3}(\psi_{1}+\psi_{3})\otimes R ,\\
+  \mu(4) &= Q + (\frac{1}{3}\psi_{0}+\psi_{3})\otimes S + \frac{1}{3}(\psi_{1}+\psi_{2})\otimes R .\\
+\end{align*}
+It is easy to check that these operators define a  valid measurement, that is $\sum_{k=1}^{4}\mu(k)=\I$.
+Using the equations in \eqref{eq:ppt-bell-states}, we can verify that those operators are also PPT.
+Again, we check this for $\mu(1)$.
+\[
+\pt_{\A}(\mu(1)) = 
+(\psi_{1} + \psi_{2} + \psi_{4})\otimes(\frac{1}{3}\psi_{1}+\frac{1}{2}\psi_{2}+\frac{1}{3}\psi_{4})
++ \frac{1}{4}\psi_{3}\otimes(\psi_{2}+\psi_{3}) \geq 0. 
+\]
+Finally, we have that $\ip{\mu(k)}{\rho_{k}} = 7/8$, for each $k \in \{1,\ldots,4\}$.
+\end{proof}
+
+To recap, for $\E$ being the ensemble of Yu--Duan--Ying states selected uniformly at random, we have
+\begin{equation}
+  \opt_{\LOCC}(\E) = \opt_{\Sep}(\E) = \frac{3}{4} < \frac{7}{8} = \opt_{\PPT}(\E) < \opt(\E) = 1.  
+\end{equation}
+
+\subsection{Generalization to higher dimension}
+
+Here we generalize the Yu--Duan--Ying in order to construct sets of $N$ orthogonal 
+maximally entangled states in $\complex^{N}\otimes\complex^{N}$ that are distinguishable
+by separable operators only with probability $3/4$, for any $N \geq 4$ that is power of $2$. 
+
+Let $t \geq 2$ be a positive integer and, for any choice of $k \in \{ 1, \ldots, 2^{t}\}$,
+we recursively define the unitary operator
+\begin{equation}
+\label{eq:construction}
+  U_{k}^{(t)} =
+    \begin{cases}
+      \sigma_{0}\otimes U_{k}^{(t-1)} &\mbox{if } 1 \leq k \leq 2^{t-1}, \mbox{ or}\\
+      \sigma_{1}\otimes U_{k-2^{t-1}}^{(t-1)} &\mbox{if } 2^{t-1} + 1 \leq k \leq 2^{t}.\\ 
+    \end{cases}
+\end{equation}
+The base of the recursion, $U_{1}^{(2)}, \ldots, U_{4}^{(2)}$, 
+is given by the operators defined in Eq.~\eqref{eq:ydy_Us}.
+In a paper by the author \cite{Cosentino14}, it was shown that the set 
+\begin{equation}
+\label{eq:ydy_higher_dimension}
+  \left\{ \vec(U_{k}^{(t)})\vec(U_{k}^{(t)})^{\ast} : k = 1, \ldots, 2^{t}\right\} 
+\end{equation}
+can be distinguished with probability at most $7/8$ by PPT measurements, 
+for any value of $t \geq 2$, when the states are drawn with uniform probability, 
+$p_{1}, \ldots, p_{2^{t}} = 1/2^{t}$.
+In the rest of this section, we show that the maximum success probability for any separable 
+measurement to distinguish the same set of states under the same assumption is $3/4$ instead.
+
+As in the theme of this thesis, we will exhibit a feasible solution of 
+the dual cone program \eqref{eq:sep-dual-problem} for which the value of 
+the objective function equals $3/4$.
+However, we first prove a rather general lemma, which shows how to compose a separable 
+operator with a block positive operator, in order to construct another block positive 
+operator in higher dimensions.
+\begin{lemma}
+\label{lemma:higher-dimension}
+Let $\X_{1}, \X_{2}, \Y_{1}$, and $\Y_{1}$ be complex Euclidean spaces. We denote by 
+$W \in \Unitary(\X_{1}\otimes\X_{2}\otimes\Y_{1}\otimes\Y_{2},
+  \X_{1}\otimes\Y_{1}\otimes\X_{2}\otimes\Y_{2})$ 
+the linear isometry that swaps the second and the third subsystems, which is defined by the following equation:
+  \begin{equation}
+  \label{eq:swap-2}
+    W(x_{1}\otimes x_{2}\otimes y_{1}\otimes y_{2}) =
+      x_{1}\otimes y_{1}\otimes x_{2}\otimes y_{2},
+  \end{equation}
+holding for all vectors $x_{1} \in \X_{1}, x_{2} \in \X_{2}, 
+y_{1} \in \Y_{1}, y_{2} \in \Y_{2}$.
+Let $S \in \Sep(\X_{1}:\Y_{1})$ be a separable operator 
+and $Q \in \BPos(\X_{2}:\Y_{2})$ be
+a block positive operator. Then the following holds:
+  \begin{equation}
+  W^{\ast}(S \otimes Q)W\in \BPos(\X_{1}\otimes\X_{2}:\Y_{1}\otimes\Y_{2}).
+  \end{equation}
+\end{lemma}
+\begin{proof}
+By the definition of block-positivity, the claim of the lemma is equivalent 
+to the following condition:
+\begin{equation}
+  (\I_{\X_{1}\otimes\X_{2}} \otimes y^{\ast})W^{\ast}(S \otimes Q)W
+    (\I_{\X_{1}\otimes\X_{2}} \otimes y) \in \Pos(\X_{1}\otimes\X_{2}),
+\end{equation}
+for every $y \in \Y_{1}\otimes\Y_{2}$.
+
+For an arbitrary $y \in \Y_{1}\otimes\Y_{2}$, consider its Schmidt decomposition,
+that is, a positive integer $r$ and orthogonal sets 
+$\{w_{1}, \ldots, w_{r}\} \subset \Y_{1}$ and $\{z_{1}, \ldots, z_{r}\} \subset \Y_{2}$ 
+such that
+  \begin{equation}
+    y = \sum_{i = 1}^{r}w_{i} \otimes z_{i}.
+  \end{equation}
+It holds that
+\begin{multline}
+\label{eq:SandQ}
+    (\I\otimes y^{\ast})W^{\ast}(S \otimes Q)W(\I\otimes y)\\
+    \begin{aligned}
+    &=\left(\sum_{i=1}^{r}\I_{\X_{1}\otimes\X_{2}}\otimes w_{i}^{\ast}\otimes z_{i}^{\ast}\right)
+      W^{\ast}(S \otimes Q)W
+      \left(\sum_{i=1}^{r}\I_{\X_{1}\otimes\X_{2}}\otimes w_{i}\otimes z_{i}\right) \\
+    &=\left(\sum_{i=1}^{r}\I_{\X_{1}}\otimes w_{i}^{\ast}\otimes\I_{\X_{2}} \otimes z_{i}^{\ast}\right)
+    (S \otimes Q)
+    \left(\sum_{i=1}^{r}\I_{\X_{1}}\otimes w_{i}\otimes\I_{\X_{2}} \otimes z_{i}\right) \\
+    &= \sum_{i,j=1}^{r}(\I_{\X_{1}}\otimes w_{i}^{\ast})S(\I_{\X_{1}}\otimes w_{j})\otimes(\I_{\X_{2}} \otimes z_{i}^{\ast})Q(\I_{\X_{2}} \otimes z_{j}).
+    \end{aligned}
+\end{multline}
+The separable operator $S \in \Sep(\X_{1}:\Y_{1})$ can be expressed as
+\begin{equation}
+  S = \sum_{j = 1}^{m}a_{j}a_{j}^{\ast}\otimes b_{j}b_{j}^{\ast},
+\end{equation}
+for vectors $a_{1}, \ldots, a_{m} \in \X_{1}$ and $b_{1}, \ldots, b_{m} \in \Y_{1}$.
+By convexity, it is enough to argue about the operator
+\begin{equation}
+  (\I\otimes y^{\ast})W^{\ast}(aa^{\ast}\otimes bb^{\ast} \otimes Q)W(\I\otimes y), 
+\end{equation}
+for any vectors $a \in \X_{1}$ and $b \in \Y_{1}$. 
+From Eq.~\eqref{eq:SandQ}, we have that 
+\begin{multline}
+  (\I\otimes y^{\ast})W^{\ast}(aa^{\ast}\otimes bb^{\ast} \otimes Q)W(\I\otimes y)\\
+\begin{aligned}
+  &= \sum_{i,j=1}^{r}(aa^{\ast}\otimes w_{i}^{\ast}bb^{\ast}w_{j})\otimes(\I_{\X_{2}} \otimes z_{i}^{\ast})Q(\I_{\X_{2}} \otimes z_{j})\\
+  &= aa^{\ast} \otimes \left(\I_{\X_{2}}\otimes\sum_{i=1}^{r}
+        w_{i}^{\ast} a z_{i}^{\ast}\right)Q
+        \left(\I_{\X_{2}}\otimes\sum_{i=1}^{r} a^{\ast}w_{i}z_{i}\right) \\
+  &= aa^{\ast} \otimes (\I_{\X_{2}}\otimes z^{\ast})Q
+        (\I_{\X_{2}}\otimes z),
+\end{aligned}
+\end{multline}
+where we have defined the vector $z \in \Y_{2}$ to be such that 
+$z = \sum_{i=1}^{r} a^{\ast}w_{i}z_{i}$.
+From the fact the $Q \in \BPos(\X_{2}:\Y_{2})$, it holds that 
+\[
+  (\I_{\X_{2}}\otimes z^{\ast})Q(\I_{\X_{2}}\otimes z) \in \Pos(\X_{2}),
+\] 
+and therefore we have that
+\begin{equation}
+  (\I_{\X_{1}\otimes\X_{2}} \otimes y^{\ast})W^{\ast}
+    (S \otimes Q)W
+    (\I_{\X_{1}\otimes\X_{2}} \otimes y) \in \Sep(\X_{1}\otimes\X_{2})
+\end{equation}
+is positive semidefinite.
+\end{proof}
+
+Now we are ready to show a feasible solution of the dual problem \eqref{eq:sep-dual-problem}
+for the set of states \eqref{eq:ydy_higher_dimension}.
+For any $t \geq 2$, we denote with $\X^{(t)}$ and $\Y^{(t)}$ two isomorphic 
+copies of the complex Euclidean space $\complex^{2^{t}}$, 
+so that the states in \eqref{eq:ydy_higher_dimension} lie in $\X^{(t)}\otimes\Y^{(t)}$.
+
+Consider the operator
+\begin{equation}
+  S = \frac{1}{2}\vec(\sigma_{0} + \sigma_{1})\vec(\sigma_{0} + \sigma_{1})^{\ast} 
+    \in \Pos(\X^{(1)}\otimes\Y^{(1)}).
+\end{equation}
+Let $W \in \Unitary(\X^{(t)}\otimes\Y^{(t)},\X^{(1)}\otimes\Y^{(1)}\otimes\X^{(t-1)}\otimes\Y^{(t-1)})$ 
+be the linear isometry defined in the statement of Lemma \ref{lemma:higher-dimension},
+acting on the specified spaces.
+The solution of the dual problem may be recursively defined as follows: 
+\begin{equation}
+  H^{(t)} = W^{\ast}(S \otimes H^{(t-1)})W,
+\end{equation}
+for any $t \geq 2$. The base of the 
+recursion $H^{(2)}$ is the operator defined in Eq. \eqref{eq:H_2}.
+In the rest of the section we prove, by induction, that the cone program constraint
+\begin{equation}
+\label{eq:condiction_Ht}
+  H^{(t)} - \frac{1}{2^{t}}\vec(U_{k}^{(t)})\vec(U_{k}^{(t)})^{\ast} 
+      \in \BPos(\X^{(t)}:\Y^{(t)})
+\end{equation}
+is satisfied for any $k \in \{1, \ldots, 2^{t} \}$. 
+
+Let us consider an arbitrary $1 \leq k \leq 2^{t-1}$ 
+(the case $2^{t-1} \leq k \leq 2^{t}$ follows from a similar argument).
+Eq. \eqref{eq:construction} implies that
+\begin{equation}
+  \begin{split}
+    \vec(U_{k}^{(t)})\vec(U_{k}^{(t)})^{\ast}  
+        &= W^{\ast}(\vec(\sigma_{0})\vec(\sigma_{0})^{\ast}\otimes 
+          \vec(U_{k}^{(t-1)})\vec(U_{k}^{(t-1)})^{\ast})W \\
+        &\leq 
+         W^{\ast}(\vec(\sigma_{0} + \sigma_{1})\vec(\sigma_{0} + \sigma_{1})^{\ast} 
+          \otimes \vec(U_{k}^{(t-1)})\vec(U_{k}^{(t-1)})^{\ast})W,
+  \end{split} 
+\end{equation}
+and therefore that
+\begin{align}
+  H^{(t)} - \frac{1}{2^{t}}\vec(U_{k}^{(t)})\vec(U_{k}^{(t)})^{\ast} 
+    &= W^{\ast}(S \otimes H^{(t-1)})W - 
+      \frac{1}{2^{t}}\vec(U_{k}^{(t)})\vec(U_{k}^{(t)})^{\ast}\\
+    &\geq W^{\ast}(S \otimes (H^{(t-1)} - 
+          \frac{1}{2^{t-1}}\vec(U_{k}^{(t-1)})\vec(U_{k}^{(t-1)})^{\ast})W.
+\end{align}
+The Peres-Horodecki criterion, along with the fact that
+\[
+  \pt_{\X}(S) = S \in \Pos(\X_{1}\otimes\Y_{1}),
+\] 
+implies that $S\in\Sep(\X_{1}:\Y_{1})$. 
+From Lemma \ref{lemma:higher-dimension} and the induction hypothesis, we have that
+\begin{equation}
+  W^{\ast}(S \otimes (H^{(t-1)} - 
+      \frac{1}{2^{t-1}}\vec(U_{k}^{(t-1)})\vec(U_{k}^{(t-1)})^{\ast})W 
+        \in \BPos(\X^{(t)}:\Y^{(t)}),
+\end{equation}
+and therefore the constraint \eqref{eq:condiction_Ht} is satisfied.
+Moreover, we have that $\tr(Q) = 1$ and therefore
+\[
+  \tr(H^{(t)}) = \tr(H^{(2)}) = \frac{3}{4}
+\]
+
+\subsubsection*{Small sets of locally indistinguishable orthogonal maximally entangled states}
+
+The main corollary of the proof above is that there exist 
+LOCC-indistinguishable sets of $k < n$ maximally entangled states in 
+$\complex^{n}\otimes\complex^{n}$.
+Asymptotically, our construction allows for the cardinality $k$ of the indistinguishable 
+sets to be as small as $Cn$, where $C$ is a constant less than $1$.
+In particular, we have that $3/4 \leq C < 1$. 
+It is possible that this constant can be improved by using 
+a different construction than the Yu--Duan--Ying states.
+A further improvement would be to exhibit 
+indistinguishable sets of maximally entangled states with cardinality $o(d)$.
+One among the smallest indistinguishable sets that come out of the above construction consists 
+of the states in $\complex^{8}\otimes\complex^{8}$ corresponding the following $7$ unitary operators: 
+\begin{equation}
+  \label{eq:ydy_Us}
+  \begin{aligned}
+    U_{1} &= \sigma_{0}\otimes\sigma_{0}\otimes\sigma_{0},\\
+    U_{2} &= \sigma_{0}\otimes\sigma_{1}\otimes\sigma_{1},\\
+    U_{3} &= \sigma_{0}\otimes\sigma_{2}\otimes\sigma_{1},\\
+    U_{4} &= \sigma_{0}\otimes\sigma_{3}\otimes\sigma_{1},\\
+    U_{5} &= \sigma_{0}\otimes\sigma_{0}\otimes\sigma_{0},\\
+    U_{6} &= \sigma_{0}\otimes\sigma_{1}\otimes\sigma_{1},\\
+    U_{7} &= \sigma_{0}\otimes\sigma_{2}\otimes\sigma_{1}.
+  \end{aligned}
+\end{equation}
+
+\begin{remark}
+In a very recent result\footnote{A similar result (obtained via a different approach) appears also 
+in a preprint by Yu and Oh \cite{Yu15}. Notice that this has not been
+published yet, neither I have verified it myself yet.}, 
+Li et al. \cite{Li15} build up on our proof from
+\cite{Cosentino14} and show that indistinguishable sets of $N$ orthogonal
+maximally entangled states in $\complex^{N}\otimes\complex^{N}$ exists for all 
+$N$ and not just when $N$ is a power of $2$.
+\end{remark}
+
+\subsubsection*{Entanglement Discrimination Catalysis}
+It is worth noting that the ``Entanglement Discrimination Catalysis'' 
+phenomenon, observed in \cite{Yu12} for the set \eqref{eq:ydy_states}, 
+also applies to the set 
+of states in the above example and to any set derived 
+from our construction.
+If Alice and Bob are provided with a maximally entangled state
+as a resource, then they are able to distinguish the states
+in these sets and, when the protocol ends, 
+they are still left with an untouched maximally entangled state.
+When $t=2$, the catalyst is used to teleport 
+the first qubit from one party to the other, 
+say from Alice to Bob. 
+Bob can then measure the first two qubits in the standard 
+Bell basis and identify which of the four states was prepared. 
+Since the third and fourth qubits are not being acted on, 
+they can be used in a new round of the protocol.
+For the case $t > 2$, let us recall the recursive construction 
+of the states from \eqref{eq:construction}.
+Distinguishing between the two cases of the recursion is 
+equivalent to distinguishing between two Bell states.
+And the base case is exactly the case $t=2$ described above, 
+with only one maximally entangled state involved in the catalysis.
+
+
+\subsubsection*{PPT vs. separable in the perfect discrimination of maximally entangled states}
+Michael Nathanson (personal communication) raised the question whether there 
+always exists a separable measurement that \emph{perfectly} distinguishes maximally entangled 
+states that are known to be \emph{perfectly} distinguishable by PPT.
+The construction that generalize Yu--Duan--Ying states in high dimension provides
+a negative answer to Michael's question. It turns out that if we take only $7$ out of the $8$ states
+coming from the construction for $t=3$ (for example, the ones corresponding to the operators in 
+Eq.~\eqref{eq:ydy_Us}), they are distinguishable by separable measurement
+with probability at most $6/7$, but they are perfectly distinguishable by PPT.
+Unfortunately we do not have a nice-looking closed form for
+the PPT measurement operators that achieve perfect distinguishability, 
+but know, by running a semidefinite programming solver, that such operators exist.
+
+\subsection{Unambiguous discrimination}
+
+Interestingly, the optimal probability of unambiguously distinguish the set of Yu--Duan-Ying states
+with PPT measurements is $3/4$, which should be compared with the success probability of $7/8$ that can be achieved with a minimum-error strategy 
+(see Theorem \ref{thm:primal-ppt-ydy}). 
+Using a semidefinite program solver, we were also able to verify that this bound is actually tight.
+
+\begin{theorem}
+The maximum success probability of \emph{unambiguously} 
+distinguishing the ensemble in Eq.~\eqref{eq:ydy-ensemble} with PPT measurements is equal to $3/4$. 
+\end{theorem}
+\begin{proof}
+We show a feasible solution of the dual problem \eqref{sdp-dual-unambiguous} for which the value of the objective function is $3/4$. Let
+\begin{equation}
+  Y = \frac{1}{16}[(\I-\psi_{1})\otimes(\I - 2\psi_{4}) + \psi_{1}\otimes(-\psi_{1}+3\psi_{2}+3\psi_{3}+\psi_{4})].
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+ Q_{1} &= [(\I - \psi_{3})\otimes\psi_{3} + \psi_{3}\otimes(\psi_{2}+\psi_{3})]/4, \\
+ Q_{2} &= [(\psi_{1} + \psi_{2})\otimes\psi_{2} + \psi_{4}\otimes(\I - \psi_{2})]/4, \\
+ Q_{3} &= [(\psi_{2} + \psi_{4})\otimes\psi_{2} + \psi_{1}\otimes(\I - \psi_{2})]/4, \\
+ Q_{4} &= [(\psi_{1} + \psi_{4})\otimes\psi_{2} + \psi_{2}\otimes(\I - \psi_{2})]/4, \\
+ Q_{5} &= (\psi_{3}\otimes\psi_{2})/4.
+\end{aligned}
+\end{equation}
+We can use the equations in \eqref{eq:ppt-bell-states} to verify that 
+the constraints of the program \eqref{sdp-dual-unambiguous} are satisfied:
+\begin{equation}
+Y - \frac{1}{4}\rho_{j} + \sum_{\substack{1\leq i \leq k \\ i\neq j}}\rho_{i} = \pt_{\A}(Q_{j}), \quad j=1,\ldots,4 \quad\text{and}\quad Y \geq \pt_{\A}(Q_{5}),
+\end{equation}
+Finally, we have $\tr(Y) = 3/4$.
+\end{proof}
+
+% move to appendix!
+% \section{Generalized Bell states}
+
+% \begin{example}[Example 1 from \cite{Bandyopadhyay11a}]
+% \begin{equation}
+% \ket{\phi_{00}}, \ket{\phi_{11}}, \ket{\phi_{32}}, \ket{\phi_{31}}
+% \end{equation}
+% \end{example}
+
+% \begin{example}[Example 2 from \cite{Bandyopadhyay11a}]
+% \begin{equation}
+% \ket{\phi_{00}}, \ket{\phi_{11}}, \ket{\phi_{32}}, \ket{\phi_{31}}
+% \end{equation}
+% \end{example}
+
+% \begin{example}[Example 3 from \cite{Bandyopadhyay11a}]
+% \begin{equation}
+% \ket{\phi_{00}}, \ket{\phi_{11}}, \ket{\phi_{32}}, \ket{\phi_{31}}
+% \end{equation}
+% \end{example}
+

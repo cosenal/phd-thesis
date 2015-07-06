@@ -1,0 +1,227 @@
+%!TEX root = thesis.tex
+
+\usepackage[nohints]{minitoc}
+\dominitoc
+
+%---------------------------------------------------------------------
+% Fonts and symbol
+%---------------------------------------------------------------------
+
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{dsfont}
+
+%---------------------------------------------------------------------
+% Theorem-like environments
+%---------------------------------------------------------------------
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{question}[theorem]{Question}
+
+%---------------------------------------------------------------------
+% Macros:
+%---------------------------------------------------------------------
+
+\newcommand{\comment}[2]{\begin{quote}\sf 
+    [*** {\color{blue} #1} : #2 ***]\end{quote}}
+
+\newcommand{\tinyspace}{\mspace{1mu}}
+\newcommand{\microspace}{\mspace{0.5mu}}
+\newcommand{\negsmallspace}{\mspace{-1.5mu}}
+\newcommand{\op}[1]{\operatorname{#1}}
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\pt}{\operatorname{T}}
+\newcommand{\rank}{\operatorname{rank}}
+\renewcommand{\int}{\operatorname{int}}
+\renewcommand{\det}{\operatorname{Det}}
+\renewcommand{\vec}{\operatorname{vec}}
+\newcommand{\fid}{\operatorname{F}}
+\newcommand{\im}{\operatorname{im}}
+
+\renewcommand{\t}{{\scriptscriptstyle\mathsf{T}}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\bigl\lvert #1 \bigr\rvert}
+\newcommand{\Bigabs}[1]{\Bigl\lvert #1 \Bigr\rvert}
+\newcommand{\biggabs}[1]{\biggl\lvert #1 \biggr\rvert}
+\newcommand{\Biggabs}[1]{\Biggl\lvert #1 \Biggr\rvert}
+
+\newcommand{\ip}[2]{\langle #1 , #2\rangle}
+\newcommand{\bigip}[2]{\bigl\langle #1, #2 \bigr\rangle}
+\newcommand{\Bigip}[2]{\Bigl\langle #1, #2 \Bigr\rangle}
+\newcommand{\biggip}[2]{\biggl\langle #1, #2 \biggr\rangle}
+\newcommand{\Biggip}[2]{\Biggl\langle #1, #2 \Biggr\rangle}
+
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\bigl\lceil #1 \bigr\rceil}
+\newcommand{\Bigceil}[1]{\Bigl\lceil #1 \Bigr\rceil}
+\newcommand{\biggceil}[1]{\biggl\lceil #1 \biggr\rceil}
+\newcommand{\Biggceil}[1]{\Biggl\lceil #1 \Biggr\rceil}
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\bigl\lfloor #1 \bigr\rfloor}
+\newcommand{\Bigfloor}[1]{\Bigl\lfloor #1 \Bigr\rfloor}
+\newcommand{\biggfloor}[1]{\biggl\lfloor #1 \biggr\rfloor}
+\newcommand{\Biggfloor}[1]{\Biggl\lfloor #1 \Biggr\rfloor}
+
+%\newcommand{\norm}[1]{\lVert\tinyspace #1 \tinyspace\rVert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\newcommand{\bignorm}[1]{\bigl\lVert\tinyspace #1 \tinyspace\bigr\rVert}
+\newcommand{\Bignorm}[1]{\Bigl\lVert\tinyspace #1 \tinyspace\Bigr\rVert}
+\newcommand{\biggnorm}[1]{\biggl\lVert\tinyspace #1 \tinyspace\biggr\rVert}
+\newcommand{\Biggnorm}[1]{\Biggl\lVert\tinyspace #1 \tinyspace\Biggr\rVert}
+
+\newcommand{\bigtriplenorm}[1]{
+  \bigl\lvert\!\microspace\bigl\lvert\!\microspace\bigl\lvert #1 
+  \bigr\rvert\!\microspace\bigr\rvert\!\microspace\bigr\rvert}
+
+\newcommand{\Bigtriplenorm}[1]{
+  \Bigl\lvert\!\microspace\Bigl\lvert\!\microspace\Bigl\lvert #1 
+  \Bigr\rvert\!\microspace\Bigr\rvert\!\microspace\Bigr\rvert}
+
+\newcommand{\biggtriplenorm}[1]{
+  \biggl\lvert\!\microspace\biggl\lvert\!\microspace\biggl\lvert #1 
+  \biggr\rvert\!\microspace\biggr\rvert\!\microspace\biggr\rvert}
+
+\newcommand{\Biggtriplenorm}[1]{
+  \Biggl\lvert\!\microspace\Biggl\lvert\!\microspace\Biggl\lvert #1 
+  \Biggr\rvert\!\microspace\Biggr\rvert\!\microspace\Biggr\rvert}
+
+\newcommand{\triplenorm}[1]{
+  \left\lvert\!\microspace\left\lvert\!\microspace\left\lvert #1 
+  \right\rvert\!\microspace\right\rvert\!\microspace\right\rvert}
+\def\iso{\cong}
+\newcommand{\defeq}{\triangleq}
+
+\newcommand{\ket}[1]{
+  \lvert\microspace #1 \microspace \rangle}
+
+\newcommand{\bigket}[1]{
+  \bigl\lvert\microspace #1 \microspace \bigr\rangle}
+
+\newcommand{\Bigket}[1]{
+  \Bigl\lvert\microspace #1 \microspace \Bigr\rangle}
+
+\newcommand{\biggket}[1]{
+  \biggl\lvert\microspace #1 \microspace \biggr\rangle}
+
+\newcommand{\Biggket}[1]{
+  \Biggl\lvert\microspace #1 \microspace \Biggr\rangle}
+
+\newcommand{\bra}[1]{
+  \langle\microspace #1 \microspace \rvert}
+
+\newcommand{\bigbra}[1]{
+  \bigl\langle\microspace #1 \microspace \bigr\rvert}
+
+\newcommand{\Bigbra}[1]{
+  \Bigl\langle\microspace #1 \microspace \Bigr\rvert}
+
+\newcommand{\biggbra}[1]{
+  \biggl\langle\microspace #1 \microspace \biggr\rvert}
+
+\newcommand{\Biggbra}[1]{
+  \Biggl\langle\microspace #1 \microspace \Biggr\rvert}
+
+\def\I{\mathds{1}}
+
+\newcommand{\setft}[1]{\mathrm{#1}}
+\newcommand{\Density}{\setft{D}}
+\newcommand{\Pos}{\setft{Pos}}
+\newcommand{\PPT}{\setft{PPT}}
+\newcommand{\PPTStar}{\setft{PPT}^{\ast}}
+\newcommand{\Unitary}{\setft{U}}
+\newcommand{\Herm}{\setft{Herm}}
+\newcommand{\Lin}{\setft{L}}
+\newcommand{\Sep}{\setft{Sep}}
+\newcommand{\BPos}{\setft{Sep}^{\ast}}
+\newcommand{\LOCC}{\setft{LOCC}}
+\newcommand{\Ent}{\setft{Ent}}
+\newcommand{\Sym}{\setft{Sym}}
+\newcommand{\Meas}{\setft{Meas}}
+\newcommand{\Ens}{\setft{Ens}}
+
+
+
+\newcommand{\SepM}{\setft{SepM}}
+
+\def\complex{\mathbb{C}}
+\def\real{\mathbb{R}}
+\def\natural{\mathbb{N}}
+\def\integer{\mathbb{Z}}
+
+\newenvironment{namedtheorem}[1]
+           {\begin{trivlist}\item {\bf #1.}\em}{\end{trivlist}}
+
+\def\X{\mathcal{X}}
+\def\Y{\mathcal{Y}}
+\def\Z{\mathcal{Z}}
+\def\W{\mathcal{W}}
+\def\A{\mathcal{A}}
+\def\B{\mathcal{B}}
+\def\V{\mathcal{V}}
+\def\U{\mathcal{U}}
+\def\C{\mathcal{C}}
+\def\D{\mathcal{D}}
+\def\E{\mathcal{E}}
+\def\F{\mathcal{F}}
+\def\M{\mathcal{M}}
+\def\N{\mathcal{N}}
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\P{\mathcal{P}}
+\def\S{\mathcal{S}}
+\def\T{\mathcal{T}}
+\def\K{\mathcal{K}}
+
+\newcommand{\reg}[1]{\mathsf{#1}}
+
+\def\yes{\text{yes}}
+\def\no{\text{no}}
+
+\def\eps{\varepsilon}
+
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\opt}{opt}
+
+\def\PP{\textup{P}}
+\def\DP{\textup{D}}
+
+\usepackage{xcolor,colortbl}
+\definecolor{Gray}{gray}{0.90}
+
+
+%---------------------------------------------------------------------
+% Cross referencing
+%---------------------------------------------------------------------
+\newcommand{\eqnref}[1]{\hyperref[#1]{{(\ref*{#1})}}}
+\newcommand{\thmref}[1]{\hyperref[#1]{{Theorem~\ref*{#1}}}}
+\newcommand{\lemref}[1]{\hyperref[#1]{{Lemma~\ref*{#1}}}}
+\newcommand{\corref}[1]{\hyperref[#1]{{Corollary~\ref*{#1}}}}
+\newcommand{\defref}[1]{\hyperref[#1]{{Definition~\ref*{#1}}}}
+\newcommand{\secref}[1]{\hyperref[#1]{{Section~\ref*{#1}}}}
+\newcommand{\chapref}[1]{\hyperref[#1]{{Chapter~\ref*{#1}}}}
+\newcommand{\figref}[1]{\hyperref[#1]{{Figure~\ref*{#1}}}}
+\newcommand{\tabref}[1]{\hyperref[#1]{{Table~\ref*{#1}}}}
+\newcommand{\remref}[1]{\hyperref[#1]{{Remark~\ref*{#1}}}}
+\newcommand{\appref}[1]{\hyperref[#1]{{Appendix~\ref*{#1}}}}
+\newcommand{\claimref}[1]{\hyperref[#1]{{Claim~\ref*{#1}}}}
+\newcommand{\propref}[1]{\hyperref[#1]{{Proposition~\ref*{#1}}}}
+\newcommand{\exampleref}[1]{\hyperref[#1]{{Example~\ref*{#1}}}}
+\newcommand{\conjref}[1]{\hyperref[#1]{{Conjecture~\ref*{#1}}}}
+
+\usepackage{bibentry}
+\usepackage{enumitem}

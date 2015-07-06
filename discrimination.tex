@@ -1,0 +1,616 @@
+%!TEX root = thesis.tex
+%-------------------------------------------------------------------------------
+\chapter{Bipartite state discrimination}
+\label{chap:bipartite-state-discrimination}
+%-------------------------------------------------------------------------------
+
+This chapter introduces the problem of discriminating quantum states
+from a known set.
+A scenario describing the problem is presented, first for the case where the 
+unknown state is given to a single individual, and then generalized to a 
+different scenario where the unknown state is distributed to two parties.
+In this thesis we will focus on the bipartite case, leaving for future work 
+an extension of the results to the multipartite case.
+
+After the problem description, this chapter reviews relevant background work,
+including prior results on the local distinguishability of
+two classes of pure states that will be the object of study in the following 
+chapters: maximally entangled states and product states.
+
+\minitoc
+
+%-------------------------------------------------------------------------------
+\section{Problem description}
+%-------------------------------------------------------------------------------
+
+\subsection*{Global state discrimination}
+An instance of the state discrimination problem is defined by a complex 
+Euclidean space $\X$, a positive integer $N$, and by an ensemble $\E$ of $N$ 
+states, that is,
+\begin{equation}
+\label{eq:global-ensemble}
+  \E = \big\{ (p_{1}, \rho_{1}), \ldots, (p_{N}, \rho_{N}) \big\},
+\end{equation}
+where $(p_{1}, \ldots, p_{N})$ is a probability vector 
+and $\rho_{1}, \ldots, \rho_{N} \in \Density(\X)$ are density operators representing
+quantum states.
+We denote the set of all ensemble of this kind by $\Ens(N, \X)$.
+
+The problem is formally described by the following 
+scenario, which involves two individuals, Alice and Charlie (the reader who misses
+Bob can be reassured that he will join us soon).
+Charlie picks an index 
+\[
+  k \in \{1, \ldots, N \},
+\] 
+according to the probability distribution $(p_{1}, \ldots, p_{N})$, 
+prepares a quantum register $\reg{X}$ with the state $\rho_{k} \in \Pos(\X)$,
+and sends it to Alice.
+Alice's task it to identify the index $k$ by performing a measurement on the 
+register $\reg{X}$.
+
+For Alice performing a measurement
+\begin{equation}
+\label{eq:global-measurement}
+\mu : \{1, \ldots, N\} \rightarrow \Pos(\X),
+\end{equation}
+ the probability that she correctly distinguishes $\E$ is given by the expression
+\begin{equation}
+\label{eq:opt-value-fixed-measurement}
+    \opt(\E, \mu) = \sum_{k=1}^{N}p_{k}\ip{\mu(k)}{\rho_{k}}.
+\end{equation}
+Since $\mu$ is a measurement and $\rho_{1}, \ldots, \rho_{N}$ are density 
+operators, it is clear that 
+\begin{equation}
+\label{eq:ip-bounds}
+  0 \leq \ip{\mu(k)}{\rho_{k}} \leq 1,
+\end{equation}
+for each $k \in \{1, \ldots, N \}$.
+Moreover, since $p$ is a probability vector, we have that
+\begin{equation}
+  0 \leq \opt(\E, \mu) \leq 1.
+\end{equation}
+We denote by $\opt(\E)$ the maximum probability of distinguishing $\E$ for any 
+possible measurement, that is,
+\begin{equation}
+\label{eq:opt-value}
+    \opt(\E) = \max_{\mu\in\Meas(N, \X)}\opt(\E, \mu).
+\end{equation}
+We say that $\E$ is \emph{distinguishable with probability at least $p$} if we 
+have $\opt(\E) \geq p$. Whenever $\E$ is distinguishable with probability $1$, we say
+that $\E$ is \emph{perfectly distinguishable} or that Alice can distinguish
+$\E$ \emph{with certainty}.
+
+The probability distribution with which the states are selected is not important 
+if we are only interested in perfect distinguishability.
+In fact, from the bounds in Eq.~\eqref{eq:ip-bounds} and a standard convexity argument,
+for any probability vector $p = (p_{1}, \ldots, p_{N})$, it holds that
+\begin{equation}
+  \sum_{k=1}^{N}p_{k}\ip{\mu(k)}{\rho_{k}} = 1
+\end{equation}
+if and only if 
+\begin{equation}
+  \ip{\mu(k)}{\rho_{k}} = 1,
+\end{equation}
+for each $k \in \supp(p)$.
+For this reason, whenever we are only interested in a qualitative result 
+(whether perfect distinguishability holds or not), we will take $p$ to be the uniform 
+distribution, that is, $p = (1/N, \ldots, 1/N)$. In such cases, we will simply 
+denote the ensemble by the list of its states, that is,
+\begin{equation}
+  \E = \{\rho_{1}, \ldots, \rho_{N}\}.
+\end{equation}
+
+We will often be interested in the distinguishability of pure-state ensembles,
+where each density operator is a rank-one projector, that is, for each 
+$k \in \{1, \ldots, N\}$, $\rho_{k} = u_{k}u_{k}^{\ast}$, 
+for a list of unit vectors $\{u_{1}, \ldots, u_{N}\} \in \X$. 
+In such case, by a further abuse of notation, we simply denote the ensemble by 
+a list of its vectors:
+\begin{equation}
+  \E = \{u_{1}, \ldots, u_{N}\}.
+\end{equation}
+
+If the states are mutually orthogonal, that is,
+\begin{equation}
+\ip{\rho_{i}}{\rho_{j}} = 0,
+\end{equation}
+for all $i,j \in \{1, \ldots, N\}$ with $i \neq j$, there is a measurement
+that perfectly distinguish them.
+Consider the spectral decomposition of each state:
+\begin{equation}
+  \rho_{k} = \sum_{i=1}^{r_{k}}\lambda_{i}x_{k,i}x_{k,i}^{\ast},
+\end{equation}
+with $\lambda_{1}, \ldots, \lambda_{r_{k}}$ being positive real numbers
+and $\{x_{k,1}, \ldots, x_{k,r_{k}}\} \subset \X$ being an orthonormal set.
+Alice can then construct the quantum measurement that perfectly distinguish 
+the states, by defining the following measurement operators:
+\begin{equation}
+  \mu(k) = \sum_{i=1}^{r_{k}}x_{k,i}x_{k,i}^{\ast},
+\end{equation}
+for each $k = 1,\ldots,N-1$, and 
+\begin{equation}
+  \mu(N) = \I - \sum_{k=1}^{N-1}\mu(k).
+\end{equation}
+It is clear that $\mu$ is a valid measurement and that
+\begin{equation}
+  \ip{\mu(k)}{\rho_{k}} = 1,
+\end{equation}
+for all $k \in \{1, \ldots, N\}$. 
+
+The distinguishability of non-orthogonal states is a prolific topic on its own and 
+a treatment of it is outside the scope of this thesis.
+For an exposition of results regarding global state discrimination, 
+the reader is referred to numerous surveys on the topic \cite{Chefles2000, Bergou2004}.
+
+\subsection*{Bipartite state discrimination}
+This dissertation focuses on a modification of the above scenario in which we 
+have three individuals involved: Alice, Bob, and Charlie.
+In this new scenario, the states to be distinguished lie on the tensor product of 
+two complex Euclidean spaces, which we label by $\X$ and $\Y$ and which are 
+held respectively by Alice and Bob.
+In other words, the ensemble consists of $N$ bipartite states represented 
+by the density matrices $\rho_{1}, \ldots, \rho_{N} \in \Density(\X\otimes\Y)$.
+
+Charlie picks an index $k \in \{1, \ldots, N\}$ and prepares the corresponding 
+state $\rho_{k} \in \Density(\X\otimes\Y)$ on a pair of quantum registers 
+$(\reg{X},\reg{Y})$ that belong to Alice and Bob, in the sense that the 
+underlying space is $\X\otimes\Y$.
+Their task is to identify the index $k$ chosen by Charlie, by means of an LOCC 
+measurement on $(\reg{X},\reg{Y})$.
+
+We will denote by $\opt_{\LOCC}(\E)$ the maximum success probability for
+Alice and Bob to distinguish an ensemble $\E\in\Ens(N, \X\otimes\Y)$ by means of 
+any LOCC measurement, that is, 
+\begin{equation}
+\label{eq:opt-LOCC}
+  \opt_{\LOCC}(\E) = \max_{\mu \in \Meas_{\LOCC}(N, \X:\Y)}\opt(\E, \mu).
+\end{equation}
+
+As it was discussed in Section \ref{sec:quantum-measurements}, the set of 
+LOCC measurements has a complex mathematical structure.
+For this reason, the state discrimination problem has been analyzed for more 
+tractable classes of measurements that approximate, in some sense, 
+the LOCC measurements.
+Among these, the classes of separable and PPT measurements are the most studied,
+because of their nice mathematical and computational properties.
+
+We denote by $\opt_{\Sep}(\E)$ and $\opt_{\PPT}(\E)$ the optimal probability of
+distinguishing an ensemble 
+$
+  \E \in \Ens(N, \X\otimes\Y)
+$ 
+by separable and PPT measurements, respectively:
+\begin{equation}
+\label{eq:opt-Sep}
+  \opt_{\Sep}(\E) = \max_{\mu \in \Meas_{\Sep}(N, \X:\Y)}\opt(\E, \mu),
+\end{equation}
+and
+\begin{equation}
+\label{eq:opt-PPT}
+  \opt_{\PPT}(\E) = \max_{\mu \in \Meas_{\PPT}(N, \X:\Y)}\opt(\E, \mu).
+\end{equation}
+
+
+In lights of the containments pictured by the diagram in Figure ...,
+we have the following chain of inequalities:  
+\begin{equation}
+\label{eq:inequality-chain}
+  \opt_{\LOCC}(\E) \leq \opt_{\Sep}(\E) \leq \opt_{\PPT}(\E) \leq \opt(\E),
+\end{equation}
+for any ensemble $\E$.
+
+Interestingly, for each of these inequalities, there exists a set of states 
+that makes the inequality strict.
+In the rest of this chapter we will see some examples for which the separation 
+is achieved.  
+
+In most of our examples and in most prior works on bipartite state discrimination, 
+the states are taken to be pure and orthogonal, so that a global measurement can 
+trivially discriminate them with certainty, that is, $\opt(\E) = 1$.
+In such cases, a separation between $\opt(\E)$ and, say, $\opt_{\LOCC}(\E)$ is obtained 
+by showing that the set of states is not perfectly distinguishable by LOCC measurements.
+
+
+\section{Discriminating between pairs of states}
+A case of particular interest is when there are two states to be distinguished,
+chosen with equal probability. 
+This is equivalent to the quantum data hiding challenge in which a secret bit 
+$b \in \{0,1\}$ is required to be hidden into a bipartite state 
+$\sigma_{b}\in\Density(\X\otimes\Y)$. In the language of the previous section, 
+we say that quantum data hiding is possible if there exists an ensemble
+\begin{equation}
+\E = \left\{\left(\frac{1}{2},\sigma_{0}\right),
+        \left(\frac{1}{2},\sigma_{1}\right)\right\}
+\end{equation}
+such that two conditions are simultaneously satisfied:
+\begin{itemize}
+\item[(a)] $\opt(\E) = 1$, and
+\item[(b)] $\opt_{\LOCC}(\E) \leq 1/2 + \varepsilon$,
+\end{itemize}
+for some ``small'' values of $\varepsilon$. The exact bounds on 
+$\varepsilon$ define the strength of the hiding scheme and, 
+of course, is depending on the dimensions of Alice's and Bob's spaces.
+
+The condition (a) above is equivalent to requiring the two states to be 
+orthogonal\footnote{We could be more general here and define another parameter
+$\delta \approx 0$ so to weaken Condition (a) to be $\opt(\E) \geq 1 - \delta$.
+This would not affect the discussion that follows, except for making the 
+presentation less clean.}.
+A consequence of this is that at least one of them must be a mixed,
+since a result by Walgate, et al. \cite{Walgate00} shows that any two orthogonal 
+bipartite \emph{pure} states can be perfectly distinguished by LOCC.
+
+The problem of discriminating between two quantum states is also 
+interesting for its connection with operator norms. 
+In particular, a connection between the trace norm and the 
+optimal probability of distinguishing two states by means of global measurements 
+is estabilished by the following theorem.
+\begin{theorem}[Holevo-Helstrom]
+Given a complex Euclidean space $\X$ and two density operators
+$\sigma_{0}, \sigma_{1} \in \Density(\X)$, it holds that
+  \begin{equation}
+    \opt(\{\sigma_{0},\sigma_{1}\}) = 
+      \frac{1}{2} + \frac{1}{4}\norm{\sigma_{0}-\sigma_{1}}_{1}.
+  \end{equation}
+\end{theorem}
+By reversing the logic direction of this theorem, one can define operator norms 
+starting from different set of measurements.
+This approach was taken in \cite{Matthews09}, where the so-called $\LOCC$-norm 
+was defined so that the following holds:
+\begin{equation}
+  \opt_{\LOCC}(\{\sigma_{0},\sigma_{1}\}) = 
+    \frac{1}{2} + \frac{1}{4}\norm{\sigma_{0}-\sigma_{1}}_{\LOCC}.
+\end{equation}
+
+Similarly, one may define norms $\norm{\cdot}_{\PPT}$ and $\norm{\cdot}_{\Sep}$
+that correspond to distinguishability by PPT and separable measurements,
+respectively. 
+
+\begin{example}[Werner hiding pairs]
+\label{example:werner-hiding-pairs}
+
+One typical quantum data hiding scheme \cite{Terhal01a,DiVincenzo2002} encodes
+the hidden classical bit in a \emph{Werner hiding pair}.
+For any positive integer $n \geq 2$, let 
+$W_{n} \in \Unitary(\complex^{n}\otimes\complex^{n})$ be the swap operator 
+defined in Eq.~\eqref{eq:swap-operator}. 
+A Werner hiding pair in $\complex^{n}\otimes\complex^{n}$ is defined by two states 
+\begin{equation}
+  \label{eq:werner-states}
+	\sigma_{0}^{(n)} = \frac{\I\otimes\I + W_{n}}{n(n+1)} 
+		\hspace*{1cm}\mbox{and}\hspace*{1cm} 
+	\sigma_{1}^{(n)} = \frac{\I\otimes\I - W_{n}}{n(n-1)}.
+\end{equation}
+% and let $\E^{(n)} = \{\sigma_{0}^{(n)},\sigma_{1}^{(n)}\}$.
+Notice that $\sigma_{0}^{(n)}$ and $\sigma_{1}^{(n)}$ are also the normalized 
+projections on the symmetric and antisymmetric subspace, respectively.
+From the orthogonality of the two states, we have
+\begin{equation}
+	\opt(\E^{(n)}) = 1,
+\end{equation}
+for any $n$, or equivalently
+\begin{equation}
+  \norm{\sigma_{0}^{(n)} - \sigma_{1}^{(n)}}_{1} = 2.
+\end{equation}
+In the next chapter we show that
+\begin{equation}
+  \opt_{\PPT}(\E^{(n)}) \leq \frac{1}{2} + \frac{1}{n+1},
+\end{equation}
+and therefore this is an example of a set of states that makes the rightmost
+inequality in Eq.
+Since there is an LOCC measurement that achieves the bound 
+\cite{DiVincenzo2002}, we also have
+\begin{equation}
+  \opt_{\LOCC}(\E^{(n)}) = \opt_{\Sep}(\E^{(n)}) = \opt_{\PPT}(\E^{(n)}) = 
+    \frac{1}{2} + \frac{1}{n+1},
+\end{equation}
+or equivalently
+\begin{equation}
+	\norm{\sigma_{0}^{(n)} - \sigma_{1}^{(n)}}_{\LOCC} = 
+    \norm{\sigma_{0}^{(n)} - \sigma_{1}^{(n)}}_{\Sep} =
+    \norm{\sigma_{0}^{(n)} - \sigma_{1}^{(n)}}_{\PPT} = \frac{4}{n+1}.
+\end{equation}
+\end{example}
+
+
+% \subsection{A maximally entangled state and its orthogonal complement}
+
+% \begin{equation}
+%     u = \frac{1}{\sqrt{n}}\sum_{j=1}^{n}e_{j}\otimes e_{j}
+% \end{equation}
+
+% \begin{equation}
+% 	\sigma_{0} = uu^{\ast}
+% 		\hspace*{2cm} 
+% 	\sigma_{1} = \frac{1}{n^{2}-1}(\I\otimes\I - uu^{\ast})
+% \end{equation}
+
+
+\section{Discrimination of maximally entangled states}
+\label{sec:mes-intro}
+
+When investigating any kind of problem, a typical computer science approach is 
+to bring the operating parameters of the problem to one extreme.
+In order to get a better understanding of the role played by entanglement in 
+bipartite state distinguishability problems, one can restrict their attention to 
+the case in which the sets to be distinguished consist of orthogonal 
+maximally entangled pure states.
+Considering states that are maximally entangled, as opposed to partially 
+entangled, is useful to reduce the number of variables that need to be taken into account, and
+it helps to have neater problem statements. It makes the problem easier to handle mathematically 
+(recall that maximally entangled states are in a one-to-one correspondence with 
+unitary operators) and, at the same time, it constitutes an edge case that is 
+interesting from the physical point of view. The reason to consider maximally entangled states
+can be summarized into one question: why bother with 
+more complicated cases when we do not even know how to deal with that?
+
+In this section, some known results on the distinguishability of 
+maximally entangled states by LOCC, separable, and PPT measurements are reviewed,
+whereas new results are presented in Chapter \ref{chap:mes}. 
+
+The simplest example of a set of LOCC-indistinguishable maximally entangled 
+states is the standard $2$-qubit Bell basis (Eq.~\eqref{eq:Bell-states}).
+It turns out that the maximum probability of distinguishing these $4$ states, 
+for any LOCC measurement, is $1/2$ \cite{Ghosh01}. In fact, a similar bound 
+holds more in general: if we are given an equally probable ensemble of $N$ 
+orthogonal maximally entangled states in $\complex^{n}\otimes\complex^{n}$, 
+the maximum probability of distinguishing them by LOCC is $n/N$ \cite{Ghosh04}.
+This bound holds even for the wider class of separable \cite{Duan09} and PPT 
+measurements \cite{Yu12}. In Chapter \ref{chap:mes} this result is re-proved 
+using our cone programming framework. 
+
+The assumption on the sets consisting entirely of maximally entangled states is
+particularly significant when we inquire the question of how the size of LOCC-indistinguishable 
+sets relates to the local dimension of each of Alice's and Bob's subsystems. 
+In fact, if we allow states that are not maximally entangled to be in the set,
+we can construct indistinguishable sets with a fixed size in any dimension we like.
+Indeed, whenever we find a set of indistinguishable maximally entangled states 
+for certain local dimensions, those states remain indistinguishable when embedded 
+in any larger local dimensions. Nonetheless they are no longer maximally 
+entangled with respect to the new larger local dimensions.
+
+Whereas this shows that any set of $N > n$ orthogonal maximally entangled states 
+can never be locally distinguished with certainty, it leaves open the question 
+whether there exist sets of $N \leq n$ indistinguishable orthogonal maximally 
+entangled states in $\complex^{n}\otimes\complex^{n}$.
+An answer to this question for the particular case of $n = 3 = N$ was given by 
+Nathanson \cite{Nathanson05}, who showed that any three orthogonal maximally 
+entangled states in $\complex^{3}\otimes\complex^{3}$ can be perfectly 
+distinguished by LOCC. In a followup work \cite{Nathanson13}, 
+Nathanson proved that $3$ maximally entangled states 
+in $\complex^{n}\otimes\complex^{n}$, for any $n \leq 3$, are always perfectly
+distinguishable by PPT.
+
+Several results aimed at filling the landscape for the case $3 < N \leq n$.
+For the weaker model of \emph{one-way} LOCC protocols, 
+Bandyopadhyay et al. \cite{Bandyopadhyay11a} showed some explicit examples of 
+indistinguishable sets of states with the size of the sets being equal to the 
+dimension of the subsystems, i.e., $N = n$. The states they use for those 
+examples lie on systems whose local dimension is $n = 4, 5, 6$. 
+Later in Chapter \ref{chap:mes}, we go back to these examples and give
+numerical evidence that the same sets of states cannot be distinguished with 
+certainty even if we allow the parties to perform PPT measurements. 
+
+Recently, Yu et al. \cite{Yu12} presented the first example of $N$ maximally 
+entangled states in $\complex^{N}\otimes\complex^{N}$ that cannot be 
+perfectly distinguished by any PPT measurement, and therefore by any general LOCC protocols.
+\begin{equation}
+  \label{eq:ydy_states}
+  \begin{aligned}
+    \ket{\phi_1} & =
+    \frac{1}{2} \ket{0}\ket{0} + 
+    \frac{1}{2} \ket{1}\ket{1} + 
+    \frac{1}{2} \ket{2}\ket{2} + 
+    \frac{1}{2} \ket{3}\ket{3} \\[2mm]
+    \ket{\phi_2} & =
+    \frac{1}{2} \ket{0}\ket{3} + 
+    \frac{1}{2} \ket{1}\ket{2} + 
+    \frac{1}{2} \ket{2}\ket{1} + 
+    \frac{1}{2} \ket{3}\ket{0} \\[2mm]
+    \ket{\phi_3} & =
+    \frac{1}{2} \ket{0}\ket{3} +
+    \frac{1}{2} \ket{1}\ket{2} - 
+    \frac{1}{2} \ket{2}\ket{1} - 
+    \frac{1}{2} \ket{3}\ket{0} \\[2mm]
+    \ket{\phi_4} & =
+    \frac{1}{2} \ket{0}\ket{1} + 
+    \frac{1}{2} \ket{1}\ket{0} -
+    \frac{1}{2} \ket{2}\ket{3} - 
+    \frac{1}{2} \ket{3}\ket{2}
+  \end{aligned}
+\end{equation}
+Later in Chapter \ref{chap:mes} we turn their result into a quantitative one,
+by showing that PPT measurements can only succeed with probability at most $7/8$
+and that $3/4$ is a tight bound on the probability of distinguishing these states 
+by separable (and LOCC) measurements.
+
+Yet another tile in the landscape of maximally entangled states distinguishability
+is a result by Fan \cite{Fan04}, for which any $N$ generalized 
+Bell states in $\complex^{n}\otimes\complex^{n}$ can be perfectly distinguished 
+by LOCC whenever 
+\[ 
+  \binom{N}{2}\leq n.
+\]
+
+Table \ref{table:max-ent-states} summarizes known results about the
+distinguishability of maximally entangled states by LOCC and PPT 
+measurements, and compares them with the results obtained in this thesis 
+(highlighted in gray). 
+
+\begin{table}[!ht]
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+    & PPT & LOCC & References\\
+  \hline \hline
+  $N = 2$     & --- & \emph{all} dist. & \cite{Walgate00}\\
+  \hline
+  $N = 3 = n$ & --- & \emph{all} dist. & \cite{Nathanson05}\\
+  \hline 
+  $N = 4 = n$ & \emph{some} indist. & --- & \cite{Yu12}\\
+  \hline
+  \rowcolor{Gray}
+  $N = n > 4$ & \emph{some} indist. & --- & \cite{Cosentino13}\\
+  \hline
+  \rowcolor{Gray}
+  $4 < N < n$ & \emph{some} indist. & --- & \cite{Cosentino14,Bandyopadhyay15}\\
+  \hline
+  $N > n$     & \emph{all} indist. & --- & \cite{Yu12,Duan09,Ghosh04} \\
+  \hline
+\end{tabular}
+\caption{Distinguishability of maximally entangled states}
+\label{table:max-ent-states}
+\end{table}
+
+\section{Discrimination of product sets}
+
+Indistinguishability by LOCC is not a prerogative of entangled states. 
+The famous \emph{domino state} set of \cite{Bennett99}, for example, is a 
+collection of orthogonal \emph{product} states that cannot be perfectly 
+discriminated by LOCC protocols.
+In this example, the local dimension of the states is $3$, and one takes
+$N = 9$, $p_1 = \cdots = p_9 = 1/9$, and
+{\setlength{\arraycolsep}{2.5mm}%
+\begin{equation} \label{eq:domino}
+\begin{array}{ll}
+  \multicolumn{2}{c}{\ket{\phi_1} = \ket{1}\ket{1},}\\[4mm]
+  \ket{\phi_2} = \ket{0}\left(\frac{\ket{0} + \ket{1}}{\sqrt{2}}\right),
+  & \ket{\phi_3} = \ket{2}\left(\frac{\ket{1} + \ket{2}}{\sqrt{2}}\right),
+  \\[4mm]
+  \ket{\phi_4} = \left(\frac{\ket{1} + \ket{2}}{\sqrt{2}}\right)\ket{0},
+  & \ket{\phi_5} = \left(\frac{\ket{0} + \ket{1}}{\sqrt{2}}\right)\ket{2},
+  \\[4mm]
+  \ket{\phi_6} = \ket{0}\left(\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right),
+  & \ket{\phi_7} = \ket{2}\left(\frac{\ket{1} - \ket{2}}{\sqrt{2}}\right),
+  \\[4mm]
+  \ket{\phi_8} = \left(\frac{\ket{1} - \ket{2}}{\sqrt{2}}\right)\ket{0},
+  & \ket{\phi_9} = \left(\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right)\ket{2}.
+\end{array}
+\end{equation}
+}%
+A rather complicated argument demonstrates that this collection cannot be
+discriminated by LOCC with probability greater than $1 - \varepsilon$ for some choice
+of a positive real number $\varepsilon$.
+(A simplified proof appears in \cite{Childs13}, where this fact
+is proved for $\varepsilon = 1.9 \times 10^{-8}$.)
+
+
+
+\section{Entanglement cost of state discrimination}
+
+As explained in the introduction, three Bell states given with uniform
+probabilities can be discriminated by separable measurements with success
+probability at most 2/3, while four Bell states can be discriminated with success
+probability at most 1/2.
+These bounds can be obtained by a fairly trivial selection of LOCC
+measurements, and can be shown to hold even for PPT measurements.
+
+On the other hand, if the parties are given a maximally entangled bit as a resource,
+then they can perform a teleportation protocol to send each other their respective parts of 
+the Bell pair they have been asked to identify.
+The set of Bell states constitutes an example of a set that is distinguishable only if we 
+are willing to consume some entanglement (given as an additional resource) or, in other words, 
+we say that the entanglement cost of distinguishing the Bell states with certainty is bigger than zero.
+
+The entanglement cost of quantum operations and measurements, within the
+paradigm of LOCC, has been considered previously.
+For instance, \cite{Cohen08} studied the entanglement cost of perfectly
+discriminating elements of unextendable product sets by LOCC measurements.
+Interestingly, his work presents some protocol where entanglement is used more 
+efficiently than in standard teleportation protocols.
+In later work, \cite{Bandyopadhyay09} and \cite{Bandyopadhyay10} considered the
+entanglement cost of measurements and established lower bounds on the amount of
+entanglement necessary for distinguishing complete orthonormal bases of two
+qubits.
+
+Our work on the entanglement cost of Bell states was inspired by a question left open by Yu, Duan, and Ying, who considered the entanglement cost of state discrimination problems by PPT and separable measurements \cite{Yu14}.
+
+
+%-------------------------------------------------------------------------------
+\section{Previous approaches}
+%-------------------------------------------------------------------------------
+
+In the results roundup of the previous sections, we summarized ``positive''
+results, in which it is shown that a certain probability of success can be obtained by 
+some measurement, as well as ``negative'' results, for which an upper bound
+on the probability of success is shown for any measurement in a certain class.
+
+To prove the first kind of results, one needs to show a protocol (for LOCC), 
+or a collection of measurement operators (for PPT and separable) that achieves 
+the given probability.
+Some protocols/measurements might be complicated to devise, others are based on 
+the composition of simple primitives. For instance, when Alice and Bob are 
+supplied with entangled bits as resource, they can a perform a teleportation
+protocol on a part of the states they are asked to distinguish 
+(an example of such a protocol is shown in Chapter \ref{chap:mes}
+for the task of distinguishing three and four Bell states).
+
+To show that the states are not distinguishable, many techniques have been devised.
+One possible approach is the one pursued by Walgate and Hardy \cite{Walgate02}, 
+which is based on a cases analysis in which all possible measurements are eliminated. 
+
+Another method, considered in \cite{Ghosh01,Ghosh04}, is to reduce the distinguishability 
+problem to a question on the amount of entanglement that can be distilled from a 
+certain mixed state. 
+Say you want to prove that the four Bell states from Eq.~\eqref{eq:Bell-states}
+are not perfectly distinguishable by any LOCC protocols.
+Suppose that the unknown Bell state is shared among two parties, Alice and Bob,
+whose spaces are denoted by $\X_{1}$ and $\Y_{1}$. Let $\X_{2}$ and $\Y_{2}$ two 
+other spaces of the same dimensions held by two more parties, Charlie and Dan. 
+Consider the state
+\begin{equation}
+  \rho \in \Density\left((\X_{1}\otimes\Y_{1})\otimes(\X_{2}\otimes\Y_{2})\right)
+\end{equation}
+defined as
+\begin{equation}
+  \rho = \frac{1}{4}\sum_{i\in\{0,1,2,3\}}\psi_{i}\otimes\psi_{i}.
+\end{equation}
+By contradiction, assume that $\{\psi_{0}, \ldots, \psi_{3}\} \subset \Density(\X_{1}\otimes\Y_{1})$
+are distinguishable by an LOCC protocol between Alice and Bob.
+Then they could communicate the outcome classically to Claire and Danny, 
+who would use this information to create a shared entangled bit between each other.
+This is not possible, since $\rho$ can also be written as  
+\begin{equation}
+  \rho = \frac{1}{4}\sum_{i\in\{0,1,2,3\}}\psi_{i}\otimes\psi_{i}
+    \in D\left((\X_{1}\otimes\X_{2})\otimes(\Y_{1}\otimes\Y_{2})\right),
+\end{equation}
+and therefore it contradicts the fact that $\rho$ is separable in the cut 
+between Alice and Claire on one side, and Bob and Danny on the other side, that is,
+\begin{equation}
+  \rho \in \Sep(\X_{1}\otimes\X_{2} : \Y_{1}\otimes\Y_{2}).
+\end{equation}
+A similar argument shows that no three Bell states, and more in general, 
+no set of $n+1$ orthogonal maximally entangled states in $\complex^{n}\otimes\complex^{n}$, 
+can be perfectly distinguished by LOCC\footnote{Later in Section \ref{sec:nathansons-bound}, 
+we will show a proof of this fact by using the convex programming framework introduced in this thesis.}. 
+This method is referred in the literature as \emph{GKRSS method}, 
+by the initials of the authors of \cite{Ghosh01}.
+
+In \cite{Horodecki03}, a modification of the GKRSS method is presented, 
+called \emph{HSSH method}. In the GKRSS method, the local distinguishability 
+problem is reduced to analyzing the entanglement contained in a mixed states
+constructed starting from the states that are to be distinguished.
+The idea is to compare the entanglement in the mixed state before and after 
+the distinguishability protocol has run its course.
+In HSSH the problem is reduced to comparing the entanglement measures in 
+\emph{pure states} instead. For some instances of the problem, the HSSH method
+turns out to be more powerful, due to the fact that entanglement measures for 
+pure states are better understood. In fact, through the HSSH method, the problem reduces 
+to understanding entanglement transformations between pure states,   
+for which necessary and sufficient conditions were derived by Nielsen \cite{Nielsen99}, and
+Jonathan and Plenio \cite{Jonathan99}.
+An application of the method by \cite{Horodecki03} is the discovery of the first 
+set of $n$ indistinguishable states in $\complex^{n}\otimes\complex^{n}$.
+
+The original proof in \cite{Terhal01a} that the Werner states form a hiding pair 
+(Example \ref{example:werner-hiding-pairs} above) also exploits the theory of entanglement,
+but makes use of an extra observation, that is, the fact that the operators 
+that constitute an LOCC measurement must be PPT.
+The mathematical properties of PPT measurements were also exploited in the recent 
+proofs by \cite{Yu12,Yu14}, which triggered the work of this thesis.
+
+
+
+%Of course

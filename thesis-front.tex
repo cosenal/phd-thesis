@@ -1,0 +1,222 @@
+%!TEX root = thesis.tex
+%
+% T I T L E   P A G E
+% -------------------
+% Last updated May 24, 2011, by Stephen Carr, IST-Client Services
+% The title page is counted as page `i' but we need to suppress the
+% page number.  We also don't want any headers or footers.
+\pagestyle{empty}
+\pagenumbering{roman}
+
+% The contents of the title page are specified in the "titlepage"
+% environment.
+\begin{titlepage}
+        \begin{center}
+        \vspace*{1.0cm}
+
+        \Huge
+        {\bf Quantum State Local Distinguishability via Convex Optimization}
+
+        \vspace*{1.0cm}
+
+        \normalsize
+        by \\
+
+        \vspace*{1.0cm}
+
+        \Large
+        Alessandro Cosentino \\
+
+        \vspace*{3.0cm}
+
+        \normalsize
+        A thesis \\
+        presented to the University of Waterloo \\ 
+        in fulfillment of the \\
+        thesis requirement for the degree of \\
+        Doctor of Philosophy \\
+        in \\
+        Computer Science \\
+
+        \vspace*{2.0cm}
+
+        Waterloo, Ontario, Canada, 2015 \\
+
+        \vspace*{1.0cm}
+
+        \end{center}
+\end{titlepage}
+
+\noindent\textbf{Copyright notice.}
+Chapters~\ref{chap:programs} and~\ref{chap:mes} contain material 
+from~\cite{Cosentino13}, which is copyrighted by the American Physical Society.
+Chapters~\ref{chap:programs},~\ref{chap:mes} and ~\ref{chap:ups}
+contain material from~\cite{Cosentino14}, which is copyrighted by Rinton Press, 
+and from~\cite{Bandyopadhyay15}, copyrighted by IEEE.
+\\ \\
+Remaining material is:
+\copyright\ Alessandro Cosentino 2015 \\
+
+
+% The rest of the front pages should contain no headers and be numbered using Roman numerals starting with `ii'
+\pagestyle{plain}
+\setcounter{page}{2}
+
+\cleardoublepage % Ends the current page and causes all figures and tables that have so far appeared in the input to be printed.
+% In a two-sided printing style, it also makes the next page a right-hand (odd-numbered) page, producing a blank page if necessary.
+ 
+
+
+% D E C L A R A T I O N   P A G E
+% -------------------------------
+  % The following is the sample Delaration Page as provided by the GSO
+  % December 13th, 2006.  It is designed for an electronic thesis.
+  \noindent
+I hereby declare that I am the sole author of this thesis. This is a true copy of the thesis, including any required final revisions, as accepted by my examiners.
+
+  \bigskip
+  
+  \noindent
+I understand that my thesis may be made electronically available to the public.
+
+\cleardoublepage
+%\newpage
+
+% A B S T R A C T
+% ---------------
+
+\begin{center}\textbf{Abstract}\end{center}
+
+Entanglement and nonlocality play a fundamental role in quantum computing.
+To understand the interplay between these phenomena, researchers have considered the 
+model of local operations and classical communication, or LOCC for short,
+which is a restricted subset of all possible operations 
+that can be performed on a multipartite quantum system.
+The task of distinguishing states from a set that is known a priori to all parties
+is one of the most basic problems among those used to test the power of LOCC protocols,
+and it has direct applications to quantum data hiding, secret sharing and quantum channel capacity.
+
+The focus of this thesis is on state distinguishability problems for 
+classes of quantum operations that are more powerful than LOCC, 
+yet more restricted than global operations, namely the 
+classes of separable and positive-partial-transpose (PPT) measurements. 
+We build a framework based on convex optimization (on cone programming, in particular) 
+to study such problems.
+Compared to previous approaches to the problem,
+the method described in this thesis provides precise numerical bounds and quantitative analytic results.
+By combining the duality theory of cone programming with the channel-state duality, 
+we also establish a novel connection between the state distinguishability problem 
+and the study of positive linear maps, which is a topic of independent interest in quantum information theory.
+
+We apply our framework to several questions that were left open in previous works 
+regarding the distinguishability  of maximally entangled states and unextendable product sets. 
+First, we exhibit sets of $k < n$ orthogonal maximally entangled states in $\complex^{n}\otimes\complex^{n}$ 
+that are not perfectly distinguishable by LOCC.
+As a consequence of this, we show a gap between the power of PPT and separable measurements 
+for the task of distinguishing sets consisting only of maximally entangled states.
+Furthermore, we prove tight bounds on the entanglement cost that is necessary to
+distinguish any sets of Bell states, thus showing that quantum teleportation is optimal for this task.
+Finally, we provide an easily checkable characterization of when an unextendable product set is 
+perfectly discriminated by separable measurements, along with the first known 
+example of an unextendable product set that cannot be perfectly discriminated 
+by separable measurements.
+
+\cleardoublepage
+\newpage
+
+% A C K N O W L E D G E M E N T S
+% -------------------------------
+
+\begin{center}\textbf{Acknowledgements}\end{center}
+
+First and foremost, I would like to thank my advisor John Watrous for his guidance
+over my PhD years.
+His meticulous style of writing has been and always will be an inspiration for me.  
+I also thank him for teaching two terrific courses on quantum information theory 
+and semidefinite programming. From his lectures I learned almost all the mathematical tools
+I needed for writing this thesis.
+
+Next, I am grateful to professors Richard Cleve, Runyao Duan, Debbie Leung, and Ashwin Nayak 
+for agreeing to be in my defense committee, and to professor Andrew Childs for being in
+my comprehensive exam committee.
+
+Most of the questions addressed in this thesis were explained to me by Som Bandyopadhyay, 
+Nengkun Yu, and Michael Nathanson. I thank them for a lot of insightful discussions on the problem.
+The ``state distinguishability'' research community is small, but has welcomed me warmly.
+
+I owe some of the ideas presented in this work to my colleagues and co-authors 
+Vincent Russo and Nathaniel Johnston. I must thank them also for helping me
+with coding in MATLAB the optimization problems presented in this thesis.
+
+From my great nerdy friends Robin and Vinayak, I learned too much: lots of theoretical computer science, 
+many research skills and, more importantly, rationality.
+
+I wish to thank grad school fellows Stacey, Adam, Ansis, Jamie, Laura, and Abel, for making
+my life at IQC more enjoyable, and for being the coolest bunch of quantum kids in the world.
+I hope our paths will cross many times in the years to come. 
+
+Thanks to my roommate Daniele for bringing a piece of Italy into my everyday life. 
+(And I am not talking \emph{only} about Baricelle olive oil!)
+
+To all my soccer team-mates, I'm very sad 
+that I will no longer be playing for Hopeless Experts.
+Every game, every defeat, every win with you guys has been fantastic. 
+I wish the team every success in the future seasons.  
+
+Throughout the past years, my \emph{classical} friend Diego has been reminding me of 
+the joy of computer hacking and of how damn interesting every branch of computer science can be.
+Thanks for that and for keeping me updated on your favorite musical discoveries.
+
+I have to save my last thanks to my family for their love and support. 
+I missed you!
+
+
+\cleardoublepage
+\newpage
+
+% D E D I C A T I O N
+% -------------------
+
+% \begin{center}\textbf{Dedication}\end{center}
+
+% This is dedicated to the one I love.
+% \cleardoublepage
+%\newpage
+
+% T A B L E   O F   C O N T E N T S
+% ---------------------------------
+\renewcommand\contentsname{Table of Contents}
+\tableofcontents
+\cleardoublepage
+\phantomsection
+%\newpage
+
+% L I S T   O F   T A B L E S
+% ---------------------------
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\cleardoublepage
+\phantomsection		% allows hyperref to link to the correct page
+%\newpage
+
+% L I S T   O F   F I G U R E S
+% -----------------------------
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\cleardoublepage
+\phantomsection		% allows hyperref to link to the correct page
+%\newpage
+
+% L I S T   O F   S Y M B O L S
+% -----------------------------
+% To include a Nomenclature section
+% \addcontentsline{toc}{chapter}{\textbf{Nomenclature}}
+% \renewcommand{\nomname}{Nomenclature}
+% \printglossary
+% \cleardoublepage
+% \phantomsection % allows hyperref to link to the correct page
+% \newpage
+
+% Change page numbering back to Arabic numerals
+\pagenumbering{arabic}
+

@@ -1,0 +1,199 @@
+%!TEX root = thesis.tex
+%-------------------------------------------------------------------------------
+\chapter{Introduction}
+\label{chap:introduction}
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+\section{Motivation}
+%-------------------------------------------------------------------------------
+
+A central subject of study in quantum information theory is 
+the interplay between entanglement and nonlocality.
+An important tool to study this relationship is the paradigm
+of local quantum operations and classical communication (LOCC). 
+This is a subset of all global quantum operations, 
+with a fairly intuitive physical description. 
+In a two-party LOCC protocol, 
+Alice and Bob can perform quantum operations only on their local
+subsystems and the communication must be classical.
+This restricted paradigm has played a crucial role in the understanding 
+of the role of entanglement in quantum information. It has also provided a 
+framework for the description of basic quantum tasks such as quantum key 
+distribution and entanglement distillation.
+Furthermore, LOCC protocols are operationally well-motivated, in the sense
+that classical communication is easy to implement.
+
+The LOCC paradigm does not have a proper classical counterpart.
+It is worth noticing that its definition does not impose any restriction on the amount of 
+classical communication that is allowed between the parties, and therefore it should not be
+confused with other setups studied in theoretical computer science where such 
+constraints are instead imposed, such as communication complexity, or information complexity.  
+
+A fundamental problem that has been studied to understand the limitations of 
+LOCC protocols is the problem of distinguishing quantum states.
+The setup of the problem is pretty simple in the bipartite case.
+The two parties are given a single copy of a quantum state chosen
+with some probability from a collection of states and their goal is to identify 
+which state was given, with the assumption that the parties have full 
+a priori knowledge of the collection.
+
+When restricted to classical states, this is an easy task, 
+different strings of bits are always completely distinguishable. 
+In the quantum case, if the states are orthogonal and global operations 
+are permitted, then it is always possible to determine the state
+with certainty.
+When the states are not orthogonal, quantum mechanics does not allow 
+perfect discrimination \cite{Nielsen11}.
+The problem of distinguishing quantum states by global operations 
+dates back to the '70s \cite{Helstrom1969},
+and since then it has been given different names: \emph{quantum state discrimination}, 
+\emph{quantum detection}, \emph{quantum hypothesis testing}.
+
+
+Even when the states are orthogonal, things get interesting in the quantum setting 
+once we impose 
+restrictions on the measurements that can be performed on the unknown state.
+Say the two parties to whom the state is given, Alice and Bob,
+have their quantum labs very far apart from each other's and, say, their research budget 
+pays only for an infrastructure to communicate with each other on a classical network.
+In other words, say that only LOCC measurements are allowed on the state. 
+Then Alice and Bob cannot in general discover the state they have been given, 
+even if the states are orthogonal.
+
+The problem of distinguishing among a known set 
+of orthogonal quantum states by LOCC protocols has been studied by several researchers\footnote{The reader may want to browse through the list of references of this thesis, for a more complete list.}
+\cite{Bennett99,Walgate00,Ghosh01,Horodecki03,Fan04,Ghosh04,Nathanson05,Watrous05,Yu11,Yu12}.
+It is referred to as the \emph{local state distinguishability problem} (or 
+\emph{local state discrimination}) and it has some direct applications 
+to other problems in quantum information theory, 
+such as secret sharing \cite{Cleve99,Gottesman00}, 
+data hiding \cite{Terhal01a,DiVincenzo2002}, and the study of quantum channel 
+capacity (see \cite{Watrous05,Yu11} and references therein).
+
+Local state distinguishability problems offer insights into how useful entanglement 
+is in quantum information processing tasks.
+The reason why investigating these problems is helpful comes from the fact that the role of entanglement 
+in such tasks is twofold. On the one hand, many LOCC protocols, such as the ones based on teleportation, 
+are fueled by entanglement shared by the parties, and therefore entanglement is a helpful resource
+for distinguishability. 
+On the other hand, if the states to be distinguished are themselves entangled,
+local measurements on only a part of the states do not always suffice to reveal 
+all the information hidden in the remaining part.
+This observation has led us towards the choice of the sets to analyze in this work, 
+which ended up being of two antipodal categories: sets consisting only of orthogonal maximally entangled states
+and sets consisting only of product states.
+
+The set of measurements that can be implemented through LOCC has an apparently
+complex mathematical structure---no tractable characterization of this set is
+known, representing a clear obstacle to a better understanding of the
+limitations of LOCC measurements.
+For example, given a collection of operators 
+describing a measurement on a bipartite system, the determination of whether or
+not this collection describes an LOCC measurement, or is closely approximated
+by an LOCC measurement, is not known to be a computationally decidable
+problem.
+For this reason, the state discrimination problem described above is sometimes
+considered for more tractable classes of measurements that approximate, in some
+sense, the set of LOCC measurements, and that are mathematically and computationally 
+more tractable than the LOCC set.
+Among these classes, the set of separable and positive-partial-transpose (PPT) measurements 
+are the subject of study of this thesis.
+Since these classes contain LOCC, any bound on their power is reflected into a 
+bound on the power of LOCC.
+
+The key observation of this dissertation is that the set of PPT operators
+and the set of separable operators both form closed convex cones and many problems concerning them, 
+including state distinguishability, can be phrased in terms of cone programming,
+which is a convex optimization framework that generalizes semidefinite programming.
+In general, we do not have a classical polynomial-time algorithm to solve
+cone programs and, in fact, optimizing over separable operators is an NP-hard task. 
+Nevertheless, cone programming, like semidefinite programming, comes with a rich duality theory,
+which can be exploited in order to derive analytical bounds for the problems we are seeking to solve.
+From the numerical point of view, we exploit the fact that the particular cone programs
+we are interested in can be approximated by efficiently solvable hierarchies of 
+semidefinite programs \cite{Doherty02}.
+
+%-------------------------------------------------------------------------------
+\section{Summary of the results}
+%-------------------------------------------------------------------------------
+We prove the following specific results:
+\begin{itemize}
+\item We obtain an exact formula for the optimal probability of correctly 
+discriminating any set of either three or four Bell states via separable 
+measurements, when the parties are given a partially entangled pair of qubits as a resource. 
+In particular, it is proved that this ancillary pair of qubits must be maximally 
+entangled in order for three Bell states to be perfectly discriminated
+by separable (or LOCC) measurements, which answers an open question of \cite{Yu14}.
+\item We build up on a construction by Yu, Duan, and Ying \cite{Yu12}, and show
+the first example of a set of $k < n$ orthogonal maximally entangled states 
+in $\complex^{n}\otimes\complex^{n}$ that is not perfectly distinguishable by LOCC,
+One takeaway from this is that the local dimension of the local subsystems does not 
+play any special role in the nonlocality exhibited by LOCC-indistinguishable sets of 
+maximally entangled states. 
+The same example serves to exhibit a gap between the power of separable and PPT measurements
+for the task of distinguishing maximally entangled states.
+\item We provide an easily checkable characterization of when an unextendable 
+product set is perfectly discriminated by separable measurements, and we use
+this characterization to present an example of an unextendable product set in
+$\complex^{4}\otimes\complex^{4}$ that is not perfectly discriminated by 
+separable measurements. This resolves an open question raised in
+\cite{Duan09}. 
+\item We show that every unextendable product set together 
+with one extra pure state orthogonal to every member of the unextendable product 
+set is not perfectly discriminated by separable measurements.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+\section{Overview}
+%-------------------------------------------------------------------------------
+
+We assume that the reader is familiar with basic concepts of quantum computation and 
+the main target is a researcher in quantum information or a graduate student 
+who has taken an introductory course to quantum based on Nielsen and Chuang \cite{Nielsen11}.
+Familiarity with more advanced concepts of quantum information theory (based 
+on \cite{Watrous15}, for example) would certain help, but it is not necessary.
+The same can be said about notions of convex optimization. The syllabus of an introductory 
+graduate-level course in convex optimization covers more than it is necessary to grasp
+the material of this thesis.
+In Chapter \ref{chap:preliminaries} basic notions of quantum information are reviewed. 
+
+Chapter \ref{chap:bipartite-state-discrimination} reviews background material 
+on bipartite state discrimination, including a comparison between previous approaches 
+to the problem and ours.
+
+In Chapter \ref{chap:programs}, we lay out a general cone programming framework
+for bipartite state discrimination and we instantiate it for the particular cases
+of separable and PPT measurement. 
+
+In Chapters \ref{chap:mes} and \ref{chap:ups}, we apply the framework described in Chapter 
+\ref{chap:programs} to study the distinguishability of sets of maximally entangled states, 
+and unextendable product sets, respectively.
+These two chapters are independent from each other and they can be read in any order.
+
+In the last chapter we draw conclusions and ask some open questions that may be
+of interest for future work. 
+
+The thesis is based on the following papers:
+\begin{itemize}
+
+\item[$\bullet$]
+ A. Cosentino. 
+\textbf{PPT-indistinguishable states via semidefinite programming}. 
+\textit{Physical Review A}, 2013.
+\cite{Cosentino13}
+
+\item[$\bullet$]
+A. Cosentino and V. Russo.
+\textbf{Small sets of locally indistinguishable orthogonal maximally entangled states}. 
+\textit{Quantum Information \& Computation},  2014.
+\cite{Cosentino14}
+
+\item[$\bullet$] 
+S. Bandyopadhyay, A. Cosentino, N. Johnston, V. Russo, J. Watrous, and N. Yu. 
+\textbf{Limitations on separable measurements by convex optimization}. 
+\textit{IEEE Transactions on Information Theory}, 2015.
+\cite{Bandyopadhyay15}
+
+\end{itemize}

@@ -1,0 +1,73 @@
+%!TEX root = thesis.tex
+%-------------------------------------------------------------------------------
+\chapter{Local distinguishability in Matlab}
+\label{chap:AppendixA}
+%-------------------------------------------------------------------------------
+
+
+\section*{Setup}
+\subsection*{Requirements}
+
+\begin{itemize}
+    \item MATLAB\footnote{Unfortunately at the time of writing this, 
+        the package CVX only runs on Matlab. I solemnly promise that I will port
+        all the code to GNU Octave once the Octave port of CVX will be completed.};
+    \item CVX  \textgreater= 2.1 \cite{cvx};
+    \item QETLAB \textgreater= 0.7 \cite{Johnston2015};
+\end{itemize}
+
+\subsection*{List of functions}
+
+\begin{itemize}
+    \item \texttt{Distinguishability} (by N. Johnston)
+    \item \texttt{LocalDistinguishability}
+    \item \texttt{UPBSepDistinguishable} (by N. Johnston)
+\end{itemize}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\section*{Examples}
+
+The code for the following examples can be found in the repository \cite{Cosentino15}. 
+
+\subsection*{Yu--Duan--Ying states}
+
+\begin{verbatim}
+states = 1/2*[vec(kron(Pauli(0),Pauli(0)))'; ...
+              vec(kron(Pauli(1),Pauli(1)))'; ...
+              vec(kron(Pauli(2),Pauli(1)))'; ...
+              vec(kron(Pauli(3),Pauli(1)))']';
+
+disp(Distinguishability(states));
+disp(LocalDistinguishability(states, 'copies', 1));
+disp(LocalDistinguishability(states));
+\end{verbatim}\color{lightgray} 
+\begin{verbatim}     
+    1
+    0.8750
+    0.7500
+\end{verbatim} 
+
+\color{black}
+
+\subsection*{Tiles set plus extra orthogonal state (Ex. \ref{ex:tiles-set})}
+
+\begin{verbatim}
+extra_state = 1/2*[1 1 -1 0 0 -1 0 0 0];
+set = [UPB('Tiles') extra_state'];
+
+disp(LocalDistinguishability(UPB('Tiles')))
+disp(LocalDistinguishability(states, 'copies', 1));
+disp(LocalDistinguishability(states));
+\end{verbatim}\color{lightgray} 
+\begin{verbatim}    
+    1.0000
+    1.0000
+    0.9860
+\end{verbatim}
+
+% \subsection*{Generalized Bell states}
+
+\color{black}
