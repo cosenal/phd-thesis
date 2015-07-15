@@ -19,9 +19,12 @@
 \subsection*{List of functions}
 
 \begin{itemize}
-    \item \texttt{Distinguishability} (by N. Johnston)
-    \item \texttt{LocalDistinguishability}
-    \item \texttt{UPBSepDistinguishable} (by N. Johnston)
+    \item \texttt{Distinguishability} (by N. Johnston) ---
+        given an ensemble $\E$, computes $\opt(\E)$;
+    \item \texttt{LocalDistinguishability} ---
+        given an ensemble $\E$, computes $\opt_{\PPT}(\E)$ or $\opt_{\Sym}(\E)$;
+    \item \texttt{UPBSepDistinguishable} (by N. Johnston) -- an implementation of
+    the criterion described in Sec.~\ref{sec:criterion-sep-upb};
 \end{itemize}
 
 \sloppy
@@ -52,7 +55,7 @@ disp(LocalDistinguishability(states));
 
 \color{black}
 
-\subsection*{Tiles set plus extra orthogonal state (Ex. \ref{ex:tiles-set})}
+\subsection*{Tiles set plus extra orthogonal state (Example \ref{ex:tiles-set})}
 
 \begin{verbatim}
 extra_state = 1/2*[1 1 -1 0 0 -1 0 0 0];
@@ -68,6 +71,64 @@ disp(LocalDistinguishability(states));
     0.9860
 \end{verbatim}
 
+\color{black}
+
+\subsection*{Bell state discrimination}
+
+\begin{verbatim}
+bells_m = [Bell(1) Bell(2) Bell(3) Bell(4)]';
+
+disp(Distinguishability(bells_m));
+disp(LocalDistinguishability(bells_m, 'copies', 1));
+\end{verbatim}
+\color{lightgray}
+\begin{verbatim}     
+    1
+    0.5000
+\end{verbatim} \color{black}
+    
+\subsection*{Entanglement cost (Section \ref{sec:entanglement-cost})} 
+
+\begin{verbatim}
+eps = 1/2; % takes a value between 0 and 1
+eps_state = [sqrt((1+eps)/2) 0 0 sqrt((1-eps)/2)]';
+\end{verbatim}
+
+
+\subsubsection*{4 Bell states}
+
+\begin{verbatim}
+d = 4;
+n = 4;
+
+bells_m = zeros(d^2, n);
+
+for k=1:n
+    % makes sure we are considering the right partition
+    bells_m(:, k) = Swap(kron(Bell(k), eps_state), [2 3], [2 2 2 2]);
+end
+
+disp(Distinguishability(bells_m));
+disp(LocalDistinguishability(bells_m, 'copies', 1));
+\end{verbatim}\color{lightgray}\begin{verbatim}     
+    1
+    0.9330
+\end{verbatim} 
+\color{black}
+    
+\subsubsection*{3 Bell states}
+
+\begin{verbatim}
+n = 3;
+disp(Distinguishability(bells_m(:, 1:n)));
+disp(LocalDistinguishability(bells_m(:, 1:n), 'copies', 1));
+disp(LocalDistinguishability(bells_m(:, 1:n), 'copies', 2));
+\end{verbatim}
+\color{lightgray} 
+\begin{verbatim}     
+    1
+    0.9916
+    0.9586
+\end{verbatim} \color{black}
 % \subsection*{Generalized Bell states}
 
-\color{black}
