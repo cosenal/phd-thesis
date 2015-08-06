@@ -90,7 +90,7 @@ each subspace.
 \begin{remark}
 The statement of Lemma \ref{lemma:isometry-ppt-star} may become very familiar to the reader, 
 once it is translated in the language of linear mappings via the Choi isomorphism.
-It is straightforward to see that the operator in Eq.~\ref{eq:reduction-operator}
+It is straightforward to see that the operator in Eq.~\eqref{eq:reduction-operator}
 is the Choi operator of a mapping $\Phi_{A}:\Lin(\Y)\to\Lin(\X)$ defined as
 \begin{equation}
   \Phi_{A}(X) = \tr(X)\I - AXA^{\ast},
@@ -479,8 +479,8 @@ discrimination problem.
   Let $\X_1 = \X_2 = \Y_1 = \Y_2 = \complex^2$, define
   $\X = \X_1 \otimes \X_2$ and $\Y = \Y_1 \otimes \Y_2$, and let
   $\varepsilon\in [0,1]$.
-  For any PPT measurement $\{P_1,P_2,P_3,P_4\}\subset\PPT(\X:\Y)$, the success
-  probability of discriminating the states corresponding to the set
+  For any PPT measurement $\mu\in\Meas_{\PPT}(4,\X:\Y)$, the success
+  probability of discriminating the states in the set
   \begin{equation}
     \label{eq:set-four-bells}
     \left\{ \ket{\phi_{1}} \otimes \ket{\tau_{\eps}},\; 
@@ -497,14 +497,7 @@ discrimination problem.
 \end{theorem}
 
 \begin{proof}
-  One may formulate a cone program corresponding to state discrimination by 
-  PPT measurements along similar lines to the cone program for separable
-  measurements, simply by replacing the cone $\Sep(\X:\Y)$ by the cone
-  $\PPT(\X:\Y)$ of positive semidefinite operators whose partial transpose is
-  positive semidefinite.
-  This cone program is a semidefinite program, as discussed in
-  \cite{Cosentino13}, by virtue of the fact that partial transpose mapping is
-  linear.
+
   
   Consider the following operator:
   \begin{equation}
@@ -520,16 +513,15 @@ discrimination problem.
     \tr(H_{\eps}) = \frac{1}{2}\left( 1 + \sqrt{1-\eps^2} \right),
   \end{equation}
   so to complete the proof it suffices to prove that $H_{\varepsilon}$ is
-  dual feasible for the (semidefinite) cone program representing the 
-  PPT state discrimination problem under consideration.
-  Dual feasibility will follow from the condition
+  dual feasible for the Program \eqref{eq:ppt-dual-problem}.
+  Dual feasibility will follow from the condition (which is sufficient but not necessary for feasibility)
   \begin{equation}
     (\pt_{\negsmallspace\X_1} \otimes \pt_{\negsmallspace\X_2})
     \Bigl(
     H_{\varepsilon} - \frac{1}{4}\,\phi_k\otimes\tau_{\varepsilon}\Bigr)
-    \in\Pos(\X_1\otimes\Y_1\otimes\X_2\otimes\Y_2)
+    \in\Pos(\X_1\otimes\Y_1\otimes\X_2\otimes\Y_2),
   \end{equation}
-  (which is sufficient but not necessary for feasibility) for $k = 1,2,3,4$.
+  for $k = 1,2,3,4$.
   One may observe that
   \begin{equation}
     \pt_{\negsmallspace\X_2}(\tau_{\varepsilon}) 
