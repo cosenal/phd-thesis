@@ -12,7 +12,7 @@
 A central subject of study in quantum information theory is 
 the interplay between entanglement and nonlocality.
 An important tool to study this relationship is the paradigm
-of local quantum operations and classical communication (LOCC). 
+of local quantum operations and classical communication (LOCC, for short). 
 This is a subset of all global quantum operations, 
 with a fairly intuitive physical description. 
 In a two-party LOCC protocol, 
@@ -44,12 +44,13 @@ different strings of bits are always completely distinguishable.
 In the quantum case, if the states are orthogonal and global operations 
 are permitted, then it is always possible to determine the state
 with certainty.
-When the states are not orthogonal, quantum mechanics does not allow 
+On the contrary, when the states are not orthogonal, quantum mechanics does not allow 
 perfect discrimination \cite{Nielsen11}.
 The problem of distinguishing quantum states by global operations 
 dates back to the '70s \cite{Helstrom1969},
-and since then it has been given different names: \emph{quantum state discrimination}, 
-\emph{quantum detection}, \emph{quantum hypothesis testing}.
+and since then it has been given different names: \emph{quantum state distinguishability}, 
+\emph{quantum state discrimination}, \emph{quantum detection}, 
+\emph{quantum hypothesis testing}.
 
 
 Even when the states are orthogonal, things get interesting in the quantum setting 
@@ -63,7 +64,7 @@ Then Alice and Bob cannot in general discover the state they have been given,
 even if the states are orthogonal.
 
 The problem of distinguishing among a known set 
-of orthogonal quantum states by LOCC protocols has been studied by several researchers\footnote{The reader may want to browse through the list of references of this thesis, for a more complete list.}
+of orthogonal quantum states by LOCC protocols has been studied by several researchers in the last 15 years\footnote{The reader may want to browse through the References section of this thesis, for a more complete list.}
 \cite{Bennett99,Walgate00,Ghosh01,Horodecki03,Fan04,Ghosh04,Nathanson05,Watrous05,Yu11,Yu12}.
 It is referred to as the \emph{local state distinguishability problem} (or 
 \emph{local state discrimination}) and it has some direct applications 
@@ -76,8 +77,8 @@ Local state distinguishability problems offer insights into how useful entanglem
 is in quantum information processing tasks.
 The reason why investigating these problems is helpful comes from the fact that the role of entanglement 
 in such tasks is twofold. On the one hand, many LOCC protocols, such as the ones based on teleportation, 
-are fueled by entanglement shared by the parties, and therefore entanglement is a helpful resource
-for distinguishability. 
+are fueled by entanglement shared by the parties, and therefore entanglement turns 
+out to be a helpful resource for distinguishability. 
 On the other hand, if the states to be distinguished are themselves entangled,
 local measurements on only a part of the states do not always suffice to reveal 
 all the information hidden in the remaining part.
@@ -90,7 +91,7 @@ complex mathematical structure---no tractable characterization of this set is
 known, representing a clear obstacle to a better understanding of the
 limitations of LOCC measurements.
 For example, given a collection of operators 
-describing a measurement on a bipartite system, the determination of whether or
+describing a measurement on a bipartite system, the problem of determining whether or
 not this collection describes an LOCC measurement, or is closely approximated
 by an LOCC measurement, is not known to be a computationally decidable
 problem.
@@ -126,10 +127,10 @@ measurements, when the parties are given a partially entangled pair of qubits as
 In particular, it is proved that this ancillary pair of qubits must be maximally 
 entangled in order for three Bell states to be perfectly discriminated
 by separable (or LOCC) measurements, which answers an open question of \cite{Yu14}.
-\item We build up on a construction by Yu, Duan, and Ying \cite{Yu12}, and show
-the first example of a set of $k < n$ orthogonal maximally entangled states 
-in $\complex^{n}\otimes\complex^{n}$ that is not perfectly distinguishable by LOCC,
-One takeaway from this is that the local dimension of the local subsystems does not 
+\item We build up on a construction by Yu, Duan, and Ying \cite{Yu12}, and we show
+the first example of a set with less than $n$ orthogonal maximally entangled states 
+in $\complex^{n}\otimes\complex^{n}$ that are not perfectly distinguishable by LOCC.
+One takeaway from this is that the dimension of the local subsystems does not 
 play any special role in the nonlocality exhibited by LOCC-indistinguishable sets of 
 maximally entangled states. 
 The same example serves to exhibit a gap between the power of separable and PPT measurements
@@ -153,11 +154,12 @@ We assume that the reader is familiar with basic concepts of quantum computation
 the main target is a researcher in quantum information or a graduate student 
 who has taken an introductory course to quantum based on Nielsen and Chuang \cite{Nielsen11}.
 Familiarity with more advanced concepts of quantum information theory (based 
-on \cite{Watrous15}, for example) would certain help, but it is not necessary.
-The same can be said about notions of convex optimization. The syllabus of an introductory 
+on \cite{Watrous15}, for example) would certainly help, but it is not necessary.
+The same can be said about notions of convex optimization, the syllabus of an introductory 
 graduate-level course in convex optimization covers more than it is necessary to grasp
 the material of this thesis.
-In Chapter \ref{chap:preliminaries} basic notions of quantum information are reviewed. 
+In Chapter \ref{chap:preliminaries} basic notions of quantum information and convex optimization 
+are reviewed. 
 
 Chapter \ref{chap:bipartite-state-discrimination} reviews background material 
 on bipartite state discrimination, including a comparison between previous approaches 
