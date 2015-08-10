@@ -6,7 +6,7 @@
 
 This chapter introduces the problem of discriminating quantum states
 from a known set.
-A scenario describing the problem is presented, first for the case where the 
+A scenario describing the problem is first presented for the case where the 
 unknown state is given to a single individual, and then generalized to a 
 different scenario where the unknown state is distributed to two parties.
 In this thesis we will focus on the bipartite case, leaving for future work 
@@ -44,9 +44,8 @@ Charlie picks an index
   k \in \{1, \ldots, N \},
 \] 
 according to the probability distribution $(p_{1}, \ldots, p_{N})$, 
-prepares a quantum register $\reg{X}$ with the state $\rho_{k} \in \Pos(\X)$,
-and sends it to Alice.
-Alice's task it to identify the index $k$ by performing a measurement on the 
+prepares a quantum register $\reg{X}$ with the state $\rho_{k} \in \Density(\X)$,
+and sends it to Alice, whose task is to identify the index $k$ by performing a measurement on the 
 register $\reg{X}$.
 
 For Alice performing a measurement
@@ -130,7 +129,7 @@ the states, by defining the following measurement operators:
 \end{equation}
 for each $k = 1,\ldots,N-1$, and 
 \begin{equation}
-  \mu(N) = \I - \sum_{k=1}^{N-1}\mu(k).
+  \mu(N) = \I_{\X} - \sum_{k=1}^{N-1}\mu(k).
 \end{equation}
 It is clear that $\mu$ is a valid measurement and that
 \begin{equation}
@@ -138,7 +137,7 @@ It is clear that $\mu$ is a valid measurement and that
 \end{equation}
 for all $k \in \{1, \ldots, N\}$. 
 
-The distinguishability of non-orthogonal states is a prolific topic on its own and 
+Global distinguishability of non-orthogonal states is a prolific topic on its own and 
 a treatment of it is outside the scope of this thesis.
 For an exposition of results regarding global state discrimination, 
 the reader is referred to numerous surveys on the topic \cite{Chefles2000, Bergou2004}.

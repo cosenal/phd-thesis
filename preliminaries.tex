@@ -52,20 +52,20 @@ denotes the adjoint of $A$, that is, the unique operator that satisfies the equa
 \begin{equation}
   \ip{v}{Au} = \ip{A^{\ast}v}{u},
 \end{equation}
-for all $u\in\X$ and $y\in\Y$.
+for all $u\in\X$ and $v\in\Y$.
 In the matrix representation of linear operators, $A^{\ast}$ is the conjugate transpose of 
 the matrix corresponding to $A$.
 
 \renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\emph{#1}}
 
-For any space $\X$, we denote some important sets of operators acting on $\X$ as follow:
+For any space $\X$, we consider the following important sets of operators acting on $\X$:
 \begin{description}
 \item[Hermitian operators -- $\Herm(\X)$]: operators $X\in\Lin(\X)$ such that $X^{\ast} = X$.
 \item[Positive semidefinite operators -- $\Pos(\X)$]: operators $X\in\Lin(\X)$ for which it holds 
   that $X = Y^{\ast}Y$ for some operator $Y\in\Lin(\X)$.
 \item[Density operators -- $\Density(\X)$]: positive semidefinite operators
   having trace equal to $1$. To denote density operators, we will use letters from 
-  the Greek alphabet, like $\rho,\sigma,\xi$.
+  the Greek alphabet, such as $\rho,\sigma,\xi$.
 \end{description}
 The eigenvalues of an Hermitian operator are all real numbers. 
 Positive semidefinite operators are Hermitian by definition, and they can be
@@ -80,12 +80,12 @@ For Hermitian operators $A, B \in \Herm(\X)$ the notations $A\geq B$
 and $B \leq A$ indicate that $A - B$ is positive semidefinite.
 
 Other important operators are \emph{linear isometries}, which are all operators
-$X\in\Lin(\X,\Y)$ such that $X^{\ast}X=\I_{\X}$. The set of linear isometries is 
-denoted by $\Unitary(\X,\Y)$.
+$X\in\Lin(\X,\Y)$ such that $X^{\ast}X=\I_{\X}$. The set of linear isometries 
+from $\X$ to $\Y$ is denoted by $\Unitary(\X,\Y)$.
 Linear isometries in $\Lin(\X)$ are called \emph{unitary operators} and their 
 set is denoted by $\Unitary(\X)$.
 
-We denote the standard Hilbert-Schmidt inner product of operators
+We denote the standard Hilbert-Schmidt inner product of two operators
 $X$ and $Y$ as
 \begin{equation}
   \ip{X}{Y} = \tr(X^{\ast}Y).
@@ -115,11 +115,12 @@ The \emph{adjoint} of a mapping $\Phi$ is defined to be the unique mapping
 \[
   \Phi^{\ast}:\Lin(\Y) \rightarrow \Lin(\X),
 \]
-which satisfies 
+which satisfies the equation
 \begin{equation}
 \label{eq:adjoint-map}
-  \ip{\Phi(X)}{Y} = \ip{X}{\Phi^{\ast}(Y)}.
+  \ip{\Phi(X)}{Y} = \ip{X}{\Phi^{\ast}(Y)},
 \end{equation}
+for every $X\in\Lin(\X), Y\in\Lin(\Y)$.
 Some important sets of linear mappings that we will consider in this thesis are
 the following:
 \begin{description}
@@ -159,7 +160,7 @@ defined by the action
 \begin{equation}
   \op{vec}(\ket{k}\bra{j}) = \ket{k} \ket{j}
 \end{equation}
-on standard basis vectors (and by linearity to all $\Lin(\Y,\X)$).
+on standard basis vectors, and by linearity to all $\Lin(\Y,\X)$.
 
 \begin{definition}
 \label{def:max-ent-states}
@@ -189,7 +190,7 @@ the set of Pauli operators
     \sigma_{3} = \begin{pmatrix} 1 & 0  \\ 0 & -1 \end{pmatrix}.
   \end{array}
 \end{equation}
-The operators $\sigma_{1},\sigma_{2},\sigma_{3}$ are often referred as Pauli $X, Y, Z$, respectively. 
+The operators $\sigma_{1},\sigma_{2},\sigma_{3}$ are often referred as Pauli-$X$, -$Y$, -$Z$, respectively. 
 The Pauli operators are Hermitian, unitary operators, and moreover,
 they are orthogonal under the inner product, thus forming an orthogonal basis for
 $\Lin(\complex^{2})$.
@@ -219,16 +220,16 @@ For any positive integer $n$, let us the define an $n$-th primitive root of unit
 \begin{equation}
   \omega_{n} = \exp(2\pi i/n).
 \end{equation}
-The generalization of Pauli-$X$ and Pauli-$Z$ in $\Unitary(\complex^{n})$ 
+The generalizations of Pauli-$X$ and Pauli-$Z$ in $\Unitary(\complex^{n})$ 
 are defined as follows:
 \begin{equation}
   X_{n} = \sum_{j \in \integer_{n}}\ket{j+1}\bra{j},
 \end{equation}
 and
 \begin{equation}
-  Z_{n} = \sum_{j \in \integer_{n}}^{n}\omega_{n}^{j}\ket{j}\bra{j}.
+  Z_{n} = \sum_{j \in \integer_{n}}\omega_{n}^{j}\ket{j}\bra{j}.
 \end{equation}
-One can define the set of \emph{generalized Pauli operators} in $\Unitary(\complex^{n})$ as the set
+Now we can define the set of \emph{generalized Pauli operators} in $\Unitary(\complex^{n})$ as the set
 \begin{equation}
 \label{eq:generalized-Pauli-operators}
   \left\{ W_{a,b} = X^{a}Z^{b} : a,b\in\integer_{n}\right\}.
@@ -237,7 +238,7 @@ Starting from these operators we define the \emph{generalized Bell basis}
 through the vector-operator bijection:
 \begin{equation}
 \label{eq:generalized-bell-basis}
-  \left\{ \frac{1}{\sqrt{n}}\vec(W_{a,b}) : a,b\in\integer_{n} \right\}.
+  \left\{ \ket{\psi_{a,b}^{(n)}} = \frac{1}{\sqrt{n}}\vec(W_{a,b}) : a,b\in\integer_{n} \right\}.
 \end{equation}
 
 %-------------------------------------------------------------------------------
@@ -265,7 +266,8 @@ of completely positive mappings.
 \label{sec:quantum-measurements}
 %-------------------------------------------------------------------------------
 When we analyze state distinguishability problems, all the physical operations
-performed by the parties involved can be formally phrased in terms of quantum measurements. 
+performed by the involved parties can be formally phrased in terms of quantum 
+measurements. 
 A \emph{quantum measurement} is defined as a function 
 \begin{equation}
 \label{eq:def-measurement}
@@ -278,7 +280,7 @@ satisfying the constraint
   \sum_{k=1}^{N} \mu(k) = \I_{\X}.
 \end{equation}
 The values $\{1, \ldots, N\}$ are the \emph{measurement outcomes} of $\mu$,
-and each operator $\mu(k)$ is the \emph{measurement operator} of $\mu$ 
+and the operator $\mu(k)$ is the \emph{measurement operator} of $\mu$ 
 associated with the outcome $k$.
 The set of all measurements over $\X$ with $N$ outcomes is denoted by 
 $\Meas(N, \X)$ and it is a subset of all functions of the same kind of $\mu$, that is,
@@ -297,7 +299,7 @@ for any $X\in\Lin(\X)$. The mapping $\Phi_{\mu}$ is a quantum channel and, in fa
 it is a \emph{quantum-to-classical} channel.
 
 In order to capture the limitation of some physical processes, we can define more restricted 
-classes of measurements, which will be object of study of this thesis.
+classes of measurements, which will be the object of study of this thesis.
 
 \subsection{LOCC measurements}
 
@@ -315,8 +317,7 @@ implemented by an LOCC protocol between Alice and Bob.
 Notice that we can define different classes of LOCC, 
 according to the number (finite or infinite) of rounds that compose the protocols.
 For the scope of this thesis, the only important thing to notice is that all the LOCC variants
-are contained in the class of separable measurement, which will be defined in the next
-section.
+are contained in the class of separable measurement (defined in the next section).
 
 We denote the set of all $N$-outcome LOCC bipartite measurements 
 on the bipartition $(\X:\Y)$ by $\Meas_{\LOCC}(N, \X:\Y)$.
@@ -360,14 +361,18 @@ completely positive mappings
 \end{definition}
 
 \begin{definition}
-Let $\X$ and $\Y$ be complex Euclidean spaces, let $N > 0$ a positive integer, and let
+Let $\X$ and $\Y$ be complex Euclidean spaces and $N > 0$ be a positive integer. 
+A measurement
 \begin{equation}
   \mu: \{1, \ldots, N \} \rightarrow \Pos(\X\otimes\Y)
 \end{equation}
-be a measurement. Then $\mu$ is said to be a \emph{separable measurement} if the 
+is said to be a \emph{separable measurement} if the 
 corresponding quantum-to-classical channel $\Phi_{\mu}$, defined as in 
 Eq.~\eqref{eq:measurement-channel-bipartite}, is a separable channel.
 \end{definition}
+
+We denote the set of all $N$-outcome separable measurements on the bipartition 
+$(\X:\Y)$ by $\Meas_{\Sep}(N, \X:\Y)$.
 
 \begin{prop}
 \label{prop:separable-each}
@@ -378,8 +383,8 @@ $\mu(k)\in \Sep(\X:\Y)$, for each $k\in\{1, \ldots, N\}$.
 \end{prop}
 
 We refer the reader to \cite{Watrous15} for a proof of Proposition \ref{prop:separable-each},
-as well as for the proof that every LOCC measurement is necessarily a separable measurement. 
-From this latter statement it follows that any limitation proved to hold for 
+as well as for a proof that every LOCC measurement is necessarily a separable measurement. 
+From this latter fact it follows that any limitation proved to hold for 
 every separable measurement must also hold for every LOCC measurement.
 
 \subsection{PPT measurements}
@@ -396,7 +401,8 @@ standard basis $\{\ket{0},\ldots,\ket{n-1}\}$ of $\X$. Equivalently,
 for any operator $X\in\Lin(X\otimes\Y)$, where $\pt:\Lin(\X)\to\Lin(\X)$
 is the transpose mapping.
 
-We will use the fact that the transpose mapping is its own adjoint and inverse, that is,
+When proving facts about PPT operators, we will use the fact that the transpose 
+mapping is its own adjoint and inverse, that is,
 \begin{equation}
   \ip{\pt(X)}{Y} = \ip{X}{\pt(Y)}, \qquad\mbox{for any }X,Y\in\Lin(\X),
 \end{equation}
@@ -405,8 +411,8 @@ and
   \pt(\pt(X)) = X,\qquad\mbox{for any }X\in\Lin(\X).
 \end{equation}
 
-A positive semidefinite operator $P\in \Pos(\X\otimes\Y)$ is a \emph{PPT}
-(short for \emph{positive partial transpose}) operator if it holds that
+A positive semidefinite operator $P\in \Pos(\X\otimes\Y)$ is a \emph{PPT} operator 
+(short for \emph{positive partial transpose}) if it holds that
 \begin{equation}
   \pt_{\negsmallspace\X}(P) \in \Pos(\X\otimes\Y).
 \end{equation}
@@ -423,7 +429,8 @@ is not. Also, in the definition of $\PPT(\X:\Y)$, it is irrelevant which of the 
     \in \Pos(\X\otimes\Y).
 \end{equation}
 
-By definition, a measurement is PPT if all its operators are PPT.  
+A measurement is PPT if all its operators are PPT, as formally specified by the following
+definition.  
 \begin{definition}
 \label{def:ppt-measurements}
 A measurement $\mu : \{1, \ldots, N\}\rightarrow\Pos(\X\otimes\Y)$ is called 
@@ -434,6 +441,9 @@ of PPT measurement operators, that is,
 \end{equation}
 for all $k \in \{1,\ldots,N\}$.
 \end{definition}
+
+We denote the set of all $N$-outcome PPT measurements on the bipartition 
+$(\X:\Y)$ by $\Meas_{\PPT}(N, \X:\Y)$.
 
 Every separable operator is a PPT operator, so every separable measurement
 (and therefore every LOCC measurement) is a PPT measurement as well. 
@@ -490,7 +500,8 @@ to be strict.
   \centering
     \def\svgwidth{200pt}
     \scalebox{.75}{\input{drawing.pdf_tex}}
-    \caption{Inclusion relationships between classes of measurements.}
+    \caption{Inclusion relationships between the classes of measurements studied 
+      in the thesis.}
     \label{fig:classes-measurements}
 \end{figure}
 
@@ -539,8 +550,9 @@ operators on $\complex^n$, equipped with the Hilbert-Schmidt inner product.
 \subsection*{Linear programming}
 \label{sec:linear-programming}
 Let $n,m$ be positive integers, $c\in\real^{n}$ and $b\in\real^{m}$ be vectors
-of real numbers, and $A \in\real^{n\times m}$ be a matrix. Then a \emph{linear program}
-is defined by the triple $(c,b,A)$ and by the following pair of optimization problems.
+of real numbers, and $A \in\real^{n\times m}$ be a matrix with real entries. 
+Then a \emph{linear program} is defined by the triple $(c,b,A)$ and by the 
+following pair of optimization problems.
 \begin{center}
   \begin{minipage}{2in}
     \centerline{\underline{Primal linear program}}\vspace{-7mm}
@@ -567,7 +579,7 @@ is defined by the triple $(c,b,A)$ and by the following pair of optimization pro
 
 Let $\X$ and $\Y$ be complex Euclidean spaces, $A\in\Herm(\X)$ and $B\in\Herm(\Y)$
 be Hermitian operators, and $\Phi:\Lin(\X)\to\Lin(\Y)$ be a Hermiticity preserving mapping.
-Then a \emph{semidefinite program} is defined by the triple $(A,B,\Phi)$ and by 
+A \emph{semidefinite program} is defined by the triple $(A,B,\Phi)$ and by 
 the following pair of optimization problems.
 \begin{center}
   \begin{minipage}{2in}
@@ -599,7 +611,8 @@ $\K\subseteq\Herm(\Z)$ be a closed, convex cone.
 For any choice of a linear map
 $\Phi:\Herm(\Z)\rightarrow\Herm(\W)$ and
 Hermitian operators $A\in\Herm(\Z)$ and $B\in\Herm(\W)$, one has a \emph{cone
-program} defined by $(A,B,\Phi)$ and represented by the following pair of optimization problems:
+program} defined by $(A,B,\Phi)$ and represented by the following pair of 
+optimization problems.
 \begin{center}
   \begin{minipage}{2in}
     \centerline{\underline{Primal cone program}}\vspace{-7mm}
@@ -628,7 +641,9 @@ Here, $\K^{\ast}$ denotes the \emph{dual cone} to $\K$, defined as
 and $\Phi^{\ast}:\Herm(\W)\rightarrow\Herm(\Z)$ is the adjoint mapping to
 $\Phi$.
 
-We observe the following elementary fact.
+In order to see how semidefinite programming is a special case of cone programming, 
+let us observe the following elementary fact that comes from the definition of 
+positive semidefinite operators.
 \begin{fact}
 \label{fact:pos-self-dual}
 The cone of positive semidefinite operators is self-dual, that is, 
@@ -641,7 +656,8 @@ In light of this, we have that $\K = \K^{\ast} = \Pos(\X)$ and we can write the
 constraint from the cone programming dual problem as
 $\Phi^{\ast}(Y) - A \in \Pos(\X)$, that is, $\Phi^{\ast}(Y) \geq A$.
 
-Most of the definitions we introduce in the rest of the section holds for all linear, semidefinite, and general cone programs.
+Most of the definitions we introduce in the rest of the section holds for all linear, 
+semidefinite, and more general cone programs.
 For a cone program defined by $(A,B,\Phi)$, one defines the 
 \emph{feasible sets} $\A$ and $\B$ of the primal and dual problems as
 \begin{equation}
@@ -696,7 +712,7 @@ $Y \in \B$ establishes that $\alpha \leq \beta$.
 
 Weak duality implies that every dual feasible operator $Y \in \B$ provides an
 upper bound of $\ip{B}{Y}$ on the value $\ip{A}{X}$ that is achievable over all
-choices of a primal feasible $X \in \A$, and likewise every primal feasible 
+choices of a primal feasible operator $X \in \A$, and likewise every primal feasible 
 operator $X \in \A$ provides a lower bound of $\ip{A}{X}$ on the value 
 $\ip{B}{Y}$
 that is achievable over all choices of a dual feasible solution $Y \in \B$. 
