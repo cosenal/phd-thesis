@@ -1,0 +1,720 @@
+\documentclass{beamer}
+
+\usepackage{array}
+\usepackage{dsfont}
+\usepackage[normalem]{ulem}
+
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\graphicspath{{../}}
+
+\def\I{\mathds{1}}
+
+\newcommand{\ip}[2]{\langle #1 , #2\rangle}
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\pt}{\operatorname{T}}
+
+\def\X{\mathcal{X}}
+\def\Y{\mathcal{Y}}
+\def\E{\mathcal{E}}
+\def\K{\mathcal{K}}
+\def\W{\mathcal{W}}
+\def\C{\mathcal{C}}
+\def\A{\mathcal{A}}
+\def\complex{\mathbb{C}}
+
+\newcommand{\setft}[1]{\mathrm{#1}}
+\newcommand{\Density}{\setft{D}}
+\newcommand{\Pos}{\setft{Pos}}
+\newcommand{\PPT}{\setft{PPT}}
+\newcommand{\PPTStar}{\setft{PPT}^{\ast}}
+\newcommand{\Unitary}{\setft{U}}
+\newcommand{\Herm}{\setft{Herm}}
+\newcommand{\Lin}{\setft{L}}
+\newcommand{\Sep}{\setft{Sep}}
+\newcommand{\BPos}{\setft{Sep}^{\ast}}
+\newcommand{\LOCC}{\setft{LOCC}}
+\newcommand{\Ent}{\setft{Ent}}
+\newcommand{\Sym}{\setft{Sym}}
+\newcommand{\Meas}{\setft{Meas}}
+\newcommand{\Ens}{\setft{Ens}}
+
+\newcommand{\microspace}{\mspace{0.5mu}}
+\newcommand{\ket}[1]{
+  \lvert\microspace #1 \microspace \rangle}
+\newcommand{\bra}[1]{
+  \langle\microspace #1 \microspace \rvert}
+
+\def\eps{\varepsilon}
+
+\newcommand{\reg}[1]{\mathsf{#1}}
+
+\usepackage{colortbl}
+\definecolor{Gray}{gray}{0.90}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+
+\title{Quantum State Local Distinguishability via Convex Optimization}
+\subtitle{PhD Defense}
+\author[A. Cosentino]{Alessandro Cosentino}
+\institute[UWaterloo]{University of Waterloo}
+\date{August 13, 2015}
+
+\begin{document}
+  {%
+    \setbeamertemplate{headline}{}
+    \frame{\titlepage}
+  }
+
+  \beamertemplatenavigationsymbolsempty
+  \addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+  }
+  \setbeamercolor{footline}{fg=black}
+  % \setbeamerfont{footline}{series=\bfseries}
+
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents%[part=1,pausesections]
+  \end{frame}
+
+  \section{State distinguishability problem}
+    
+    \begin{frame}{Quantum state distinguishability problem}
+        An instance of the problem is specified by an ensemble of $N$ states
+        \[
+            \left\{(p_{1}, \rho_{1}), \ldots, (p_{N}, \rho_{N}) \right\},
+        \]
+        \begin{block}{The problem}
+          \begin{itemize}
+          \item An index $k\in\{1, \ldots, N\}$ is picked at random with prob. $p_{k}$
+          \item The state $\rho_{k}$ is prepared on a register $\reg{X}$
+          \item Alice is asked to identify $k$ by means of measurements on $\reg{X}$ 
+          \end{itemize}
+        \end{block}
+        \begin{block}{Observations}
+          \begin{itemize}
+          \item \emph{Classical} states are always completely distinguishable
+          \item \emph{Orthogonal} quantum states are perfectly distinguishability
+          \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Quantum state \emph{local} distinguishability problem}
+        In the ensemble
+        \[
+          \left\{(p_{1}, \rho_{1}), \ldots, (p_{N}, \rho_{N}) \right\},
+        \]
+        the states $\rho_{1},\ldots,\rho_{N}\in\Density(\X\otimes\Y)$ 
+        are now bipartite states.
+        \begin{block}{The problem}
+          \begin{itemize}
+          \item An index $k\in\{1, \ldots, N\}$ is picked at random with prob. $p_{k}$
+          \item The state $\rho_{k}$ is prepared on a register $\reg{X}$ shared by two parties
+          \item Alice and Bob are asked to identify $k$ by Local Operations and Classical Communication (LOCC) on $\reg{X}$
+          \end{itemize}
+        \end{block}
+        \begin{block}{Motivations}
+            \begin{itemize}
+                \item Understanding nonlocality/entanglement
+                \item Applications to \emph{secret sharing, data hiding, channel capacity}
+                \item LOCC protocols are interesting from a physical point of view
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Quantum state local distinguishability problem}
+        \begin{block}{Typical assumptions}
+            \begin{itemize}
+                \item Sets of \emph{orthogonal} \emph{pure} states
+                \item Perfect distinguishability (with probability $1$) 
+                \item \emph{Uniform} probability of selection ($p_{1} = \cdots = p_{N} = 1/N$) 
+            \end{itemize}
+        \end{block}
+        \begin{columns}[t]
+            \column{.48\textwidth}
+            \begin{block}{Distinguishable}
+             \begin{itemize}
+              \item \textit{any} 2 pure states\\
+              {\footnotesize [Walgate et al., '00]}
+              \item \textit{any} 3 maximally entangled states in $\complex^{3}\otimes\complex^{3}$\\
+              {\footnotesize [Nathanson - '05]}
+              \item \dots
+             \end{itemize}
+             \vspace{3pt}
+             \end{block}
+            \column{.48\textwidth}
+            \begin{block}{Indistinguishable}
+             \begin{itemize}
+              \item \textit{any} set of $3$ or $4$ Bell states\\
+              {\footnotesize [Ghosh et al, '01]}
+              \item $9$ \emph{product} states in $\complex^{3}\otimes\complex^{3}$\\
+              {\footnotesize [Bennett et al. - PRA, 1999]}
+              \item \dots
+              \end{itemize}
+             \vspace{3pt}
+             \end{block}
+        \end{columns}
+    \end{frame}
+  
+    \begin{frame}{Quantum measurements and LOCC}
+        \begin{block}{$N$-outcome bipartite measurement}        
+        \[
+            \mu : \{ 1, \ldots, N \} \to \Pos(\X\otimes\Y)
+        \]
+        \[
+            \sum_{k=1}^{N}\mu(k) = \I_{\X\otimes\Y}
+        \]
+        \end{block}
+        
+        \begin{block}{LOCC measurements}
+          \begin{itemize}
+            \item Difficult object to handle mathematically
+            \item A cumbersome formal definition 
+            \item Many kinds of LOCC
+          \end{itemize}
+          \begin{center}
+            \includegraphics[scale=0.35]{locc.pdf}
+            \vskip-1mm
+            \hspace*\fill{\footnotesize (from Laura Man\v{c}inska's PhD thesis)}
+          \end{center}
+        \end{block}        
+    \end{frame}
+
+    \begin{frame}{Separable and PPT measurements}
+        \begin{block}{Separable operators}
+        \vspace{-15pt}
+        \begin{align*}
+            P = \sum_{k = 1}^{M} Q_k \otimes R_k \in \Sep(\X:\Y), \qquad M > 0,\;& Q_1,\ldots,Q_M \in \Pos(\X), \\[-10pt]  & R_1,\ldots,R_M\in\Pos(\Y)
+        \end{align*}
+        \end{block}
+        \vspace{-10pt}
+        \begin{block}{PPT (Positive-partial-transpose) operators}
+        \vspace{-10pt}
+        \[
+            \PPT(\X:\Y) = \left\{ P \in \Pos(\X\otimes\Y) \,:\, \pt_{\X}(P) \in \Pos(\X\otimes\Y) \right\}  
+        \]
+        \end{block}
+        \begin{block}{Separable/PPT measurements}
+        \vspace{-10pt}
+        \begin{equation*}
+            \begin{aligned}[c]
+            &\mu(k) \in \Sep(\X:\Y), \text{ or}\\
+            &\mu(k) \in \PPT(\X:\Y)\\
+            \end{aligned}
+            \qquad\qquad
+            \begin{aligned}[c]
+            (\text{for each }k\in\{1,\ldots,N\})
+            \end{aligned}
+            \end{equation*} 
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Classes of measurements}
+        \begin{figure}[!ht]
+            \centering
+            \def\svgwidth{200pt}
+            \scalebox{.60}{\input{drawing.pdf_tex}}
+        \end{figure}
+        \begin{itemize}
+            \item A bound on PPT/Sep reflects into a bound on LOCC
+            \item Optimizing over Sep is NP-hard
+            \item Optimizing over PPT is computationally easy
+        \end{itemize}
+    \end{frame}  
+
+  \section{Cone programming framework}
+
+    \begin{frame}[t]{Semidefinite program for global state distinguishability}
+        \begin{itemize}
+          \item One of the first applications of SDP in quantum [Eldar, Megretski, Verghese, '03]
+        \end{itemize}
+        \vspace{10pt}
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Primal (Global)}
+            \begin{equation*}
+              \begin{split}
+                \text{max:} \quad & 
+                \sum_{k=1}^{N} p_{k}\ip{\rho_{k}}{\mu(k)},\\
+                \text{s.t.:} \quad & \sum_{k=1}^{N} \mu(k) = \I_{\X},\\
+                  & \mu : \{1,\ldots, N\}\rightarrow \Pos(\X)
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Dual (Global)}
+            \vspace{10pt}
+            \begin{equation*}
+              \label{eq:global-dual-problem}
+              \begin{split}
+                \text{min:} \quad & \tr(H)\\
+                \text{s.t.:} \quad & H-p_k\rho_k \in \Pos(\X)\\
+                & \quad\qquad(k = 1,\ldots,N),\\
+                \quad & H \in \Herm(\X).
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}
+        \vspace{10pt}
+        \begin{itemize}
+          \item \emph{Weak duality}: any $H$ feasible solution of the dual gives
+            an upper bound on the optimal value of the primal  
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{General cone program for bipartite state distinguishability}
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Primal}
+            \vspace{-5pt}
+            \begin{equation*}
+              \begin{split}
+                \text{max:} \quad & 
+                \sum_{k=1}^{N} p_{k}\ip{\rho_{k}}{\mu(k)},\\
+                \text{s.t.:} \quad & \sum_{k=1}^{N} \mu(k) = \I_{\X\otimes\Y},\\
+                  & \boxed{\mu : \{1,\ldots, N\}\rightarrow \C}
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Dual}
+            \vspace{5pt}
+            \begin{equation*}
+              \label{eq:global-dual-problem}
+              \begin{split}
+                \text{min:} \quad & \tr(H)\\
+                \text{s.t.:} \quad & \boxed{H-p_k\rho_k \in \C^{\ast}}\\
+                & \quad\qquad(k = 1,\ldots,N),\\
+                \quad & H \in \Herm(\X\otimes\Y).
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}
+        \vspace{20pt}
+        \begin{itemize}
+            \item $\C\subseteq\Pos(\X\otimes\Y)$ is a closed convex cone
+            \item $\C^{\ast}$ is the cone dual to $\C$, that is,
+            \[
+              \C^{\ast} = \{Y\in\Herm(\X\otimes\Y)\,:\,\ip{X}{Y} \geq 0\;\:\text{for all $X\in\C$}\}
+            \]
+            \item $\Pos(\X)$ is self-dual: $\Pos(\X) = (\Pos(\X))^{\ast}$
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{\only<1>{Cone}\only<2>{\sout{Cone} Semidefinite} program for PPT distinguishability}
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Primal (PPT)}
+            \vspace{-5pt}
+            \begin{equation*}
+              \begin{split}
+                \text{max:} \quad & 
+                \sum_{k=1}^{N} p_{k}\ip{\rho_{k}}{\mu(k)},\\
+                \text{s.t.:} \quad & \sum_{k=1}^{N} \mu(k) = \I_{\X},\\
+                  & \mu : \{1,\ldots, N\}\rightarrow \PPT(\X:\Y)
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Dual (PPT)}
+            \vspace{5pt}
+            \begin{equation*}
+              \label{eq:global-dual-problem}
+              \begin{split}
+                \text{min:} \quad & \tr(H)\\
+                \text{s.t.:} \quad & H-p_k\rho_k \in 
+                    \only<1>{\PPT^{\ast}(\X:\Y)}\only<2>{\boxed{\PPT^{\ast}(\X:\Y)}}\\
+                & \quad\qquad(k = 1,\ldots,N),\\
+                \quad & H \in \Herm(\X).
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}
+        \vspace{5pt}
+        \onslide<2>{
+        \begin{block}{Decomposable operators}
+        \begin{itemize}
+        \item By definition,
+            \vspace{-10pt}
+            \[
+              \PPT^{\ast}(\X:\Y) = \{ S + \pt_{\X}(R) \,:\, S, R \in \Pos(\X\otimes\Y) \}
+            \]
+        \item Choi-isomorphic to \emph{decomposable maps}
+        \vspace{-10pt}
+            \[
+              \Phi(Y) = \Psi(Y) + (\pt {\circ}\, \Xi)(Y),
+                \qquad\Psi, \Xi \text{ completely positive}
+            \]
+        \end{itemize}
+        \end{block}
+        }
+    \end{frame}
+
+    \begin{frame}{Cone program for separable distinguishability}
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Primal (Separable)}
+            \vspace{-5pt}
+            \begin{equation*}
+              \label{eq:sep-primal-problem}
+              \begin{split}
+                \text{max:} \quad & 
+                  \sum_{k=1}^{N} p_{k}\ip{\rho_{k}}{\mu(k)},\\
+                \text{s.t.:} \quad & \sum_{k=1}^{N} \mu(k) = \I_{\X\otimes\Y},\\
+                    & \mu : \{1,\ldots, N\}\rightarrow \Sep(\X:\Y).
+              \end{split}
+            \end{equation*}
+             \end{center}
+        \end{minipage}\hfill
+        \begin{minipage}[t]{0.48\linewidth}
+            \begin{center}
+            \underline{Dual (Separable)}
+            \vspace{5pt}
+            \begin{equation*}
+              \label{eq:global-dual-problem}
+              \begin{split}
+                \text{min:} \quad & \tr(H)\\
+                \text{s.t.:} \quad & H-p_k\rho_k \in 
+                \only<1>{\BPos(\X:\Y)}\only<2>{\boxed{\BPos(\X:\Y)}}\\
+                & \quad\qquad(k = 1,\ldots,N),\\
+                \quad & H \in \Herm(\X).
+              \end{split}
+            \end{equation*}
+            \end{center}
+        \end{minipage}
+        \vspace{10pt}
+        \onslide<2->{
+        \begin{block}{Block-positive operators}
+        \begin{itemize}
+            \item Choi representation of positive linear mappings:
+                \[
+                    \Phi(Y) \in \Pos(\X), \quad\text{for every }Y\in\Pos(\Y)
+                \]
+            \item $\BPos(\X:\Y) \setminus \Pos(\X\otimes\Y)$ are the 
+                \emph{entanglement witnesses}
+        \end{itemize}
+        \end{block}
+        }
+    \end{frame}
+
+    \begin{frame}{Benefits of the cone programming formulation}
+      \begin{block}{Analytically}
+        \begin{itemize}
+          \item To prove a set is \emph{not perfectly} distinguishable, we find $H$ s.t.
+            \begin{enumerate}
+                \item $\tr(H) < 1$
+                \item $H-p_k\rho_k \in \BPos(\X:\Y)$, for \underline{all} $k\in\{1, \ldots,N\}$
+            \end{enumerate}
+          \item Many families of operators in $\BPos(\X:\Y)$ are known
+          \item Actual numerical bounds, as opposed to qualitative statements
+        \end{itemize}
+      \end{block}
+      \begin{block}{Numerically}
+        \begin{itemize}
+          \item We can approximate the Sep cone program by a hierarchy of semidefinite programs
+          \item A MATLAB implementation is now in N. Johnston's QETLAB
+        \end{itemize}
+      \end{block}
+    \end{frame}
+
+  \section{Applications}
+  \subsection{Maximally entangled states}
+
+    \begin{frame}{Entanglement cost of distinguishing Bell states}
+        \begin{itemize}
+          \item Max. prob. to LOCC-distinguish the $4$ Bell states is $1/2$
+          \item Max. prob. to LOCC-distinguish any set of $3$ Bell states is $2/3$
+        \end{itemize}
+        \begin{block}{Entanglement cost}
+            Alice and Bob are given as a resource a $2$-qubit entangled state
+            \[
+                \ket{\tau_{\eps}} = \sqrt{\frac{1 + \eps}{2}}\,\ket{0}\ket{0} + 
+                  \sqrt{\frac{1 - \eps}{2}}\,\ket{1}\ket{1}, \qquad \eps\in[0,1]
+            \]
+        \end{block}
+        \begin{itemize}
+            \item Up to local unitaries, it characterizes all 2-qubit states
+            \item $4$ Bell states: \emph{perfect} LOCC-disting. iff $\eps = 0$ [HSSH, '03] 
+            \item $3$ Bell states: \emph{perfect} PPT-disting. iff $\eps \leq 1/3$ [YDY, '14]
+            \item $3$ Bell states: what about separable and LOCC?   
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Entanglement cost of distinguishing Bell states}
+        \begin{theorem}[new]
+        The maximum probability of distinguishing 3 Bell states is
+        \[
+            \frac{1}{3}\left(2 + \sqrt{1 - \eps^{2}}\right).
+        \]
+        \end{theorem}
+        \begin{corollary}
+            \begin{enumerate}
+                \item Max. ent. state ($\eps=0$) is necessary for 
+                    perfect discrimination
+                \item Teleportation is optimal
+            \end{enumerate}
+        \end{corollary}
+        \begin{block}{Corresponding map}
+            A new positive map from $\Lin(\complex^{2}\oplus\complex^{2})$ to $\Lin(\complex^{2}\oplus\complex^{2})$
+        \end{block}
+    \end{frame}
+ 
+
+    \begin{frame}{Local distinguishability of maximally entangled states}
+        \begin{itemize}
+            \item $N$ max. ent. states in $\complex^{d}\otimes\complex^{d}$ (what's the role of $d$?)
+            \item A significant case because of the dual role of entanglement
+        \end{itemize}
+        \vspace{-10pt}
+        \begin{table}[!ht]
+        \centering
+        \def\arraystretch{1.5}
+        \begin{tabular}{|c|c|c|p{4.3cm}|}
+          \hline
+            & PPT & LOCC & References\\
+          \hline \hline
+          $N = 2, \text{any }d$     & --- & \emph{all} dist. & [Walgate et al., 2000]\\
+          \hline
+          $N = 3 = d$ & --- & \emph{all} dist. & [Nathanson, 2005]\\
+          \hline
+          \rowcolor{Gray}
+          $N = 4 = d$ & \emph{some} indist. & --- & [Yu, Duan, and Ying, 2012]\\
+          \hline
+          $4 < N < d$ & \emph{some} indist. & --- & \emph{this thesis}\\
+          \hline
+          $N > d$     & \emph{all} indist. & --- & [Yu, Duan, and Ying, 2012, \newline Duan et al. 2009, \newline Ghosh et al. 2004] \\
+          \hline
+        \end{tabular}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}{Yu--Duan--Ying states}
+        \begin{theorem}[YDY, '12]
+        The following 4 orthogonal max. ent. states in $\complex^{4}\otimes\complex^{4}$ are
+                \emph{not perfectly} distinguishable by PPT (and therefore LOCC):
+        \begin{align*}
+            \phi_{1} &= \psi_{0}\otimes\psi_{0} \\
+            \phi_{2} &= \psi_{1}\otimes\psi_{1} \\
+            \phi_{3} &= \psi_{2}\otimes\psi_{1} \\
+            \phi_{4} &= \psi_{3}\otimes\psi_{1} 
+        \end{align*}
+        \end{theorem}
+        \begin{theorem}[new]
+            The optimal probability of distinguishing YDY by LOCC is $3/4$.
+        \end{theorem}
+        \begin{block}{Corresponding map}
+            Breuer-Hall positive linear maps from $\Lin(\complex^{4})$ to $\Lin(\complex^{4})$
+        \end{block}
+    \end{frame}
+ 
+ 
+    \begin{frame}[t]{Small sets of locally indistinguishable max. ent. states}
+        \begin{table}[!ht]
+        \centering
+        \def\arraystretch{1.5}
+        \begin{tabular}{|c|c|c|p{4.3cm}|}
+          \hline
+            & PPT & LOCC & References\\
+          \hline \hline
+          $N = 2, \text{any }d$     & --- & \emph{all} dist. & [Walgate et al., 2000]\\
+          \hline
+          $N = 3 = d$ & --- & \emph{all} dist. & [Nathanson, 2005]\\
+          \hline 
+          $N = 4 = d$ & \emph{some} indist. & --- & [Yu, Duan, and Ying, 2012]\\
+          \hline
+          \rowcolor{Gray}
+          $4 < N < d$ & \emph{some} indist. & --- & \emph{this thesis}\\
+          \hline
+          $N > d$     & \emph{all} indist. & --- & [GKRS '04, DFXY '09, YDY '12] \\
+          \hline
+        \end{tabular}
+        \end{table}
+        \begin{theorem}[new]
+            There exists an indistinguishable set of $N < d$ maximally entangled states in 
+            $\complex^{d}\otimes\complex^{d}$
+        \end{theorem}
+    \end{frame}
+
+    \begin{frame}{Small sets of locally indistinguishable max. ent. states}
+        \begin{block}{Generalized Yu--Duan--Ying}
+            \begin{align*}
+                \phi_{1} &= \textcolor{red}{\psi_{0}} \otimes \psi_{0}\otimes\psi_{0} 
+                  \qquad \phi_{5} = \textcolor{red}{\psi_{1}} \otimes\psi_{0}\otimes\psi_{0}\\
+                \phi_{2} &= \textcolor{red}{\psi_{0}} \otimes \psi_{1}\otimes\psi_{1} 
+                  \qquad \phi_{6} = \textcolor{red}{\psi_{1}} \otimes\psi_{1}\otimes\psi_{1}\\
+                \phi_{3} &= \textcolor{red}{\psi_{0}} \otimes \psi_{2}\otimes\psi_{1} 
+                  \qquad \phi_{7} = \textcolor{red}{\psi_{1}} \otimes\psi_{2}\otimes\psi_{1}\\
+                \phi_{4} &= \textcolor{red}{\psi_{0}} \otimes \psi_{3}\otimes\psi_{1} 
+                  \qquad \text{\sout{\ensuremath{\phi_{8} = \textcolor{red}{\psi_{1}} \otimes\psi_{3}\otimes\psi_{1}}}}
+            \end{align*}
+        \end{block}
+        \begin{itemize}
+          \item $7$ orthogonal maximally entangled states in $\complex^{8}\otimes\complex^{8}$
+          \item Maximum probability for any separable measurement is $6/7$ 
+          \item Perfectly distinguishable by PPT
+        \end{itemize}
+    \end{frame}
+
+  \subsection{Unextendable product sets}
+    \begin{frame}{Distinguishability of unextendable product sets}    
+        \begin{definition}[Unextendable product sets -- UPS]
+            An orthonormal collection of product vectors
+            \[
+              \A = \{ u_{k}\otimes v_{k} : k = 1, \ldots, N \} \subset \X \otimes \Y
+            \]
+            s.t. there is no (nonzero) product vector $u\otimes v \perp \A$.
+        \end{definition}
+        \begin{block}{Previously known}
+            \begin{itemize}
+                \item no UPS can be perfectly distinguished by LOCC meas.
+                \item every UPS can be perfectly distinguished by PPT meas.
+                \item every UPS in $\complex^{3}\otimes\complex^{3}$ can be perfectly distinguished by separable meas.
+            \end{itemize}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{UPS indistinguishable by separable measurements}
+        \begin{theorem}[new]
+        Feng's UPS in $\complex^{4}\otimes\complex^{4}$ is not perfectly distinguishable by Sep.
+        \begin{equation*}
+          \begin{array}{l}
+            \ket{\phi_1} = \ket{0}\ket{0}, \\
+            \ket{\phi_2} = \ket{1}\left(\ket{0} - \ket{2} + \ket{3}\right)/\sqrt{3},\\
+            \ket{\phi_3} = \ket{2}\left(\ket{0} + \ket{1} - \ket{3}\right)/\sqrt{3}, \\
+            \ket{\phi_4} = \ket{3}\ket{3}, \\
+            \ket{\phi_5} = \left(\ket{1} + \ket{2} + \ket{3}\right)\left(\ket{0}
+            - \ket{1} + \ket{2}\right)/3, \\
+            \ket{\phi_6} = \left(\ket{0} - \ket{2} + \ket{3}\right)\ket{2}/\sqrt{3}, \\
+            \ket{\phi_7} = \left(\ket{0} + \ket{1} - \ket{3}\right)\ket{1}/\sqrt{3}, \\
+            \ket{\phi_8} = \left(\ket{0} - \ket{1} + \ket{2}\right)\left(\ket{0}
+            + \ket{1} + \ket{2}\right)/3.
+          \end{array}
+        \end{equation*}
+        \end{theorem}
+        \vspace{-10pt}
+        \begin{block}{Proof}
+          \begin{itemize}
+              \item Not the usual cone program this time... 
+              \item ...but a criterion for perfect separable discrimination of UPS
+                  checkable with a \emph{linear program}!
+          \end{itemize}
+        \end{block}       
+    \end{frame}
+
+  \section{Conclusions}
+    \begin{frame}{Contributions of the thesis}
+        \begin{itemize}
+         \itemsep2em
+            \item A framework based on cone programming to test local distinguishability 
+                of quantum states
+            \item Precise (often optimal) numerical bounds on the success probability of 
+                distinguishing some famous sets of states
+            \item A novel connection between quantum state distinguishability and the study of 
+                positive linear maps
+        \end{itemize}
+        \begin{exampleblock}{}
+          {\large\emph{``State discrimination is the most fundamental task in physics.''}}
+          \vskip5mm
+          \hspace*\fill{\small--- Jon Walgate (Calgary, 2005)}
+        \end{exampleblock}
+    \end{frame}
+        
+      \begin{frame}{Open questions}
+        \begin{itemize}
+        \itemsep1em
+          \item The other way: new sets of indistinguishable states from known positive maps?
+          \item What about a cone program for LOCC... 
+            \begin{center}
+            \underline{Dual}
+              \begin{equation*}
+                \label{eq:locc-dual-problem}
+                \begin{split}
+                  \text{min:} \quad & \tr(H)\\
+                  \text{s.t.:}
+                   \quad & 
+                    \begin{pmatrix}
+                        H - p_{1}\rho_{1} & & \\
+                         & \ddots & \\
+                         & & H - p_{N}\rho_{N}
+                   \end{pmatrix}\in \boxed{\Meas_{\LOCC}^{\ast}(N, \X:\Y)},\\
+                \end{split}
+              \end{equation*}
+            \end{center}
+            Can we say anything about $\Meas_{\LOCC}^{\ast}(N, \X:\Y)$?
+          \item Other settings (multipartite, two copies, etc.)
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Acknowledgments}
+        \begin{center}
+            \newcolumntype{L}{>{\scshape}l}
+            \begin{tabular}{ r L }
+                Supervisor & John Watrous \\[1em]
+                Committee members & Richard Cleve \\
+                                  & Runyao Duan \\
+                                  & Debbie Leung \\
+                                  & Ashwin Nayak \\[1em]
+                Co-authors & Som Bandyopadhyay \\
+                           & Nathaniel Johnston \\
+                           & Vincent Russo \\
+                           & Nengkun Yu \\[1em]
+                Funded by  & NSERC \\
+                           & US Army Research Office \\
+                           & David R. Cheriton Scholarship
+            \end{tabular}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}{Publications}
+    
+        \begin{itemize}
+        \setlength\itemsep{1em}
+            \item 
+            A. Cosentino. 
+
+            \textbf{PPT-indistinguishable states via semidefinite programming}. 
+            
+            \textit{Physical Review A}, 2013.
+
+            \item
+            A. Cosentino and V. Russo.
+
+            \textbf{Small sets of locally indistinguishable orthogonal maximally entangled states}. 
+            
+            \textit{Quantum Information \& Computation},  2014.
+
+            \item 
+            S. Bandyopadhyay, A. Cosentino, N. Johnston, V. Russo, J. Watrous, and N. Yu. 
+            
+            \textbf{Limitations on separable measurements by convex optimization}. 
+            
+            \textit{IEEE Transactions on Information Theory}, 2015.
+        \end{itemize}
+
+    \end{frame}
+
+\end{document}
