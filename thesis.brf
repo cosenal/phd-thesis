@@ -19,7 +19,7 @@
 \backcite {Watrous15}{{6}{2}{chapter.2}}
 \backcite {Nielsen11}{{6}{2}{chapter.2}}
 \backcite {Wolkowicz00,Tuncel12}{{6}{2}{chapter.2}}
-\backcite {Mancinska13,Watrous15}{{12}{2.2.1}{subsection.2.2.1}}
+\backcite {Mancinska13,Watrous15}{{13}{2.2.1}{subsection.2.2.1}}
 \backcite {Watrous15}{{14}{2.2.2}{theorem.2.4}}
 \backcite {Peres1996,Horodecki1996}{{16}{2.2.3}{equation.2.2.40}}
 \backcite {Boyd04}{{17}{2.3}{section.2.3}}
@@ -103,4 +103,4 @@
 \backcite {cvx}{{87}{A}{section*.22}}
 \backcite {Johnston2015}{{87}{A}{section*.22}}
 \backcite {Cosentino15}{{88}{A}{section*.24}}
-\backcite {Ghosh04}{{90}{A}{section*.31}}
+\backcite {Ghosh04}{{90}{A}{section*.30}}

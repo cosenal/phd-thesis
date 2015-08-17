@@ -46,6 +46,8 @@ The inner product of two vectors $u, v \in \complex^{n}$ is defined as
 
 We write $\Lin(\X,\Y)$ to denote the space of linear operators from a space $\X$ 
 to a space $\Y$, and we write $\Lin(\X)$ as shorthand for $\Lin(\X,\X)$.
+Throughout the thesis, linear operators will be denoted with capital letters from the
+beginning and the end of the English alphabet, such as $A, B, C, X, Y, Z$. 
 
 For every operator $A\in\Lin(\X,\Y)$, the operator $A^{\ast}\in\Lin(\Y,\X)$
 denotes the adjoint of $A$, that is, the unique operator that satisfies the equation
@@ -120,7 +122,7 @@ which satisfies the equation
 \label{eq:adjoint-map}
   \ip{\Phi(X)}{Y} = \ip{X}{\Phi^{\ast}(Y)},
 \end{equation}
-for every $X\in\Lin(\X), Y\in\Lin(\Y)$.
+for every $X\in\Lin(\X)$ and $Y\in\Lin(\Y)$.
 Some important sets of linear mappings that we will consider in this thesis are
 the following:
 \begin{description}
@@ -300,6 +302,12 @@ it is a \emph{quantum-to-classical} channel.
 
 In order to capture the limitation of some physical processes, we can define more restricted 
 classes of measurements, which will be the object of study of this thesis.
+In the definitions that follow it will be assumed that the measurements always act on a 
+bipartite space $\X\otimes\Y$, where $\X$ and $\Y$ denote the complex Euclidean spaces 
+underlying Alice's and Bob's systems, respectively. Although all the notions considered 
+in this section could be extended to a more general scenario where more than two parties 
+are involved in the measurement, here and in the rest of the thesis we restrict our attention
+to the bipartite case.
 
 \subsection{LOCC measurements}
 
@@ -373,11 +381,13 @@ Eq.~\eqref{eq:measurement-channel-bipartite}, is a separable channel.
 
 We denote the set of all $N$-outcome separable measurements on the bipartition 
 $(\X:\Y)$ by $\Meas_{\Sep}(N, \X:\Y)$.
-
+Separable measurements can be alternatively characterized as those measurements
+whose measurement operators are separable, as it is formalized by the following
+proposition.
 \begin{prop}
 \label{prop:separable-each}
 Let $\X$ and $\Y$ be complex Euclidean spaces, and let $N > 0$. A measurement 
-$\mu : \{1,\ldots,N\}\to\Pos(\X\otimes\Y)$ is a separable measurement 
+$\mu \in\Meas_{\Sep}(N, \X:\Y)$ is separable
 if and only if each $\mu(k)$ is a separable operator, that is, 
 $\mu(k)\in \Sep(\X:\Y)$, for each $k\in\{1, \ldots, N\}$.
 \end{prop}
@@ -448,10 +458,10 @@ $(\X:\Y)$ by $\Meas_{\PPT}(N, \X:\Y)$.
 Every separable operator is a PPT operator, so every separable measurement
 (and therefore every LOCC measurement) is a PPT measurement as well. 
 
-\begin{theorem}
+\begin{prop}
 Any separable operator $P \in \Sep(\X:\Y)$ is also a PPT operator over the same
 bipartition, that is, $P \in \PPT(\X:\Y)$.
-\end{theorem}
+\end{prop}
 \begin{proof}
 Suppose that $P \in \Sep(\X:\Y)$. Then it holds that
 \begin{equation}
@@ -471,10 +481,11 @@ As the transpose mapping is positive, we have
 and therefore $S \in \PPT(\X:\Y)$.
 \end{proof}
 
-The PPT criterion is therefore a necessary condition for separability. It is 
-also sufficient in $\complex^{2}\otimes\complex^{3}$ and $\complex^{2}\otimes\complex^{3}$ 
-\cite{Peres1996,Horodecki1996}, but it is not in higher dimension, 
-where there are entangled PPT operators. 
+For a positive semidefinite operator, the condition of remaining positive semidefinite under 
+the operation of partial transpose is therefore a necessary condition for separability. 
+It is also sufficient in $\complex^{2}\otimes\complex^{3}$ and 
+$\complex^{2}\otimes\complex^{3}$ \cite{Peres1996,Horodecki1996}, 
+but it is not in higher dimension, where there are entangled PPT operators. 
 
 The Choi operator of the transpose mapping $\pt : \Lin(\complex^{n})\to\Lin(\complex^{n})$
 is the \emph{swap operator} 
@@ -516,9 +527,13 @@ There has been an extensive range of applications of semidefinite programming
 to quantum information theory, but this is not the case for  
 the more general cone programming framework. 
 The success of semidefinite programming in quantum information comes from the fact 
-that many quantum primitives (states, channels, measurements) 
-can be represented within the cone of positive semidefinite operators with linear
-constraints. 
+that many quantum primitives (states, channels, global measurements) 
+can be represented within the cone of positive semidefinite operators with the addition of 
+simple linear constraints. 
+The problem of discriminating states by separable measurement considered in this thesis, 
+as well as other problems in which one optimizes over the cone of separable measurement,
+does not have a simple characterization in a more general 
+
 In this section we review basic definition in convex analysis and convex optimization.
 
 Let $\V$ be an arbitrary vector space over the real or complex number.
