@@ -5,9 +5,9 @@
 \usepackage[normalem]{ulem}
 
 \makeatletter
-\def\input@path{{../}}
+\def\input@path{{../figures/}}
 \makeatother
-\graphicspath{{../}}
+\graphicspath{{../figures/}}
 
 \def\I{\mathds{1}}
 
@@ -265,7 +265,6 @@
             \underline{Dual (Global)}
             \vspace{10pt}
             \begin{equation*}
-              \label{eq:global-dual-problem}
               \begin{split}
                 \text{min:} \quad & \tr(H)\\
                 \text{s.t.:} \quad & H-p_k\rho_k \in \Pos(\X)\\
@@ -302,7 +301,6 @@
             \underline{Dual}
             \vspace{5pt}
             \begin{equation*}
-              \label{eq:global-dual-problem}
               \begin{split}
                 \text{min:} \quad & \tr(H)\\
                 \text{s.t.:} \quad & \boxed{H-p_k\rho_k \in \C^{\ast}}\\
@@ -343,7 +341,6 @@
             \underline{Dual (PPT)}
             \vspace{5pt}
             \begin{equation*}
-              \label{eq:global-dual-problem}
               \begin{split}
                 \text{min:} \quad & \tr(H)\\
                 \text{s.t.:} \quad & H-p_k\rho_k \in 
@@ -380,7 +377,6 @@
             \underline{Primal (Separable)}
             \vspace{-5pt}
             \begin{equation*}
-              \label{eq:sep-primal-problem}
               \begin{split}
                 \text{max:} \quad & 
                   \sum_{k=1}^{N} p_{k}\ip{\rho_{k}}{\mu(k)},\\
@@ -395,7 +391,6 @@
             \underline{Dual (Separable)}
             \vspace{5pt}
             \begin{equation*}
-              \label{eq:global-dual-problem}
               \begin{split}
                 \text{min:} \quad & \tr(H)\\
                 \text{s.t.:} \quad & H-p_k\rho_k \in 
@@ -651,7 +646,6 @@
             \begin{center}
             \underline{Dual}
               \begin{equation*}
-                \label{eq:locc-dual-problem}
                 \begin{split}
                   \text{min:} \quad & \tr(H)\\
                   \text{s.t.:}
