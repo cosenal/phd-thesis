@@ -128,13 +128,13 @@ are chosen in the natural way:
 and $\Phi : \Lin(\X\oplus\cdots\oplus\X) \rightarrow \Lin(\X)$ is defined as 
 \begin{equation}
   \Phi\begin{pmatrix}
-  \mu(1) & \cdots & \cdot \\
+  X_{1} & \cdots & \cdot \\
   \vdots & \ddots & \vdots\\
-  \cdot & \cdots & \mu(N)
+  \cdot & \cdots & X_{N}
   \end{pmatrix}
-  \equiv \mu(1)+\cdots+\mu(N),
+  \equiv X_{1}+\cdots+X_{N},
 \end{equation}
-for any $P_{1}, \ldots, P_{N} \in \Lin(\X)$.
+for any $X_{1}, \ldots, X_{N} \in \Lin(\X)$.
 
 Let $\Y = \complex^{N}$. One can easily verify that the mapping 
 $\Phi^{\ast}: \Lin(\X)\rightarrow\Lin(\Y\otimes\X)$,
@@ -225,7 +225,7 @@ Phrasing this problem as a cone program is not interesting as such. Even though 
 technically possible, we would not be able to exploit the advantages that come from such formulation, 
 due to the fact (by now, we have stressed this enough!) that the set of LOCC measurements 
 is not easy to be handled mathematically.
-For the set of LOCC measurement, we do not even have a characterization
+For the set of LOCC measurements, we do not even have a characterization
 on the same lines of Property \ref{property:each-measurement-operator}, so we cannot cast
 the problem in the general form of the program in \eqref{eq:cone-primal-problem}. 
 
@@ -250,8 +250,8 @@ from the Program~\eqref{eq:cone-primal-problem} when we instantiate $\C$ with
 some particular cones corresponding to different classes of bipartite 
 measurements. In particular, we will mainly look at the programs derived from the cones
 of separable operators, PPT operators, and operators with $k$-symmetric extensions.
-For each of these programs, we show the dual program and try to make any possible
-simplification. Moreover, we point out whenever a program can be 
+For each of these programs, we will show the dual program and try to make any possible
+simplification. Moreover, we will point it out whenever a program can be 
 expressed by using only semidefinite constraints, as it was the case for the 
 Program~\eqref{eq:pos-primal-problem} from above.
 
@@ -383,7 +383,7 @@ that
 \end{equation}
 for any operators $A, B\in\Lin(\X\otimes\Y)$, which implies
 \begin{equation}
-\ip{\mu(k)}{\pt_{\X}(R_{k})} = \ip{\pt_{\mu(k)}}{R_{k}},
+\ip{\mu(k)}{\pt_{\X}(R_{k})} = \ip{\pt_{\X}(\mu(k))}{R_{k}},
 \end{equation}
 for any $k \in \{1, \ldots, N\}$, and therefore
 \begin{equation}
@@ -477,7 +477,7 @@ It holds that the Bell states from Eq.~\eqref{eq:Bell-states} are invariant unde
 that is, $\psi_{i} = U\psi_{i}U^{*}$ for any $U \in G$ and any $i\in\{0,1,2,3\}$.
 \end{prop}
 
-It turns out that in the case when the set to distinguish contains only lattice states,
+It turns out that in the case the set to distinguish contains only lattice states,
 the semidefinite program ($\PP_{\PPT}$) simplifies remarkably, as it is established 
 by the following theorem.
 \begin{theorem}
@@ -506,10 +506,10 @@ are lattice states.
 Let $\Phi = \Delta^{\otimes t}$ be the $t$-fold tensor product of the map $\Delta$,
 that is,
 \begin{equation}
-  \Phi(v_{1}\otimes\cdots\otimes v_{t}) = 
-    \Delta(v_{1})\otimes\cdots\otimes\Delta(v_{t}),
+  \Phi(X_{1}\otimes\cdots\otimes X_{t}) = 
+    \Delta(X_{1})\otimes\cdots\otimes\Delta(X_{t}),
 \end{equation}
-for any choice of vectors $v_{1}, \ldots, v_{t} \in \X\otimes\Y$. 
+for any choice of linear operators $X_{1}, \ldots, X_{t} \in \Lin(\X\otimes\Y)$. 
 Assume that a measurement 
 \[
   \mu : \{1,\ldots,N\}\to\PPT(\X:\Y)
@@ -645,8 +645,8 @@ For instance, one has
   (\I_{\X} \otimes y^{\ast}) H (\I_{\X} \otimes y)\in\Pos(\X)
   \;\text{for every $y\in\Y$}\bigr\}.
 \end{multline}
-Alternatively, block-positive operators can be characterized as representations 
-of \emph{positive} linear maps, via the Choi representation.
+Alternatively, block-positive operators can be characterized as Choi 
+representations of \emph{positive} linear maps.
 That is, for any linear map $\Phi:\Lin(\Y)\rightarrow\Lin(\X)$
 mapping arbitrary linear operators on $\Y$ to linear operators on $\X$, the
 following two properties are equivalent:
@@ -819,7 +819,7 @@ of the symmetric-extension hierarchy to be at least as powerful as the program
       \end{description}
   \end{itemize}
 
-Finally, we can put all the constraint together in a hierarchy of semidefinite programs 
+Finally, we can put all the constraints together in a hierarchy of semidefinite programs 
 in which, at the $s$-th level, we optimize over measurements whose operators possess 
 $s$-symmetric bosonic PPT extensions. 
 The following is the semidefinite program corresponding to the level $s = 2$ of 
@@ -848,7 +848,7 @@ be easily inferred from this one).
 \end{equation}
 \end{center}
 \vspace{10pt} 
-The dual program can be derived by moving to the standard form and again, 
+The dual program can be derived by moving to the standard form and 
 by observing that the partial transpose is its own adjoint.
 \vspace{10pt} 
 \begin{center}
@@ -874,6 +874,9 @@ by observing that the partial transpose is its own adjoint.
   \end{split}
 \end{equation}
 \end{center}
+
+% Figure \ref{fig:symm-extension} pictures the containment relationships between
+% the classes of 
 
 \begin{figure}[!htbp]
   \centering

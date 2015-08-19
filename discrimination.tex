@@ -115,14 +115,14 @@ If the states are mutually orthogonal, that is,
 \ip{\rho_{i}}{\rho_{j}} = 0,
 \end{equation}
 for all $i,j \in \{1, \ldots, N\}$ with $i \neq j$, there is a measurement
-that perfectly distinguish them.
+that perfectly distinguishes them.
 Consider the spectral decomposition of each state:
 \begin{equation}
   \rho_{k} = \sum_{i=1}^{r_{k}}\lambda_{i}x_{k,i}x_{k,i}^{\ast},
 \end{equation}
 with $\lambda_{1}, \ldots, \lambda_{r_{k}}$ being positive real numbers
 and $\{x_{k,1}, \ldots, x_{k,r_{k}}\} \subset \X$ being an orthonormal set.
-Alice can then construct the quantum measurement that perfectly distinguish 
+Alice can then construct the quantum measurement that perfectly distinguishes 
 the states, by defining the following measurement operators:
 \begin{equation}
   \mu(k) = \sum_{i=1}^{r_{k}}x_{k,i}x_{k,i}^{\ast},
@@ -191,7 +191,7 @@ and
 \end{equation}
 
 
-In lights of the containments pictured by the diagram in Figure ...,
+In lights of the containments pictured by the diagram in Figure \ref{fig:classes-measurements},
 we have the following chain of inequalities:  
 \begin{equation}
 \label{eq:inequality-chain}
@@ -229,7 +229,7 @@ such that two conditions are simultaneously satisfied:
 \end{itemize}
 for some ``small'' values of $\varepsilon$. The exact bounds on 
 $\varepsilon$ define the strength of the hiding scheme and, 
-of course, is depending on the dimensions of Alice's and Bob's spaces.
+of course, depend on the dimensions of Alice's and Bob's spaces.
 
 The condition (a) above is equivalent to requiring the two states to be 
 orthogonal\footnote{We could be more general here and define another parameter
@@ -297,7 +297,7 @@ In the next chapter we show that
   \opt_{\PPT}(\E^{(n)}) \leq \frac{1}{2} + \frac{1}{n+1},
 \end{equation}
 and therefore this is an example of a set of states that makes the rightmost
-inequality in Eq.
+inequality in Eq. \eqref{eq:inequality-chain} strict.
 Since there is an LOCC measurement that achieves the bound 
 \cite{DiVincenzo2002}, we also have
 \begin{equation}
@@ -393,7 +393,10 @@ certainty even if we allow the parties to perform PPT measurements.
 
 Recently, Yu et al. \cite{Yu12} presented the first example of $N$ maximally 
 entangled states in $\complex^{N}\otimes\complex^{N}$ that cannot be 
-perfectly distinguished by any PPT measurement, and therefore by any general LOCC protocols.
+perfectly distinguished by any PPT measurement, and therefore by any general 
+LOCC protocols.
+Their particular example is composed by the following $N = 4$ states in 
+$\complex^{4}\otimes\complex^{4}$:
 \begin{equation}
   \label{eq:ydy_states}
   \begin{aligned}
@@ -401,22 +404,22 @@ perfectly distinguished by any PPT measurement, and therefore by any general LOC
     \frac{1}{2} \ket{0}\ket{0} + 
     \frac{1}{2} \ket{1}\ket{1} + 
     \frac{1}{2} \ket{2}\ket{2} + 
-    \frac{1}{2} \ket{3}\ket{3} \\[2mm]
+    \frac{1}{2} \ket{3}\ket{3}, \\[2mm]
     \ket{\phi_2} & =
     \frac{1}{2} \ket{0}\ket{3} + 
     \frac{1}{2} \ket{1}\ket{2} + 
     \frac{1}{2} \ket{2}\ket{1} + 
-    \frac{1}{2} \ket{3}\ket{0} \\[2mm]
+    \frac{1}{2} \ket{3}\ket{0}, \\[2mm]
     \ket{\phi_3} & =
     \frac{1}{2} \ket{0}\ket{3} +
     \frac{1}{2} \ket{1}\ket{2} - 
     \frac{1}{2} \ket{2}\ket{1} - 
-    \frac{1}{2} \ket{3}\ket{0} \\[2mm]
+    \frac{1}{2} \ket{3}\ket{0}, \\[2mm]
     \ket{\phi_4} & =
     \frac{1}{2} \ket{0}\ket{1} + 
     \frac{1}{2} \ket{1}\ket{0} -
     \frac{1}{2} \ket{2}\ket{3} - 
-    \frac{1}{2} \ket{3}\ket{2}
+    \frac{1}{2} \ket{3}\ket{2}.
   \end{aligned}
 \end{equation}
 Later in Chapter \ref{chap:mes} we turn their result into a quantitative one,
@@ -459,7 +462,13 @@ measurements, and compares them with the results obtained in this thesis
   $N > n$     & \emph{all} indist. & --- & \cite{Yu12,Duan09,Ghosh04} \\
   \hline
 \end{tabular}
-\caption{Distinguishability of maximally entangled states}
+\caption[Distinguishability of maximally entangled states]{Distinguishability of 
+    maximally entangled states. (``\emph{some} indist.'': 
+    there exist sets of states that are indistinguishable 
+    for the dimension and the class of measurements of the corresponding cell;
+    ``\emph{all} dist./indist.'': all sets of states are distinguishable/indistinguishable; 
+    ``---'': the distinguishability can be inferred by the rest of the row.)
+}
 \label{table:max-ent-states}
 \end{table}
 
@@ -568,15 +577,15 @@ defined as
 \end{equation}
 By contradiction, assume that $\{\psi_{0}, \ldots, \psi_{3}\} \subset \Density(\X_{1}\otimes\Y_{1})$
 are distinguishable by an LOCC protocol between Alice and Bob.
-Then they could communicate the outcome classically to Claire and Danny, 
+Then they could communicate the outcome classically to Charlie and Dan, 
 who would use this information to create a shared entangled bit between each other.
-This is not possible, since $\rho$ can also be written as  
+This is not possible, since $\rho$ can also be written (because of the symmetry among Bell states) as  
 \begin{equation}
   \rho = \frac{1}{4}\sum_{i\in\{0,1,2,3\}}\psi_{i}\otimes\psi_{i}
     \in D\left((\X_{1}\otimes\X_{2})\otimes(\Y_{1}\otimes\Y_{2})\right),
 \end{equation}
 and therefore it contradicts the fact that $\rho$ is separable in the cut 
-between Alice and Claire on one side, and Bob and Danny on the other side, that is,
+between Alice and Charlie on one side, and Bob and Dan on the other side, that is,
 \begin{equation}
   \rho \in \Sep(\X_{1}\otimes\X_{2} : \Y_{1}\otimes\Y_{2}).
 \end{equation}
