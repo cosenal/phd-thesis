@@ -221,13 +221,19 @@ Ideally, we would like to solve the following problem:
   \end{equation}
 \end{center}
 
-Phrasing this problem as a cone program is not interesting as such. Even though it is
-technically possible, we would not be able to exploit the advantages that come from such formulation, 
-due to the fact (by now, we have stressed this enough!) that the set of LOCC measurements 
-is not easy to be handled mathematically.
-For the set of LOCC measurements, we do not even have a characterization
-on the same lines of Property \ref{property:each-measurement-operator}, so we cannot cast
-the problem in the general form of the program in \eqref{eq:cone-primal-problem}. 
+Phrasing this problem as a cone program is not interesting as such. It is
+technically possible, as we can write the constraints of the program in terms 
+of membership of the variables to a convex cone\footnote{The exposition of 
+Section \ref{sec:convex-optimization} restricted the definition of cone programs
+to optimization problems in which the underlying cone is topologically \emph{closed}. 
+It is known that the set of LOCC operations is not closed, but one could consider 
+the closure of the set \cite{Chitambar14} and yet the discussion here would still apply.} 
+along with some additional linear constraints.
+However we would not be able to exploit the advantages that come from such formulation, 
+due to the fact that the set of LOCC measurements does not possess nice mathematical properties.
+For instance, we do not have a characterization of LOCC measurements
+on the same lines of Property \ref{property:each-measurement-operator}, and consequently 
+we cannot cast the problem in the general form of Program \eqref{eq:cone-primal-problem}. 
 
 As indicated in Chapter \ref{chap:bipartite-state-discrimination}, the LOCC set
 can be approximated by other sets of measurements that are easier to be manipulated 
@@ -430,6 +436,8 @@ $\Psi,\Xi:\Lin(\Y)\rightarrow\Lin(\X)$, such that, for any $Y\in\Lin(\Y)$,
 where $\pt$ denotes the transpose map.
 \end{definition}
 
+
+
 \subsubsection{Exploiting symmetries}
 
 In cases where the ensemble of states we wish to distinguish exhibit some symmetry,
@@ -573,7 +581,7 @@ for any $k \in \{1, \ldots, N\}$, which concludes the proof.
 
 The advantage of the linear programming formulation is in the computational 
 efficiency of the algorithms that solve the program.
-However, for sake of clarity, in the analytic proofs that will follow, 
+However, for sake of uniformity, in the analytic proofs that will follow, 
 we will always stick to the more general semidefinite programming formulation, 
 even when we consider distinguishability of lattice states.
 
@@ -653,12 +661,11 @@ following two properties are equivalent:
 \begin{itemize}
 \item[(a)] For every positive semidefinite operator $Y \in \Pos(\Y)$, it 
 holds that $\Phi(Y) \in \Pos(\X)$. 
-\item[(b)] The Choi operator
+\item[(b)] The Choi operator $J(\Phi)$ of the mapping $\Phi$,
+defined as in Eq. \eqref{eq:choi-operator}, satisfies 
 \begin{equation}
-  J(\Phi) = \sum_{0\leq j,k< m} \Phi\bigl(\ket{j}\bra{k}\bigr) 
-  \otimes \ket{j}\bra{k}
+  J(\Phi) \in \BPos(\X:\Y).
 \end{equation}
-of $\Phi$ satisfies $J(\Phi) \in \BPos(\X:\Y)$.
 \end{itemize}
 
 Dual to the fact that there are positive semidefinite operators, which are not 
@@ -875,8 +882,9 @@ by observing that the partial transpose is its own adjoint.
 \end{equation}
 \end{center}
 
-% Figure \ref{fig:symm-extension} pictures the containment relationships between
-% the classes of 
+Figure \ref{fig:symm-extension} pictures the hierarchy of measurements that have
+$s$-symmetric extensions and the relationships between the same hierarchy
+and the classes of global ($\Pos$) and separable measurements ($\Sep$). 
 
 \begin{figure}[!htbp]
   \centering

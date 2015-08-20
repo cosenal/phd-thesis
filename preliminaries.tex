@@ -234,13 +234,14 @@ and
 Now we can define the set of \emph{generalized Pauli operators} in $\Unitary(\complex^{n})$ as the set
 \begin{equation}
 \label{eq:generalized-Pauli-operators}
-  \left\{ W_{a,b} = X^{a}Z^{b} : a,b\in\integer_{n}\right\}.
+  \left\{ W_{a,b}^{(n)} = X_{n}^{a}Z_{n}^{b} : a,b\in\integer_{n}\right\}.
 \end{equation}
 Starting from these operators we define the \emph{generalized Bell basis}
 through the vector-operator bijection:
 \begin{equation}
 \label{eq:generalized-bell-basis}
-  \left\{ \ket{\psi_{a,b}^{(n)}} = \frac{1}{\sqrt{n}}\vec(W_{a,b}) : a,b\in\integer_{n} \right\}.
+  \left\{ \psi_{a,b}^{(n)} = \frac{1}{\sqrt{n}}\vec\left(W_{a,b}^{(n)}\right)
+    \vec\left(W_{a,b}^{(n)}\right)^{\ast} : a,b\in\integer_{n} \right\}.
 \end{equation}
 
 %-------------------------------------------------------------------------------
@@ -251,9 +252,10 @@ through the vector-operator bijection:
 To a quantum mapping $\Phi : \Lin(\X)\rightarrow\Lin(\Y)$, we associate an 
 operator $J(\Phi) \in \Lin(\Y\otimes\X)$ defined as follows:
 \begin{equation}
+\label{eq:choi-operator}
   J(\Phi) = (\Phi\otimes\I_{\Lin(\X)})(\vec(\I_{\X})\vec(\I_{\X})^{\ast}).
 \end{equation}
-If we are assuming that $\X$ has dimension $n$, we can alternatively write this as
+If we assume that $\X$ has dimension $n$, we can alternatively write this as
 \begin{equation}
   J(\Phi) = \sum_{1\leq i,j \leq n}\Phi(\ket{i}\bra{j})\otimes\ket{i}\bra{j}.
 \end{equation}
@@ -349,7 +351,7 @@ for some choice of a positive integer $M$ and positive semidefinite operators
 \begin{definition}
 Let $\X^{\reg{A}}, \X^{\reg{B}}, \Y^{\reg{A}}$, and $\Y^{\reg{B}}$ be complex
 Euclidean spaces.
-A completely positive mappings 
+A completely positive mapping 
 \[
   \Phi:\Lin(\X^{\reg{A}}\otimes\X^{\reg{B}})\to\Lin(\Y^{\reg{A}}\otimes\Y^{\reg{B}})
 \]
@@ -530,11 +532,11 @@ The success of semidefinite programming in quantum information comes from the fa
 that many quantum primitives (states, channels, global measurements) 
 can be represented within the cone of positive semidefinite operators with the addition of 
 simple linear constraints. 
-The problem of discriminating states by separable measurement considered in this thesis, 
-as well as other problems in which one optimizes over the cone of separable measurement,
-does not have a simple characterization in a more general 
-
-In this section we review basic definition in convex analysis and convex optimization.
+Problems in which one optimizes over the cone of separable operators, such as 
+the problem of discriminating states by separable measurements considered in this thesis, 
+do not have a characterization in the framework of semidefinite programming and 
+for such problems the full expressivity of the general cone programming framework is required.  
+In this section we review basic definitions in convex analysis and convex optimization.
 
 Let $\V$ be an arbitrary vector space over the real or complex number.
 A subset $\C$ of $\V$ is a \emph{cone} if $u\in\C$ implies that $\lambda u \in \C$,
