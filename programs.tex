@@ -224,7 +224,7 @@ Ideally, we would like to solve the following problem:
 Phrasing this problem as a cone program is not interesting as such. It is
 technically possible, as we can write the constraints of the program in terms 
 of membership of the variables to a convex cone\footnote{The exposition of 
-Section \ref{sec:convex-optimization} restricted the definition of cone programs
+Section \ref{sec:convex-optimization} limited the definition of cone programs
 to optimization problems in which the underlying cone is topologically \emph{closed}. 
 It is known that the set of LOCC operations is not closed, but one could consider 
 the closure of the set \cite{Chitambar14} and yet the discussion here would still apply.} 
@@ -238,9 +238,9 @@ we cannot cast the problem in the general form of Program \eqref{eq:cone-primal-
 As indicated in Chapter \ref{chap:bipartite-state-discrimination}, the LOCC set
 can be approximated by other sets of measurements that are easier to be manipulated 
 mathematically. It turns out that both the sets of PPT and separable measurements are
-suitable for the cone programming framework described above. In fact, for both 
-these sets it is relatively easy to characterize the dual set, and an equivalent 
-of Property \ref{property:each-measurement-operator} holds,
+suitable for the cone programming framework described above. In fact, they both
+form closed convex cones, for both these sets it is relatively easy to characterize the dual set, 
+and moreover, an equivalent of Property \ref{property:each-measurement-operator} holds.
 For example, Proposition \ref{prop:separable-each} characterizes a separable 
 measurement over the bipartition $(\X:\Y)$ as a collection of operators 
 belonging to the cone $\Sep(\X:\Y)$.
