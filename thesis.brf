@@ -24,6 +24,7 @@
 \backcite {Peres1996,Horodecki1996}{{16}{2.2.3}{equation.2.2.40}}
 \backcite {Boyd04}{{17}{2.3}{section.2.3}}
 \backcite {Chefles2000, Bergou2004}{{24}{3.1}{equation.3.1.15}}
+\backcite {Bennett99}{{25}{3.1}{equation.3.1.19}}
 \backcite {Walgate00}{{26}{3.2}{equation.3.2.20}}
 \backcite {Matthews09}{{26}{3.2}{equation.3.2.21}}
 \backcite {Aubrun15}{{26}{3.2}{equation.3.2.22}}
@@ -99,10 +100,10 @@
 \backcite {Terhal01}{{81}{6.2}{equation.6.2.13}}
 \backcite {Terhal01}{{82}{6.6}{equation.6.2.24}}
 \backcite {Ghosh04}{{84}{7}{theorem.7.1}}
-\backcite {Montanaro07}{{85}{7}{theorem.7.2}}
-\backcite {Matthews10}{{85}{7}{theorem.7.2}}
-\backcite {Gharibian13}{{85}{7}{equation.7.0.1}}
-\backcite {cvx}{{87}{A}{section*.22}}
-\backcite {Johnston2015}{{87}{A}{section*.22}}
-\backcite {Cosentino15}{{88}{A}{section*.24}}
-\backcite {Ghosh04}{{90}{A}{section*.31}}
+\backcite {Montanaro07}{{85}{7}{equation.7.0.1}}
+\backcite {Matthews10}{{85}{7}{equation.7.0.1}}
+\backcite {Gharibian13}{{86}{7}{equation.7.0.2}}
+\backcite {cvx}{{88}{A}{section*.22}}
+\backcite {Johnston2015}{{88}{A}{section*.22}}
+\backcite {Cosentino15}{{89}{A}{section*.24}}
+\backcite {Ghosh04}{{91}{A}{section*.31}}
