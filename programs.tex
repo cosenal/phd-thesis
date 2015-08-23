@@ -17,7 +17,7 @@ to prove bounds on LOCC protocols for the task of bipartite state discrimination
 We build on the idea described in Chapter \ref{chap:preliminaries} that LOCC 
 measurements can be approximated by more tractable classes of measurements, 
 in particular the sets of separable and PPT measurements.
-It turns out that we can describe them conveniently using convex cones, 
+It turns out that we can describe these sets conveniently using convex cones, 
 and therefore, many problems in which we optimize over them can be cast 
 into the cone programming paradigm. 
 
@@ -28,8 +28,8 @@ into the cone programming paradigm.
 The global state discrimination problem was one of the 
 first applications of semidefinite programming to the theory of quantum 
 information \cite{Eldar03a}.
-Let us recall the parameters that define an instance of the problem. 
-We are given a complex Euclidean space $\X$, a positive integer $N$, and an 
+Let us recall the parameters that define an instance of the problem: 
+a complex Euclidean space $\X$, a positive integer $N$, and an 
 ensemble $\E$ of $N$ states, that is,
 \begin{equation}
 \label{eq:ensemble}
@@ -39,8 +39,8 @@ where $\rho_{1}, \ldots, \rho_{N} \in \Density(\X)$ and $(p_{1}, \ldots, p_{N})$
 a probability vector.
 We can construct a family of semidefinite programs parametrized by $\X$
 and $N$, such that one program takes $\E \in \Ens(\X, N)$ as input and 
-its optimal value corresponds to the maximum probability for any measurement to 
-distinguish $\E$:
+its optimal value corresponds to the maximum probability for any global 
+measurement to distinguish the states in $\E$:
 \begin{center}
 \underline{Primal (Global measurements)}
 \begin{equation}
@@ -54,19 +54,20 @@ distinguish $\E$:
 \end{equation}
 \end{center}
 
-The variables of the program form a collection of operators and the constraints 
-impose that such collection of operators forms a valid measurements. 
+The variables of the program $\mu(1), \ldots, \mu(N)$ 
+form a collection of linear operators and the linear constraints of the program 
+impose that such collection forms a valid measurements. 
 In particular, the constraints demand that each operator belongs to the cone of 
 semidefinite operators and that all the operators sum to identity, as in the
-definition of measurement from Section \ref{sec:quantum-measurements}.
+definition of quantum measurement from Section \ref{sec:quantum-measurements}.
 
 The key observation of this dissertation is that we can generalize the
-above semidefinite program to a family of cone programs, where
+above semidefinite program to a family of cone programs, whenever
 the set of measurements over which we are optimizing forms a convex cone.
-In effect, this generalization turns out to be helpful when the set of
-measurements is characterized by the further property that each measurement in 
-the set can be represented by restricting each of its measurement operators to 
-belong to a particular convex cone.
+In effect, this generalization turns out to be helpful only when the set of
+measurements is characterized by the further property that a measurement 
+belongs to the set if all its measurement operators to belong to a particular 
+convex cone.
 
 More formally, say we are given a complex Euclidean space $\X$ and consider the
 problem of distinguishing the ensemble $\E$ from  Eq. \eqref{eq:ensemble} by 
@@ -114,8 +115,7 @@ The cone denoted by $\K$ in Section \ref{sec:cone-programming} is taken to be
 the cone of operators of this form for which each $\mu(k)$ belongs to the cone 
 $\C$.
 
-The mapping $\Phi$ and operators $A$ and $B$ 
-are chosen in the natural way:
+The operators $A$ and $B$ and the mapping $\Phi$ are chosen in the natural way:
 \begin{equation}
   A = \begin{pmatrix}
     p_1 \rho_1 & \cdots & 0 \\
@@ -136,7 +136,7 @@ and $\Phi : \Lin(\X\oplus\cdots\oplus\X) \rightarrow \Lin(\X)$ is defined as
 \end{equation}
 for any $X_{1}, \ldots, X_{N} \in \Lin(\X)$.
 
-Let $\Y = \complex^{N}$. One can easily verify that the mapping 
+By setting $\Y = \complex^{N}$, one can easily verify that the mapping 
 $\Phi^{\ast}: \Lin(\X)\rightarrow\Lin(\Y\otimes\X)$,
 defined as  
 \begin{equation}
@@ -163,21 +163,20 @@ With these definitions in hand, one can write the dual of the Program
 
 Throughout the thesis we will use the property of \emph{weak duality} of cone 
 programs (Proposition \ref{prop:weak-duality-cone}) to upper bound the
-optimal solution of the primal program \eqref{eq:cone-primal-problem}.
+optimal value of the primal program \eqref{eq:cone-primal-problem}.
 The cone programs considered in this thesis also possess the property 
 of \emph{strong duality}. This property depends on the specific cone $\C$,
-and we will discuss it whenever we treat a specific $\C$, although
+and we will discuss it whenever we consider a specific $\C$, although
 it should be noted that strong duality is not needed for any of our results.
 
 In the rest of this chapter, we will see different instantiations of the general
 program for a variety of measurements classes. 
 We started this section by presenting the semidefinite program 
 \eqref{eq:pos-primal-problem} for the problem of  
-state distinguishability by global measurement. In that case, the cone $\C$ 
-of the general cone program 
-corresponded to the cone of semidefinite operators, that is, $\C = \Pos(\X)$ and, 
-due to Fact \ref{fact:pos-self-dual}, we have that $\C^{\ast} = \C$. 
-Thus we can write the following dual program of \eqref{eq:pos-primal-problem}:
+state distinguishability by global measurement. The cone $\C$ corresponding to that program
+is the cone of semidefinite operators, that is, $\C = \Pos(\X)$. 
+Due to Fact~\ref{fact:pos-self-dual}, we have that $\C^{\ast} = \C$, and  
+thus we can write the following program dual to Program~\eqref{eq:pos-primal-problem}:
 \begin{center}
 \underline{Dual (Global measurements)}
 \begin{equation}
@@ -190,7 +189,6 @@ Thus we can write the following dual program of \eqref{eq:pos-primal-problem}:
   \end{split}
 \end{equation}
 \end{center}
-
 
 \section{Bipartite measurements}
 The above generalization of the optimal measurement cone program turns out to be
@@ -262,10 +260,11 @@ expressed by using only semidefinite constraints, as it was the case for the
 Program~\eqref{eq:pos-primal-problem} from above.
 
 \subsection{PPT measurements}
-
+\label{sec:ppt-measurements-program}
 We start with the cone of PPT operators and we describe a semidefinite program 
-that computes $\opt_{\PPT}(\E)$. Using tools of convex optimization to solve 
-problems concerning the PPT cone is not a novel idea. 
+that computes $\opt_{\PPT}(\E)$, when given as input an ensemble $\E\in\Ens(N,\X:\Y)$. 
+Using tools of convex optimization to solve problems concerning the PPT cone 
+is not a novel idea. 
 Two other applications of convex programming to the realm of PPT operations 
 are the semidefinite program shown by Rains to compute the maximum fidelity 
 obtained by a PPT distillation protocol \cite{Rains01} and the hierarchy of 
@@ -276,10 +275,10 @@ Recall from Definition \ref{def:ppt-measurements} that a measurement
 $\mu : \{1, \ldots, N\} \rightarrow \Pos(\X\otimes\Y)$ is in 
 $\Meas_{\PPT}(N, \X:\Y)$ if and only if
 \begin{equation}
-  \mu(1), \ldots, \mu(N) \in \PPT(\X:\Y).
+  \mu(k) \in \PPT(\X:\Y),
 \end{equation}
-From the definition of $\PPT(\X:\Y)$, we can write the cone program in
-the following form:
+for each $k \in \{1,\ldots,N\}$. From the definition of $\PPT(\X:\Y)$, 
+we can write the cone program in the following form:
 \begin{center}
 \underline{Primal (PPT measurements)}
 \begin{equation}
@@ -351,9 +350,7 @@ are the known inputs of the problem, and the map $\Phi : $ is defined as
 for any operator $X$ in the form of Eq.~\eqref{eq:ppt-X}.
 
 Once the program is in the standard form, one can easily derive its dual.
-The variable of the dual program is the Hermitian operator
-$Y \in $ 
-defined as follows:
+The variable of the dual program is an Hermitian operator defined as follows:
 \begin{equation}
 \label{eq:ppt-Y}
   Y = 
@@ -365,7 +362,7 @@ defined as follows:
     \end{pmatrix},
 \end{equation}
 for Hermitian operators $Y, R_{1}, \ldots, R_{N} \in \Herm(\X\otimes\Y)$.
-The adjoint of $\Phi$ is defined as the mapping
+The adjoint of $\Phi$ is the mapping
 \begin{equation}
   \Phi^{\ast}(Y) \equiv 
     \begin{pmatrix}
@@ -395,7 +392,7 @@ for any $k \in \{1, \ldots, N\}$, and therefore
 \begin{equation}
   \ip{Y}{\Phi(X)} = \ip{\Phi^{\ast}(Y)}{X}.
 \end{equation}
-By rearranging everything in a more explicit form, we have the following dual program:
+By rearranging everything in a more explicit form, we get the following dual program:
 \begin{center}
 \underline{Dual (PPT measurements)}
 \begin{equation}
@@ -426,7 +423,7 @@ representations of so-called \emph{decomposable maps} from
 $\Lin(\Y)$ to $\Lin(\X)$, via the Choi isomorphism 
 (see Section \ref{sec:choi-isomorphism})
 \begin{definition}
-A decomposable map $\Phi:\Lin(\Y)\rightarrow\Lin(\X)$ is a linear map that can 
+A \emph{decomposable} map $\Phi:\Lin(\Y)\rightarrow\Lin(\X)$ is a linear map that can 
 be represented as the sum of a completely positive map and a completely 
 co-positive map, that is, there exist two completely positive maps 
 $\Psi,\Xi:\Lin(\Y)\rightarrow\Lin(\X)$, such that, for any $Y\in\Lin(\Y)$,
@@ -440,10 +437,10 @@ where $\pt$ denotes the transpose map.
 
 \subsubsection{Exploiting symmetries}
 
-In cases where the ensemble of states we wish to distinguish exhibit some symmetry,
+Whenever the ensemble of states we wish to distinguish exhibits some symmetry,
 we can simplify the semidefinite program ($\PP_{\PPT}$) to a linear program.
 One particular case where this kind of symmetry emerges is when 
-we consider so-called \emph{lattice states}. Let
+we consider ensembles of so-called \emph{lattice states}. Let
 \[
   \psi_{i} = \ket{\psi_{i}}\bra{\psi_{i}} \in \Density(\complex^{2}\otimes\complex^{2}),
 \]
@@ -461,7 +458,7 @@ $\{\psi_{v} = \ket{\psi_{v}}\bra{\psi_{v}} : v \in \integer_{4}^{t}\}$
 are called \emph{lattice operators}, or \emph{lattice states} if they are also 
 density operators \cite{Piani06}.
 
-The following equations regarding the partial transpose of the Bell states will 
+The equations and the proposition that follow, regarding properties of the Bell states, will 
 be used in the main proof of this section and can be proved by direct inspection.
 \begin{equation}
   \label{eq:ppt-bell-states}
@@ -472,8 +469,6 @@ be used in the main proof of this section and can be proved by direct inspection
     \pt_{\X}(\psi_{3}) = \frac{1}{2}\I - \psi_{1}.
   \end{aligned}
 \end{equation}
-The following proposition is useful for the proof of the main theorem of this 
-section and, again, it can be easily proved by direct inspection.
 \begin{prop}
 \label{prop:groupG}
 Let $\{\sigma_{0}, \sigma_{1}, \sigma_{2}, \sigma_{3}\} \subset \Herm(\complex^{2})$ 
@@ -596,11 +591,11 @@ being one of those) where this connection has been made use of.
 As it is stated by Proposition \ref{prop:separable-each}, a measurement
 $\mu : \{1,\ldots,N\} \rightarrow \Pos(\X\otimes\Y)$ is separable when 
 \begin{equation}
-  \mu(1), \ldots, \mu(N) \in \Sep(\X:\Y).
+  \mu(k) \in \Sep(\X:\Y),
 \end{equation}
-We can write the maximum probability of distinguishing an ensemble $\E$ by 
-separable measurements, $\opt_{\Sep}(\E)$, as the optimal value of the 
-following cone program: 
+for each $k\in\{1,\ldots,N\}$. We can write the maximum probability 
+of distinguishing an ensemble $\E$ by separable measurements, 
+$\opt_{\Sep}(\E)$, as the optimal value of the following cone program: 
 \begin{center}
 \underline{Primal ($\PP_{\Sep}$)}
 \begin{equation}
@@ -614,14 +609,14 @@ following cone program:
 \end{equation}
 \end{center}
 
-An important observation about this program is that, unlike the case of the 
-PPT program, its constraints cannot be formulated as semidefinite constraints.
+An important observation about this program is that, unlike it was the case for the 
+PPT-distinguishability program, its constraints cannot be formulated as semidefinite constraints.
 % \comment{AC}{``cannot be formulated'' is not a formal statement, make this formal}
-Later in Section \ref{sec:computational-aspects} we will see how this has 
+In Section \ref{sec:computational-aspects} we will see how this has 
 implications in the computational complexity of the problem.
 
 We denote the cone dual to $\Sep(\X:\Y)$ by $\BPos(\X:\Y)$, and defer its definition
-to the next paragraph, after we write the dual program of \eqref{eq:sep-primal-problem}:
+to the next paragraph, after we write the Program dual of \eqref{eq:sep-primal-problem}:
 \begin{center}
 \underline{Dual ($\DP_{\Sep}$)}
 \begin{equation}
@@ -668,8 +663,8 @@ defined as in Eq. \eqref{eq:choi-operator}, satisfies
 \end{equation}
 \end{itemize}
 
-Dual to the fact that there are positive semidefinite operators, which are not 
-separable, is the fact that there are block-positive operators, which are not 
+Dual to the fact that there are non-separable positive semidefinite operators 
+is the fact that there are block-positive operators, which are not 
 positive semidefinite. Such operators are called \emph{entanglement witnesses} 
 and represent (via the Choi representation) linear maps that are positive, 
 but not completely positive.
@@ -681,7 +676,7 @@ We will see many other example of entanglement witnesses in later sections;
 for a more exhaustive review, see \cite{Chruscinski2014}.
 
 The Venn diagram in Figure \ref{fig:measurements-dual} depicts the containments
-of sets that are dual to the sets of measurements operators we have considered  
+of sets that are dual to the sets of measurements operators we have considered so far  
 (a set with one shade of gray is dual to the set with the same shade of gray from
 Figure \ref{fig:classes-measurements}).
 
@@ -706,8 +701,9 @@ Figure \ref{fig:classes-measurements}).
 \subsection{Symmetric extensions}
 \label{sec:symm-ext}
 For any given ensemble of states $\E$, the cone program \eqref{eq:sep-primal-problem}
-for separable measurements outputs a better (not always strictly better) approximation of $\opt_{\LOCC}(\E)$, 
-compared to the output of the semidefinite program \eqref{eq:ppt-primal-problem} for PPT measurements.
+for separable measurements outputs a better (although not always strictly better) 
+approximation of $\opt_{\LOCC}(\E)$, compared to the output of the semidefinite 
+program \eqref{eq:ppt-primal-problem} for PPT measurements.
 The drawback is in the computational complexity: on the one extreme, we have 
 polynomial time algorithms to solve the PPT semidefinite program, and on the other 
 extreme, we can prove that optimizing over a set of separable operator is an NP-hard 
@@ -716,17 +712,16 @@ problem (more details in Section \ref{sec:computational-aspects}).
 Building up on an idea by Doherty, Parrilo, and Spedalieri \cite{Doherty02,Doherty04}, 
 we are able to interpolate between these two extremes and construct a hierarchy of
 semidefinite programs characterized by the following trade-off: whenever we 
-climb up a level of the hierarchy, the size of the program increases 
-(and so does the running time of the algorithms that solve it), however the
+climb up a level of the hierarchy, the size of the program increases, however the
 outputs of the program gives an approximation closer to $\opt_{\Sep}(\E)$.
 
 In order to formally describe the hierarchy of semidefinite programs that 
 approximates $\opt_{\Sep}(\E)$, we first need to introduce the concept of 
-symmetric extension of a positive operator. 
-First let us define the set of permutation operators.
-Let $s$ be a positive integer and let $\X_{1}, \ldots, \X_{s}$ be $s$ isomorphic 
-copies of the same complex Euclidean space, that is, for some positive integer
-$d$ and any $k \in \{1, \ldots, m \}$, $\X_{k} \simeq \complex^{d}$. 
+symmetric extension of a positive operator.
+Before doing so, we define the set of permutation operators.
+Let $s$ and $d$ be positive integers and let $\X_{1}, \ldots, \X_{s}$ be $s$ isomorphic 
+copies of some complex Euclidean space of dimension $d$, that is, 
+for any $k \in \{1, \ldots, s \}$, $\X_{k} \simeq \complex^{d}$. 
 Given a permutation $\pi\in\Sym(s)$, we define
 a \emph{permutation operator} 
 \begin{equation}
@@ -744,7 +739,7 @@ semidefinite operator.
 \begin{definition}
   Suppose we are given complex Euclidean spaces $\X$ and $\Y$, and an operator
   $P\in\Pos(\X\otimes\Y)$. Moreover, let $s$ be a positive integer and let 
-  $\Y_{2},\ldots,\Y_{s}$ be copies of the space $\Y$. An operator 
+  $\Y_{2},\ldots,\Y_{s}$ be $s-1$ copies of the space $\Y$. An operator 
   \begin{equation}
     X \in \Pos(\X\otimes\Y\otimes\Y_{2}\otimes\cdots\otimes\Y_{s})
   \end{equation}
@@ -827,6 +822,8 @@ of the symmetric-extension hierarchy to be at least as powerful as the program
       for all $j \in \{2, \ldots, s\}$.
       \end{description}
   \end{itemize}
+An operator $X$ for which this property holds is called a \emph{PPT} symmetric
+extension of $P$.
 
 Finally, we can put all the constraints together in a hierarchy of semidefinite programs 
 in which, at the $s$-th level, we optimize over measurements whose operators possess 
@@ -884,7 +881,7 @@ by observing that the partial transpose is its own adjoint.
 \end{equation}
 \end{center}
 
-Figure \ref{fig:symm-extension} pictures the hierarchy of measurements that have
+Figure~\ref{fig:symm-extension} depicts the hierarchy of measurements that have
 $s$-symmetric extensions and the relationships between the same hierarchy
 and the classes of global ($\Pos$) and separable measurements ($\Sep$). 
 
@@ -1110,3 +1107,7 @@ The dual program can be derived by routine calculation.
       & y_{i,j} \in \real, \quad 1 \leq i,j \leq N, \quad i \neq j.\notag
     \end{align}
 \end{center}
+In the next chapter we will see an application of this program for unambiguous 
+PPT-distinguishability. In particular, we will analyze a set of states where 
+the unambiguous PPT-distinsuishability is strictly lower than the regular 
+PPT-distinguishability calculated by the program of Section~\ref{sec:ppt-measurements-program}. 

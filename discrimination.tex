@@ -339,11 +339,11 @@ or equivalently
 \section{Discrimination of maximally entangled states}
 \label{sec:mes-intro}
 
-When investigating any kind of problem, a typical computer science approach is 
+When investigating some problem, a typical computer science approach is 
 to bring the operating parameters of the problem to one extreme.
 In order to get a better understanding of the role played by entanglement in 
 bipartite state distinguishability problems, one can restrict their attention to 
-the case in which the sets to be distinguished consist of orthogonal 
+the case in which the sets to be distinguished consist only of orthogonal 
 maximally entangled pure states.
 Considering states that are maximally entangled, as opposed to partially 
 entangled, is useful to reduce the number of variables that need to be taken into account, and
@@ -365,7 +365,7 @@ for any LOCC measurement, is $1/2$ \cite{Ghosh01}. In fact, a similar bound
 holds more in general: if we are given an equally probable ensemble of $N$ 
 orthogonal maximally entangled states in $\complex^{n}\otimes\complex^{n}$, 
 the maximum probability of distinguishing them by LOCC is $n/N$ \cite{Ghosh04}.
-This bound holds even for the wider class of separable \cite{Duan09} and PPT 
+This bound holds even for the wider classes of separable \cite{Duan09} and PPT 
 measurements \cite{Yu12}. In Chapter \ref{chap:mes} this result is re-proved 
 using our cone programming framework. 
 
@@ -388,7 +388,7 @@ Nathanson \cite{Nathanson05}, who showed that any three orthogonal maximally
 entangled states in $\complex^{3}\otimes\complex^{3}$ can be perfectly 
 distinguished by LOCC. In a followup work \cite{Nathanson13}, 
 Nathanson proved that $3$ maximally entangled states 
-in $\complex^{n}\otimes\complex^{n}$, for any $n \leq 3$, are always perfectly
+in $\complex^{n}\otimes\complex^{n}$, for any $n \geq 3$, are always perfectly
 distinguishable by PPT.
 
 Several results aimed at filling the landscape for the case $3 < N \leq n$.
@@ -445,7 +445,7 @@ by LOCC whenever $n$ is prime and
   \binom{N}{2}\leq n.
 \]
 
-Table \ref{table:max-ent-states} summarizes known results about the
+Table \ref{table:max-ent-states} recaps all above-mentioned results about the
 distinguishability of maximally entangled states by LOCC and PPT 
 measurements, and compares them with the results obtained in this thesis 
 (highlighted in gray). 
@@ -488,7 +488,7 @@ Indistinguishability by LOCC is not a prerogative of entangled states.
 The famous \emph{domino state} set of \cite{Bennett99}, for example, is a 
 collection of orthogonal \emph{product} states that cannot be perfectly 
 discriminated by LOCC protocols.
-In this example, the local dimension of the states is $3$, and one takes
+The local dimension of the domino states is $3$, and one takes
 $N = 9$, $p_1 = \cdots = p_9 = 1/9$, and
 {\setlength{\arraycolsep}{2.5mm}%
 \begin{equation} \label{eq:domino}
@@ -530,7 +530,8 @@ then they can perform a teleportation protocol to send each other their respecti
 the Bell pair they have been asked to identify.
 The set of Bell states constitutes an example of a set that is distinguishable only if we 
 are willing to consume some entanglement (given as an additional resource) or, in other words, 
-we say that the entanglement cost of distinguishing the Bell states with certainty is bigger than zero.
+we say that the entanglement cost of distinguishing the Bell states with certainty 
+must be bigger than zero.
 
 The entanglement cost of quantum operations and measurements, within the
 paradigm of LOCC, has been considered previously.
@@ -628,7 +629,3 @@ but makes use of an extra observation, that is, the fact that the operators
 that constitute an LOCC measurement must be PPT.
 The mathematical properties of PPT measurements were also exploited in the recent 
 proofs by \cite{Yu12,Yu14}, which triggered the work of this thesis.
-
-
-
-%Of course

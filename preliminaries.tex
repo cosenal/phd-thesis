@@ -539,8 +539,8 @@ for such problems the full expressivity of the general cone programming framewor
 In this section we review basic definitions in convex analysis and convex optimization.
 
 Let $\V$ be an arbitrary vector space over the real or complex number.
-A subset $\C$ of $\V$ is a \emph{cone} if $u\in\C$ implies that $\lambda u \in \C$,
-for all $\lambda \geq 0$. A cone $\C$ is convex if $u,v\in\C$ implies that
+A subset $\K$ of $\V$ is a \emph{cone} if $u\in\K$ implies that $\lambda u \in \K$,
+for all scalar $\lambda \geq 0$. A cone $\K$ is convex if $u,v\in\K$ implies that
 $u + v \in \K$.
 A cone program (also known as a \emph{conic program}) expresses the
 maximization of a linear function over the intersection of an affine subspace
@@ -576,7 +576,7 @@ following pair of optimization problems.
     \begin{align*}
       \text{maximize:}\quad & \ip{c}{x}\\
       \text{subject to:}\quad & A x = b,\\
-      & x \geq 0.
+      & x \geq 0, x\in\real^{n}.
     \end{align*}
   \end{minipage}
   \hspace*{1.5cm}
@@ -585,7 +585,7 @@ following pair of optimization problems.
     \begin{align*}
       \text{minimize:}\quad & \ip{b}{y}\\
       \text{subject to:}\quad & A^{\t}y \geq c,\\
-      & y\in\real^{n}.
+      & y\in\real^{m}.
     \end{align*}
   \end{minipage}
 \end{center}
@@ -657,6 +657,13 @@ Here, $\K^{\ast}$ denotes the \emph{dual cone} to $\K$, defined as
 \end{equation}
 and $\Phi^{\ast}:\Herm(\W)\rightarrow\Herm(\Z)$ is the adjoint mapping to
 $\Phi$.
+
+Notice that the above programs are often presented in different (although equivalent) 
+ways in most convex optimization textbooks.
+In fact, the way the programs are presented in this thesis differs from 
+the so-called \emph{standard form}.
+This choice is due to the fact that the standard form is less suitable for
+programs that describe quantum information problems. 
 
 In order to see how semidefinite programming is a special case of cone programming, 
 let us observe the following elementary fact that comes from the definition of 
