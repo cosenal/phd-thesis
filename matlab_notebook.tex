@@ -135,7 +135,7 @@ disp(LocalDistinguishability(bells_m(:, 1:n), 'copies', 2));
 In the code that follows, the function \texttt{GenPauli(a,b,n)} generates the 
 matrix corresponding to the operator $W_{a,b}\in\Unitary(\complex^{n})$ 
 defined in Eq.~\eqref{eq:generalized-Pauli-operators}.
-\subsection*{$5$ states in $\complex^{5}\otimes\complex^{5}$}
+\subsection*{$5$ maximally entangled states in $\complex^{5}\otimes\complex^{5}$}
 \begin{verbatim}
 n = 5;
 gen_bells = [vec(GenPauli(0,0,n)), ...
@@ -153,7 +153,7 @@ disp(LocalDistinguishability(gen_bells, 'copies', 1));
     0.9898
 \end{verbatim} \color{black}
 
-\subsection*{$6$ states in $\complex^{6}\otimes\complex^{6}$}
+\subsection*{$6$ maximally entangled states in $\complex^{6}\otimes\complex^{6}$}
 \begin{verbatim}
 n = 6;
 gen_bells = [vec(GenPauli(0,0,n)), ...

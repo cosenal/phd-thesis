@@ -426,14 +426,12 @@ $\Lin(\Y)$ to $\Lin(\X)$, via the Choi isomorphism
 A \emph{decomposable} map $\Phi:\Lin(\Y)\rightarrow\Lin(\X)$ is a linear map that can 
 be represented as the sum of a completely positive map and a completely 
 co-positive map, that is, there exist two completely positive maps 
-$\Psi,\Xi:\Lin(\Y)\rightarrow\Lin(\X)$, such that, for any $Y\in\Lin(\Y)$,
+$\Psi,\Xi:\Lin(\Y)\rightarrow\Lin(\X)$, such that
 \begin{equation}
-  \Phi(Y) = \Psi(Y) + (\pt {\circ}\, \Xi)(Y),
+  \Phi = \Psi + \pt {\circ}\, \Xi,
 \end{equation}
 where $\pt$ denotes the transpose map.
 \end{definition}
-
-
 
 \subsubsection{Exploiting symmetries}
 
@@ -662,6 +660,22 @@ defined as in Eq. \eqref{eq:choi-operator}, satisfies
   J(\Phi) \in \BPos(\X:\Y).
 \end{equation}
 \end{itemize}
+In order to prove the equivalence, observe the following equation:
+\begin{equation}
+\label{eq:choi-positive}
+  (\I_{\X}\otimes y^{\ast})J(\Phi)(\I_{X}\otimes y) = \Phi(\overline{y}y^{\t}),
+\end{equation}
+which holds for every vector $y\in\Y$.
+Since the operator $\overline{y}y^{\t}$ is positive semidefinite,
+we have that (a) implies (b).
+To see the converse, recall that every positive semidefinite operator can be 
+written as a positive linear combination of rank-$1$ positive semidefinite 
+operators. Therefore, from the property (b), it holds that 
+\begin{equation}
+ (\I_{\X}\otimes y^{\t})J(\Phi)(\I_{X}\otimes \overline{y}) = \Phi(yy^{\ast}) 
+  \in\Pos(\X),
+\end{equation}
+for every vector $y\in\Y$, and thus by linearity $\Phi$ is a positive mapping. 
 
 Dual to the fact that there are non-separable positive semidefinite operators 
 is the fact that there are block-positive operators, which are not 
@@ -1107,7 +1121,7 @@ The dual program can be derived by routine calculation.
       & y_{i,j} \in \real, \quad 1 \leq i,j \leq N, \quad i \neq j.\notag
     \end{align}
 \end{center}
-In the next chapter we will see an application of this program for unambiguous 
-PPT-distinguishability. In particular, we will analyze a set of states where 
+In the next chapter we will see an application of this program to the problem of 
+unambiguous PPT-distinguishability. In particular, we will analyze a set of states where 
 the unambiguous PPT-distinsuishability is strictly lower than the regular 
 PPT-distinguishability calculated by the program of Section~\ref{sec:ppt-measurements-program}. 
